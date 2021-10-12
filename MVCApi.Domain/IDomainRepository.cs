@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MVCApi.Domain.Entites;
 
 namespace MVCApi.Domain
 {
-    public interface IDomainRepository<T>
+    public interface IDomainRepository<TEntity> where TEntity : BaseEntity
     {
-        Task<T> GetByIdAsync(Guid id);
-        Task<IEnumerable<T>> GetPaginatedAsync(int pageNumber, int pageSize);
-        Task Add(T entity);
+        Task<TEntity> GetByIdAsync(Guid id);
+        Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize);
+        Task Add(TEntity entity);
     }
 }
