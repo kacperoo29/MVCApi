@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NHibernate;
 
 namespace MVCApi
 {
@@ -32,6 +29,19 @@ namespace MVCApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MVCApi", Version = "v1" });
             });
+
+            services.AddScoped<ISessionFactory>(s => Fluently.Configure()
+                .Database(
+                    SQLiteConfiguration.Standard
+                        .UsingFile("firstProject.db")
+                    )
+                .Mappings(m =>
+                //TODO: Change Program to any mapping class
+                    m.FluentMappings.AddFromAssemblyOf<Program>())
+                .BuildSessionFactory());
+
+            // TODO: Add any assembly from Application layer
+            //services.AddMediatR(typeof());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

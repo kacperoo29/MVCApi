@@ -8,4 +8,8 @@
     <ProjectReference Include="../MVCApi.Application/MVCApi.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+  </ItemGroup>
+
 </Project>

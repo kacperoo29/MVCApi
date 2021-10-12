@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../MVCApi.Application/MVCApi.Application.csproj" />
+    <ProjectReference Include="../MVCApi.Services/MVCApi.Services.csproj" />
   </ItemGroup>
 
 </Project>
