@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCApi.Domain", "MVCApi.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCApi.Application", "MVCApi.Application\MVCApi.Application.csproj", "{217C8A7D-40EB-4C98-AB63-65CBF378D36A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCApi.Tests", "MVCApi.Tests\MVCApi.Tests.csproj", "{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{217C8A7D-40EB-4C98-AB63-65CBF378D36A}.Release|x64.Build.0 = Release|Any CPU
 		{217C8A7D-40EB-4C98-AB63-65CBF378D36A}.Release|x86.ActiveCfg = Release|Any CPU
 		{217C8A7D-40EB-4C98-AB63-65CBF378D36A}.Release|x86.Build.0 = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|x64.Build.0 = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Debug|x86.Build.0 = Debug|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|x64.ActiveCfg = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|x64.Build.0 = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|x86.ActiveCfg = Release|Any CPU
+		{0A5B232D-6B79-4E06-A543-AA81A3BE0BA9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
