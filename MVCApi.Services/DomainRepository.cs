@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
+using MVCApi.Services.Exceptions;
 
 namespace MVCApi.Services
 {
@@ -29,9 +32,17 @@ namespace MVCApi.Services
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
+            Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            if (pageNumber < 1)
+                return new List<TEntity>();
+            
+            if (pageSize <  ServicesConstants.MinPageSize || pageSize > ServicesConstants.MaxPageSize)
+                throw new InvalidPageSizeException(pageSize);
+
+            return await _context.Set<TEntity>().Where(filter)
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }
