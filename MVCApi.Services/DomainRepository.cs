@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
@@ -9,17 +10,26 @@ namespace MVCApi.Services
     public class DomainRepository<TEntity> : IDomainRepository<TEntity>
         where TEntity : BaseEntity
     {
-        public Task<Guid> Add(TEntity entity)
+        private readonly DbContext _context;
+
+        public DomainRepository(DbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<TEntity> GetByIdAsync(Guid id)
+        public async Task<Guid> Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<TEntity>().AddAsync(entity);
+
+            return entity.Id;
         }
 
-        public Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<TEntity> GetByIdAsync(Guid id)
+        {
+            return await _context.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize)
         {
             throw new NotImplementedException();
         }
