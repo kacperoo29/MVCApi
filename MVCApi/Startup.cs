@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MVCApi.Application.Commands;
+using MVCApi.Domain;
 using MVCApi.Services;
 
 namespace MVCApi
@@ -34,6 +35,8 @@ namespace MVCApi
                 => options.UseNpgsql(Configuration.GetConnectionString("eshopdb")));
 
             services.AddMediatR(typeof(CreateCustomer));
+
+            services.AddScoped(typeof(IDomainRepository<>), typeof(DomainRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

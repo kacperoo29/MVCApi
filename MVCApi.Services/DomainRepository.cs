@@ -10,9 +10,9 @@ namespace MVCApi.Services
     public class DomainRepository<TEntity> : IDomainRepository<TEntity>
         where TEntity : BaseEntity
     {
-        private readonly DbContext _context;
+        private readonly EShopContext _context;
 
-        public DomainRepository(DbContext context)
+        public DomainRepository(EShopContext context)
         {
             _context = context;
         }
