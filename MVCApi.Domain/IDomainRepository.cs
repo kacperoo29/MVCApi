@@ -9,6 +9,6 @@ namespace MVCApi.Domain
     {
         Task<TEntity> GetByIdAsync(Guid id);
         Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize);
-        Task Add(TEntity entity);
+        Task<Guid> Add(TEntity entity);
     }
 }
