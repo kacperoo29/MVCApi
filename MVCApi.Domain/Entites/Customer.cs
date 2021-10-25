@@ -12,5 +12,9 @@ namespace MVCApi.Domain.Entites
         {
             return new Customer();
         }
+
+        public void ChangeName(string name) {
+            
+        }
     }
 }

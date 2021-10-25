@@ -31,8 +31,8 @@ namespace MVCApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MVCApi", Version = "v1" });
             });
 
-            services.AddDbContext<EShopContext>(options 
-                => options.UseNpgsql(Configuration.GetConnectionString("eshopdb")));
+            services.AddDbContext<EShopContext>(options
+                => options.UseSqlServer(Configuration.GetConnectionString("eshopdb"), b => b.MigrationsAssembly("MVCApi")));
 
             services.AddMediatR(typeof(CreateCustomer));
 

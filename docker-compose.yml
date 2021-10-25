@@ -2,12 +2,12 @@ version: "3.9"
 services:
   api:
     build: .
-    environment: 
+    environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=crypticpassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-    ports: 
+    ports:
       - 5000:80
       - 5001:443
     volumes:
@@ -15,10 +15,14 @@ services:
     depends_on:
       - db
   db:
-    image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - db_data:/var/opt/mssql/data
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - "1433:1433"
     environment:
-      - POSTGRES_DB=eshop
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      SA_PASSWORD: "Password123"
+      ACCEPT_EULA: "Y"
+
+volumes:
+  db_data:

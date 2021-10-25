@@ -9,6 +9,7 @@ namespace MVCApi.Application.Commands
 {
     public class CreateCustomer : IRequest<Guid>
     {
+        public string Name { get; private set; }
 
         public class Handler : IRequestHandler<CreateCustomer, Guid>
         {
