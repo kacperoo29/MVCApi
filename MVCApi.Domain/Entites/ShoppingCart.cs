@@ -8,18 +8,21 @@ namespace MVCApi.Domain.Entites
         public Customer Owner { get; private set; }
         public List<Product> Products { get; private set; }
 
-        public ShoppingCart() {}
+        public ShoppingCart() { }
 
         protected ShoppingCart(Customer owner)
         {
             Owner = owner;
+            Products = new List<Product>();
         }
 
-        public static ShoppingCart Create(Customer owner) {
+        public static ShoppingCart Create(Customer owner)
+        {
             return new ShoppingCart(owner);
         }
 
-        public void AddProduct(Product product) {
+        public void AddProduct(Product product)
+        {
             // TODO: Check if product can be added
 
             Products.Add(product);
