@@ -29,8 +29,8 @@ namespace MVCApi.Application.Commands
                 var product = await _productRepository.GetByIdAsync(request.ProductId);
                 var cart = await _cartRepository.GetByIdAsync(request.CartId);
 
-                cart.AddProduct(product);     
-                // TODO: mark cart as edited for database           
+                cart.AddProduct(product);
+                await _cartRepository.Edit(cart);
 
                 return cart.Id;
             }
