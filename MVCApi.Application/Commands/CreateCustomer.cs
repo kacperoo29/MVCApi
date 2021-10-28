@@ -25,7 +25,6 @@ namespace MVCApi.Application.Commands
                 var customer = Customer.Create();
 
                 return await _repository.Add(customer);
-
             }
         }
     }

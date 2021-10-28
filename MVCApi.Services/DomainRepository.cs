@@ -23,6 +23,23 @@ namespace MVCApi.Services
         public async Task<Guid> Add(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entity.Id;
+        }
+
+        public async Task<Guid> Delete(TEntity entity)
+        {
+            _context.Remove(entity);
+            await _context.SaveChangesAsync();
+
+            return entity.Id;
+        }
+
+        public async Task<Guid> Edit(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
             return entity.Id;
         }
