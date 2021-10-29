@@ -10,8 +10,8 @@ namespace MVCApi.Application.Commands
 {
     public class AddProductToCart : IRequest<Guid> 
     {
-        public Guid CartId { get; private set; }
-        public Guid ProductId { get; private set; }
+        public Guid CartId { get; init; }
+        public Guid ProductId { get; init; }
 
         public class Handler : IRequestHandler<AddProductToCart, Guid>
         {

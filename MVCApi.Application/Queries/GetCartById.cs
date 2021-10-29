@@ -1,18 +1,15 @@
-﻿using MediatR;
-using MVCApi.Domain;
-using MVCApi.Domain.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using MVCApi.Domain;
+using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Queries
 {
     public class GetCartById : IRequest<ShoppingCart>
     {
-        public Guid CartId { get; private set; }
+        public Guid CartId { get; init; }
 
         public class Handler : IRequestHandler<GetCartById, ShoppingCart>
         {
