@@ -8,6 +8,8 @@ namespace MVCApi.Services
 {
     public class ApplicationUser : IdentityUser<Guid>, IApplicationUser
     {
-        public IDomainUser DomainUser { get; private set; }
+        public IDomainUser DomainUser { get; set; }
+
+        public Guid DomainUserId { get; set; }
     }
 }

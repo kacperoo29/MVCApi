@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MVCApi.Domain.Entites;
+using Newtonsoft.Json.Converters;
 
 namespace MVCApi.Services
 {
@@ -21,10 +22,14 @@ namespace MVCApi.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOne<Customer>(e => (Customer)e.DomainUser)
-                .WithOne(i => (ApplicationUser)i.ApplicationUser)
-                .HasForeignKey<Customer>(c => c.ApplicationUserId);
+            // modelBuilder.Entity<ApplicationUser>()
+            //     .HasOne<Customer>(e => (Customer)e.DomainUser)
+            //     .WithOne(i => (ApplicationUser)i.ApplicationUser)
+            //     .HasForeignKey<Customer>(c => c.ApplicationUserId);
+            modelBuilder.Entity<Customer>()
+                .HasOne<ApplicationUser>(u => (ApplicationUser)u.ApplicationUser)
+                .WithOne(i => (Customer)i.DomainUser)
+                .HasForeignKey<ApplicationUser>(c => c.DomainUserId);
         }
     }
 }

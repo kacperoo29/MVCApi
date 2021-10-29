@@ -22,6 +22,7 @@ namespace MVCApi.Application.Commands
                 IUserService userService)
             {
                 _cartRepository = cartRepository;
+                _customerRepository = customerRepository;
                 _userService = userService;
             }
 

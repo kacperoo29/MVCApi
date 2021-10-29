@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MVCApi.Application;
 using MVCApi.Application.Commands;
 using MVCApi.Domain;
 using MVCApi.Services;
