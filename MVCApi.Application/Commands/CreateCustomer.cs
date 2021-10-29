@@ -22,9 +22,10 @@ namespace MVCApi.Application.Commands
 
             public async Task<Guid> Handle(CreateCustomer request, CancellationToken cancellationToken)
             {
-                var customer = Customer.Create();
+                // var customer = Customer.Create();
 
-                return await _repository.Add(customer);
+                // return await _repository.Add(customer);
+                throw new NotImplementedException();
             }
         }
     }

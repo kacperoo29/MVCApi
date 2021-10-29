@@ -1,16 +1,27 @@
+using System;
+
 namespace MVCApi.Domain.Entites
 {
-    public class Customer : BaseEntity
+    public class Customer : BaseEntity, IDomainUser
     {
-        protected Customer()
-            : base()
+        public Guid ApplicationUserId { get; private set; }
+        public IApplicationUser ApplicationUser { get; private set; }
+
+        private Customer()
         {
 
         }
 
-        public static Customer Create()
+        protected Customer(IApplicationUser user)
+            : base()
         {
-            return new Customer();
+            ApplicationUserId = user.Id;
+            ApplicationUser = user;
+        }   
+
+        public static Customer Create(IApplicationUser user)
+        {
+            return new Customer(user);
         }
 
         public void ChangeName(string name) {
