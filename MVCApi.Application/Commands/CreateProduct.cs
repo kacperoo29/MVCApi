@@ -9,23 +9,23 @@ namespace MVCApi.Application.Commands
 {
     public class CreateProduct : IRequest<Guid>
     {
-        public string Name { get; private set; }
+        public string Name { get; init; }
+        public string Description { get; init; }
 
         public class Handler : IRequestHandler<CreateProduct, Guid>
         {
-            private readonly IDomainRepository<Product> _repository;
+            private readonly IDomainRepository<Product> _productRepository;
 
-            public Handler(IDomainRepository<Product> repository)
+            public Handler(IDomainRepository<Product> productRepository)
             {
-                _repository = repository;
+                _productRepository = productRepository;
             }
 
             public async Task<Guid> Handle(CreateProduct request, CancellationToken cancellationToken)
             {
-                //TODO: implement name as a parameter
-                var product = Product.Create("test");
+                var product = Product.Create(request.Name, request.Description);
 
-                return await _repository.Add(product);
+                return await _productRepository.AddAsync(product);
 
             }
         }
