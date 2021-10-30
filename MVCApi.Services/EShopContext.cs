@@ -1,9 +1,9 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MVCApi.Domain.Entites;
-using Newtonsoft.Json.Converters;
 
 namespace MVCApi.Services
 {
@@ -12,6 +12,10 @@ namespace MVCApi.Services
         public DbSet<Product> Products { get; private set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; private set; }
         public DbSet<Customer> Customers { get; private set; }
+        public DbSet<Category> Categories { get; private set; }
+        public DbSet<ContactInfo> ContactInfos { get; private set; }
+        public DbSet<Address> Addresses { get; private set; }
+        public DbSet<Order> Orders { get; private set; }
 
         public EShopContext(DbContextOptions<EShopContext> options)
             : base(options)
@@ -19,14 +23,9 @@ namespace MVCApi.Services
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            base.OnModelCreating(modelBuilder);
-
-            // modelBuilder.Entity<ApplicationUser>()
-            //     .HasOne<Customer>(e => (Customer)e.DomainUser)
-            //     .WithOne(i => (ApplicationUser)i.ApplicationUser)
-            //     .HasForeignKey<Customer>(c => c.ApplicationUserId);
-            
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);        
         }
     }
 }

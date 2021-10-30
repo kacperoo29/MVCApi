@@ -1,32 +1,27 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace MVCApi.Domain.Entites
 {
     public class ShoppingCart : BaseEntity
     {
-        public Customer Owner { get; private set; }
-        public List<Product> Products { get; private set; }
+        public ICollection<ProductCart> Products { get; private set; }
 
-        private ShoppingCart() { }
-
-        protected ShoppingCart(Customer owner)
+        protected ShoppingCart()
             : base()
         {
-            Owner = owner;
-            Products = new List<Product>();
+            Products = new List<ProductCart>();
         }
 
-        public static ShoppingCart Create(Customer owner)
+        public static ShoppingCart Create()
         {
-            return new ShoppingCart(owner);
+            return new ShoppingCart();
         }
 
-        public void AddProduct(Product product)
+        public void AddProduct(Product product, int count)
         {
             // TODO: Check if product can be added
 
-            Products.Add(product);
+            Products.Add(new ProductCart(product, this, count));
         }
 
     }

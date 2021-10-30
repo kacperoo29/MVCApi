@@ -8,7 +8,7 @@ namespace MVCApi.Domain.Entites
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public DateTime DateOfBirth { get; private set; }
-        public List<Address> Addresses { get; private set; }
+        public ICollection<Address> Addresses { get; private set; }
         public ContactInfo ContactInfo { get; private set; }
 
         private Customer()
@@ -31,11 +31,6 @@ namespace MVCApi.Domain.Entites
         {
             // TODO: Business logic checks
             return new Customer(firstName, lastName, dateOfBirth, address, contactInfo);
-        }
-
-        public void ChangeName(string name)
-        {
-
         }
     }
 }
