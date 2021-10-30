@@ -8,9 +8,10 @@ namespace MVCApi.Domain.Entites
         public Customer Owner { get; private set; }
         public List<Product> Products { get; private set; }
 
-        public ShoppingCart() { }
+        private ShoppingCart() { }
 
         protected ShoppingCart(Customer owner)
+            : base()
         {
             Owner = owner;
             Products = new List<Product>();

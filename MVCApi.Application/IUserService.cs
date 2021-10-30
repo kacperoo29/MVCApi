@@ -8,6 +8,6 @@ namespace MVCApi.Application
     public interface IUserService
     {
         Task<IApplicationUser> GetCurrentUser();
-        Task<IApplicationUser> CreateUser(IDomainUser domainUser, string userName, string password);
+        Task<IApplicationUser> CreateUser(string email, string userName, string password);
     }
 }

@@ -1,30 +1,41 @@
 using System;
+using System.Collections.Generic;
 
 namespace MVCApi.Domain.Entites
 {
     public class Customer : BaseEntity, IDomainUser
     {
-        public IApplicationUser ApplicationUser { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
+        public List<Address> Addresses { get; private set; }
+        public ContactInfo ContactInfo { get; private set; }
 
-        protected Customer()
-            : base()
+        private Customer()
         {
-            
+            Addresses = new List<Address>();
         }
 
-        public static Customer Create()
+        protected Customer(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
+            : base()
         {
-            return new Customer();
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Addresses = new List<Address>();
+            Addresses.Add(address);
+            ContactInfo = contactInfo;
+        }
+
+        public static Customer Create(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
+        {
+            // TODO: Business logic checks
+            return new Customer(firstName, lastName, dateOfBirth, address, contactInfo);
         }
 
         public void ChangeName(string name)
         {
 
-        }
-
-        public void SetReference(IApplicationUser user) 
-        {
-            ApplicationUser = user;
         }
     }
 }

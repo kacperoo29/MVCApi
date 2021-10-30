@@ -31,7 +31,7 @@ namespace MVCApi.Application.Commands
                 var user = await _userService.GetCurrentUser();
                 var customer = await _customerRepository.GetByIdAsync(user.Id);
                 var cart = ShoppingCart.Create(customer);
-                await _cartRepository.Add(cart);
+                await _cartRepository.AddAsync(cart);
                 
                 return cart.Id;
             }

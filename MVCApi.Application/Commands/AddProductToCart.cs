@@ -30,7 +30,7 @@ namespace MVCApi.Application.Commands
                 var cart = await _cartRepository.GetByIdAsync(request.CartId);
 
                 cart.AddProduct(product);
-                await _cartRepository.Edit(cart);
+                await _cartRepository.EditAsync(cart);
 
                 return cart.Id;
             }

@@ -26,10 +26,7 @@ namespace MVCApi.Services
             //     .HasOne<Customer>(e => (Customer)e.DomainUser)
             //     .WithOne(i => (ApplicationUser)i.ApplicationUser)
             //     .HasForeignKey<Customer>(c => c.ApplicationUserId);
-            modelBuilder.Entity<Customer>()
-                .HasOne<ApplicationUser>(u => (ApplicationUser)u.ApplicationUser)
-                .WithOne(i => (Customer)i.DomainUser)
-                .HasForeignKey<ApplicationUser>(c => c.DomainUserId);
+            
         }
     }
 }

@@ -8,7 +8,7 @@ namespace MVCApi.Domain.Entites
         public string Name { get; private set; }
         public List<ShoppingCart> Carts { get; private set; }
 
-        public Product() { }
+        private Product() { }
         
     }
 }
