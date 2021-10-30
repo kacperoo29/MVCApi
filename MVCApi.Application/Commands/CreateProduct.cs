@@ -13,19 +13,19 @@ namespace MVCApi.Application.Commands
 
         public class Handler : IRequestHandler<CreateProduct, Guid>
         {
-            private readonly IDomainRepository<Product> _repository;
+            private readonly IDomainRepository<Product> _productRepository;
 
-            public Handler(IDomainRepository<Product> repository)
+            public Handler(IDomainRepository<Product> productRepository)
             {
-                _repository = repository;
+                _productRepository = productRepository;
             }
 
             public async Task<Guid> Handle(CreateProduct request, CancellationToken cancellationToken)
             {
                 //TODO: implement name as a parameter
-                var product = Product.Create("test");
+                var product = Product.Create("test", "test");
 
-                return await _repository.Add(product);
+                return await _productRepository.AddAsync(product);
 
             }
         }
