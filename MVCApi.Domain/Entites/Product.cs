@@ -10,6 +10,7 @@ namespace MVCApi.Domain.Entites
         public ICollection<ProductCart> ShoppingCarts { get; private set; }
         public ICollection<CurrencyProduct> Prices { get; private set; }
 
+
         protected Product(string name, string description) 
         {
             ShoppingCarts = new List<ProductCart>();
