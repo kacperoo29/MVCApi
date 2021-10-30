@@ -12,7 +12,7 @@ namespace MVCApi.Application.Queries
 {
     public class GetProductById : IRequest<Product>
     {
-        public Guid ProductId { get; private set; }
+        public Guid ProductId { get; init; }
 
         public class Handler : IRequestHandler<GetProductById, Product>
         {

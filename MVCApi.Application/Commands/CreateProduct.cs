@@ -9,7 +9,8 @@ namespace MVCApi.Application.Commands
 {
     public class CreateProduct : IRequest<Guid>
     {
-        public string Name { get; private set; }
+        public string Name { get; init; }
+        public string Description { get; init; }
 
         public class Handler : IRequestHandler<CreateProduct, Guid>
         {
@@ -22,8 +23,7 @@ namespace MVCApi.Application.Commands
 
             public async Task<Guid> Handle(CreateProduct request, CancellationToken cancellationToken)
             {
-                //TODO: implement name as a parameter
-                var product = Product.Create("test", "test");
+                var product = Product.Create(request.Name, request.Description);
 
                 return await _productRepository.AddAsync(product);
 

@@ -25,12 +25,14 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(command));
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<Customer>> GetOrderById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetOrderById { OrderId = id }));
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetAllOrders()
         {

@@ -28,11 +28,13 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(command));
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetAllCategories()
         {
             return Ok(await _mediator.Send(new GetAllCategories()));
         }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<Category>> GetCategoryById([FromRoute] Guid id)
