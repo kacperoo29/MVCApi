@@ -23,6 +23,12 @@ services:
     environment:
       SA_PASSWORD: "Password123"
       ACCEPT_EULA: "Y"
+  client:
+    build: ./MVCApi.Client
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
 
 volumes:
   db_data:
