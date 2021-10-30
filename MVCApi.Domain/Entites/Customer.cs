@@ -1,20 +1,36 @@
+using System;
+using System.Collections.Generic;
+
 namespace MVCApi.Domain.Entites
 {
-    public class Customer : BaseEntity
+    public class Customer : BaseEntity, IDomainUser
     {
-        protected Customer()
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
+        public ICollection<Address> Addresses { get; private set; }
+        public ContactInfo ContactInfo { get; private set; }
+
+        private Customer()
+        {
+            Addresses = new List<Address>();
+        }
+
+        protected Customer(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
             : base()
         {
-
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Addresses = new List<Address>();
+            Addresses.Add(address);
+            ContactInfo = contactInfo;
         }
 
-        public static Customer Create()
+        public static Customer Create(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
         {
-            return new Customer();
-        }
-
-        public void ChangeName(string name) {
-            
+            // TODO: Business logic checks
+            return new Customer(firstName, lastName, dateOfBirth, address, contactInfo);
         }
     }
 }

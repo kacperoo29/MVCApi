@@ -14,22 +14,47 @@ namespace MVCApi.Services
         where TEntity : BaseEntity
     {
         private readonly EShopContext _context;
+        private DbSet<TEntity> DbSet => _context.Set<TEntity>();
 
         public DomainRepository(EShopContext context)
         {
             _context = context;
         }
 
-        public async Task<Guid> Add(TEntity entity)
+        public async Task<Guid> AddAsync(TEntity entity)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
+            await DbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity.Id;
         }
 
+        public async Task<Guid> Delete(TEntity entity)
+        {
+            _context.Remove(entity);
+            await _context.SaveChangesAsync();
+
+            return entity.Id;
+        }
+
+        public async Task<Guid> EditAsync(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return entity.Id;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
+        {
+            return filter != null 
+                ? await DbSet.Where(filter).ToListAsync() 
+                : await DbSet.ToListAsync();
+        }
+
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+            return await DbSet.FindAsync(id);
         }
 
         public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
@@ -37,12 +62,13 @@ namespace MVCApi.Services
         {
             if (pageNumber < 1)
                 return new List<TEntity>();
-            
-            if (pageSize <  ServicesConstants.MinPageSize || pageSize > ServicesConstants.MaxPageSize)
+
+            if (pageSize < ServicesConstants.MinPageSize || pageSize > ServicesConstants.MaxPageSize)
                 throw new InvalidPageSizeException(pageSize);
 
-            return await _context.Set<TEntity>().Where(filter)
-                .Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            return filter != null
+                ? await DbSet.Where(filter).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync()
+                : await DbSet.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }

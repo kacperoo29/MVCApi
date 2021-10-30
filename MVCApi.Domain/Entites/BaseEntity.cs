@@ -4,12 +4,18 @@ namespace MVCApi.Domain.Entites
 {
     public abstract class BaseEntity
     {
-        public Guid Id { get; private set; }
-        public DateTime DateCreated { get; private set; }
+        public Guid Id { get; protected set; }
+        public DateTime DateCreated { get; protected set; }
 
         protected BaseEntity()
         {
             Id = Guid.NewGuid();
+            DateCreated = DateTime.Now;
+        }
+
+        protected BaseEntity(Guid id)
+        {
+            Id = id;
             DateCreated = DateTime.Now;
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -10,8 +9,9 @@ namespace MVCApi.Application.Commands
 {
     public class AddProductToCart : IRequest<Guid> 
     {
-        public Guid CartId { get; private set; }
-        public Guid ProductId { get; private set; }
+        public Guid CartId { get; init; }
+        public Guid ProductId { get; init; }
+        public int Count { get; init; }
 
         public class Handler : IRequestHandler<AddProductToCart, Guid>
         {
@@ -29,8 +29,8 @@ namespace MVCApi.Application.Commands
                 var product = await _productRepository.GetByIdAsync(request.ProductId);
                 var cart = await _cartRepository.GetByIdAsync(request.CartId);
 
-                cart.AddProduct(product);     
-                // TODO: mark cart as edited for database           
+                cart.AddProduct(product, request.Count);
+                await _cartRepository.EditAsync(cart);
 
                 return cart.Id;
             }
