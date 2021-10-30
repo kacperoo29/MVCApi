@@ -1,11 +1,9 @@
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using MVCApi.Application;
 using MVCApi.Domain;
-using MVCApi.Domain.Entites;
 
 namespace MVCApi.Services
 {
@@ -25,12 +23,21 @@ namespace MVCApi.Services
             return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
         }
 
-        public async Task<IApplicationUser> CreateUser(IDomainUser domainUser, string userName, string password)
+        public async Task<IApplicationUser> CreateUser(string email, string userName, string password)
         {
-            var newUser = new ApplicationUser { UserName = userName, DomainUser = domainUser, Id = domainUser.Id };
+            var newUser = new ApplicationUser { UserName = userName, Email = email };
             var errors = await _userManager.CreateAsync(newUser, password);
-
+            
             return newUser;
+        }
+
+        public async Task<Guid> LinkDomainUser(Guid id, IDomainUser user)
+        {
+            var appUser = await _userManager.FindByIdAsync(id.ToString());
+            appUser.DomainUser = user;
+            await _userManager.UpdateAsync(appUser);
+
+            return appUser.Id;
         }
     }
 }

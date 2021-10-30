@@ -21,7 +21,7 @@ namespace MVCApi.Services
             _context = context;
         }
 
-        public async Task<Guid> Add(TEntity entity)
+        public async Task<Guid> AddAsync(TEntity entity)
         {
             await DbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -37,7 +37,7 @@ namespace MVCApi.Services
             return entity.Id;
         }
 
-        public async Task<Guid> Edit(TEntity entity)
+        public async Task<Guid> EditAsync(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();

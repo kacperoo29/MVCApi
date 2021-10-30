@@ -4,14 +4,16 @@ using MVCApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCApi.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    partial class EShopContextModelSnapshot : ModelSnapshot
+    [Migration("20211030114558_AddCustomerFields")]
+    partial class AddCustomerFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,29 +52,7 @@ namespace MVCApi.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Categories");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.ContactInfo", b =>
@@ -98,54 +78,7 @@ namespace MVCApi.Migrations
                     b.HasIndex("CustomerId")
                         .IsUnique();
 
-                    b.ToTable("ContactInfos");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Currency", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DecimalPlaces")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Currency");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.CurrencyProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CurrencyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CurrencyId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CurrencyProduct");
+                    b.ToTable("ContactInfo");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.Customer", b =>
@@ -171,83 +104,21 @@ namespace MVCApi.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("MVCApi.Domain.Entites.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ShoppingCartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("MVCApi.Domain.Entites.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.ProductCart", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ShoppingCartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("ProductCart");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.ShoppingCart", b =>
@@ -259,7 +130,12 @@ namespace MVCApi.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("ShoppingCarts");
                 });
@@ -463,20 +339,26 @@ namespace MVCApi.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.Property<Guid>("CartsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CartsId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductShoppingCart");
+                });
+
             modelBuilder.Entity("MVCApi.Domain.Entites.Address", b =>
                 {
                     b.HasOne("MVCApi.Domain.Entites.Customer", null)
                         .WithMany("Addresses")
                         .HasForeignKey("CustomerId");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Category", b =>
-                {
-                    b.HasOne("MVCApi.Domain.Entites.Category", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.ContactInfo", b =>
@@ -490,58 +372,13 @@ namespace MVCApi.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("MVCApi.Domain.Entites.CurrencyProduct", b =>
+            modelBuilder.Entity("MVCApi.Domain.Entites.ShoppingCart", b =>
                 {
-                    b.HasOne("MVCApi.Domain.Entites.Currency", "Currency")
-                        .WithMany("Products")
-                        .HasForeignKey("CurrencyId");
-
-                    b.HasOne("MVCApi.Domain.Entites.Product", "Product")
-                        .WithMany("Prices")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Currency");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Order", b =>
-                {
-                    b.HasOne("MVCApi.Domain.Entites.Customer", "Customer")
+                    b.HasOne("MVCApi.Domain.Entites.Customer", "Owner")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("OwnerId");
 
-                    b.HasOne("MVCApi.Domain.Entites.ShoppingCart", "ShoppingCart")
-                        .WithMany()
-                        .HasForeignKey("ShoppingCartId");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("ShoppingCart");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Product", b =>
-                {
-                    b.HasOne("MVCApi.Domain.Entites.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.ProductCart", b =>
-                {
-                    b.HasOne("MVCApi.Domain.Entites.Product", "Product")
-                        .WithMany("ShoppingCarts")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("MVCApi.Domain.Entites.ShoppingCart", "ShoppingCart")
-                        .WithMany("Products")
-                        .HasForeignKey("ShoppingCartId");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -595,16 +432,19 @@ namespace MVCApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MVCApi.Domain.Entites.Category", b =>
+            modelBuilder.Entity("ProductShoppingCart", b =>
                 {
-                    b.Navigation("Children");
+                    b.HasOne("MVCApi.Domain.Entites.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Currency", b =>
-                {
-                    b.Navigation("Products");
+                    b.HasOne("MVCApi.Domain.Entites.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.Customer", b =>
@@ -612,18 +452,6 @@ namespace MVCApi.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("ContactInfo");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.Product", b =>
-                {
-                    b.Navigation("Prices");
-
-                    b.Navigation("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("MVCApi.Domain.Entites.ShoppingCart", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

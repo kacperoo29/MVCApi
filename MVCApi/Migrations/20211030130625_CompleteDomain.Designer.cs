@@ -4,14 +4,16 @@ using MVCApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCApi.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    partial class EShopContextModelSnapshot : ModelSnapshot
+    [Migration("20211030130625_CompleteDomain")]
+    partial class CompleteDomain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,6 +209,9 @@ namespace MVCApi.Migrations
                     b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CurrencyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -219,6 +224,8 @@ namespace MVCApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CurrencyId");
 
                     b.ToTable("Products");
                 });
@@ -493,7 +500,7 @@ namespace MVCApi.Migrations
             modelBuilder.Entity("MVCApi.Domain.Entites.CurrencyProduct", b =>
                 {
                     b.HasOne("MVCApi.Domain.Entites.Currency", "Currency")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CurrencyId");
 
                     b.HasOne("MVCApi.Domain.Entites.Product", "Product")
@@ -525,6 +532,10 @@ namespace MVCApi.Migrations
                     b.HasOne("MVCApi.Domain.Entites.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
+
+                    b.HasOne("MVCApi.Domain.Entites.Currency", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CurrencyId");
 
                     b.Navigation("Category");
                 });

@@ -12,8 +12,8 @@ namespace MVCApi.Domain
         Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
             Expression<Func<TEntity, bool>> filter = null);
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);
-        Task<Guid> Add(TEntity entity);
-        Task<Guid> Edit(TEntity entity);
+        Task<Guid> AddAsync(TEntity entity);
+        Task<Guid> EditAsync(TEntity entity);
         Task<Guid> Delete(TEntity entity);
     }
 }

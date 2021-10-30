@@ -5,6 +5,5 @@ namespace MVCApi.Domain
     public interface IDomainUser
     {
         Guid Id { get; }
-        IApplicationUser ApplicationUser { get; }
     }
 }
