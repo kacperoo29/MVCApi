@@ -12,15 +12,27 @@ namespace MVCApi.Domain.Entites
             Products = new List<Product>();
         }
 
-        public string Name { get; }
+        protected Category(string name, Category parent)
+            : this(name)
+        {            
+            ParentId = parent.Id;
+            Parent = parent;
+        }
+
+        public string Name { get; private set; }
         public Guid? ParentId { get; private set; }
         public virtual Category Parent { get; private set; }
-        public virtual ICollection<Category> Children { get; }
-        public virtual ICollection<Product> Products { get; }
+        public virtual ICollection<Category> Children { get; private set; }
+        public virtual ICollection<Product> Products { get; private set; }
 
         public static Category Create(string name)
         {
             return new Category(name);
+        }
+
+        public static Category Create(string name, Category parent)
+        {
+            return new Category(name, parent);
         }
     }
 }

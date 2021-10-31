@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace MVCApi.Domain.Entites
@@ -9,7 +10,7 @@ namespace MVCApi.Domain.Entites
             Products = new List<ProductCart>();
         }
 
-        public virtual ICollection<ProductCart> Products { get; }
+        public virtual ICollection<ProductCart> Products { get; private set; }
 
         public static ShoppingCart Create()
         {
@@ -21,6 +22,18 @@ namespace MVCApi.Domain.Entites
             // TODO: Check if product can be added
 
             Products.Add(new ProductCart(product, this, count));
+        }
+
+        public void RemoveProduct(Guid productId)
+        {
+            foreach (var item in Products)
+                if (item.Product.Id == productId)
+                    Products.Remove(item);
+        }
+
+        public void Clear()
+        {
+            Products.Clear();
         }
     }
 }
