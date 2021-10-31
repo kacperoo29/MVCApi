@@ -14,6 +14,7 @@ namespace MVCApi.Domain.Entites
         {
             Customer = customer;
             ShoppingCart = shoppingCart;
+            OrderState = OrderState.New;
         }
 
         public static Order Create(Customer customer, ShoppingCart shoppingCart)

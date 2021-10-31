@@ -1,6 +1,6 @@
-namespace MVCApi.Application.DTOs
+namespace MVCApi.Application.Dto
 {
-    public class AddressDTO
+    public class AddressDto
     {
         public string Country { get; set; }
         public string City { get; set; }

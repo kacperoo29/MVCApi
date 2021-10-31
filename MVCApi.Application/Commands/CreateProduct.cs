@@ -26,7 +26,6 @@ namespace MVCApi.Application.Commands
                 var product = Product.Create(request.Name, request.Description);
 
                 return await _productRepository.AddAsync(product);
-
             }
         }
     }

@@ -1,5 +1,5 @@
 using AutoMapper;
-using MVCApi.Application.DTOs;
+using MVCApi.Application.Dto;
 using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application
@@ -8,16 +8,16 @@ namespace MVCApi.Application
     {
         public MappingProfile()
         {
-            CreateMap<ContactInfo, ContactInfoDTO>();
-            CreateMap<Address, AddressDTO>();
-            CreateMap<Customer, CustomerDTO>();
-            CreateMap<Category, CategoryDTO>();
-            CreateMap<Currency, CurrencyDTO>();
-            CreateMap<CurrencyProduct, CurrencyProductDTO>();
-            CreateMap<Product, ProductDTO>();
-            CreateMap<ProductCart, ProductCartDTO>();
-            CreateMap<ShoppingCart, ShoppingCartDTO>();
-            CreateMap<Order, OrderDTO>();
+            CreateMap<ContactInfo, ContactInfoDto>();
+            CreateMap<Address, AddressDto>();
+            CreateMap<Customer, CustomerDto>();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<Currency, CurrencyDto>();
+            CreateMap<CurrencyProduct, CurrencyProductDto>();
+            CreateMap<Product, ProductDto>();
+            CreateMap<ProductCart, ProductCartDto>();
+            CreateMap<ShoppingCart, ShoppingCartDto>();
+            CreateMap<Order, OrderDto>();
         }
     }
 }

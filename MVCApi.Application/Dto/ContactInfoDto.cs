@@ -1,6 +1,6 @@
-namespace MVCApi.Application.DTOs
+namespace MVCApi.Application.Dto
 {
-    public class ContactInfoDTO
+    public class ContactInfoDto
     {
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

@@ -6,17 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using MVCApi.Application.DTOs;
+using MVCApi.Application.Dto;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Queries
 {
-    public class GetProductById : IRequest<ProductDTO>
+    public class GetProductById : IRequest<ProductDto>
     {
         public Guid ProductId { get; init; }
 
-        public class Handler : IRequestHandler<GetProductById, ProductDTO>
+        public class Handler : IRequestHandler<GetProductById, ProductDto>
         {
             private readonly IDomainRepository<Product> _repository;
             private readonly IMapper _mapper;
@@ -27,10 +27,10 @@ namespace MVCApi.Application.Queries
                 _mapper = mapper;
             }
 
-            public async Task<ProductDTO> Handle(GetProductById request, CancellationToken cancellationToken)
+            public async Task<ProductDto> Handle(GetProductById request, CancellationToken cancellationToken)
             {
                 var product = await _repository.GetByIdAsync(request.ProductId);
-                return _mapper.Map<Product, ProductDTO>(product);
+                return _mapper.Map<Product, ProductDto>(product);
             }
         }
     }

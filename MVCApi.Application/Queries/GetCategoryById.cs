@@ -6,17 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using MVCApi.Application.DTOs;
+using MVCApi.Application.Dto;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Queries
 {
-    public class GetCategoryById : IRequest<CategoryDTO>
+    public class GetCategoryById : IRequest<CategoryDto>
     {
         public Guid CategoryId { get; init; }
 
-        public class Handler : IRequestHandler<GetCategoryById, CategoryDTO>
+        public class Handler : IRequestHandler<GetCategoryById, CategoryDto>
         {
             private readonly IDomainRepository<Category> _categoryRepository;
             private readonly IMapper _mapper;
@@ -27,11 +27,11 @@ namespace MVCApi.Application.Queries
                 _mapper = mapper;
             }
 
-            public async Task<CategoryDTO> Handle(GetCategoryById request, CancellationToken cancellationToken)
+            public async Task<CategoryDto> Handle(GetCategoryById request, CancellationToken cancellationToken)
             {
                 var category = await _categoryRepository.GetByIdAsync(request.CategoryId);
 
-                return _mapper.Map<Category, CategoryDTO>(category);
+                return _mapper.Map<Category, CategoryDto>(category);
             }
         }
     }

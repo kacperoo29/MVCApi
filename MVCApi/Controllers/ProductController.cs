@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
-using MVCApi.Application.DTOs;
+using MVCApi.Application.Dto;
 using MVCApi.Application.Queries;
 
 namespace MVCApi.Controllers 
@@ -24,7 +24,7 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{ProductId}")]
-        public async Task<ActionResult<ProductDTO>> GetProductById([FromRoute] GetProductById query)
+        public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] GetProductById query)
         {
             return Ok(await _mediator.Send(query));
         }

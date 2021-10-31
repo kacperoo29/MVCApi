@@ -3,17 +3,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using MVCApi.Application.DTOs;
+using MVCApi.Application.Dto;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Queries
 {
-    public class GetOrderById : IRequest<OrderDTO>
+    public class GetOrderById : IRequest<OrderDto>
     {
         public Guid OrderId { get; init; }
 
-        public class Handler : IRequestHandler<GetOrderById, OrderDTO>
+        public class Handler : IRequestHandler<GetOrderById, OrderDto>
         {
             private readonly IDomainRepository<Order> _orderRepository;
             private readonly IMapper _mapper;
@@ -24,11 +24,11 @@ namespace MVCApi.Application.Queries
                 _mapper = mapper;
             }
 
-            public async Task<OrderDTO> Handle(GetOrderById request, CancellationToken cancellationToken)
+            public async Task<OrderDto> Handle(GetOrderById request, CancellationToken cancellationToken)
             {
                 var order = await _orderRepository.GetByIdAsync(request.OrderId);
 
-                return _mapper.Map<Order, OrderDTO>(order);
+                return _mapper.Map<Order, OrderDto>(order);
             }
         }
     }
