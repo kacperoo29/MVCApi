@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,7 +11,6 @@ namespace MVCApi.Application.Queries
 {
     public class GetAllCategories : IRequest<IEnumerable<CategoryDto>>
     {
-
         public class Handler : IRequestHandler<GetAllCategories, IEnumerable<CategoryDto>>
         {
             private readonly IDomainRepository<Category> _categoryRepository;
@@ -25,7 +22,8 @@ namespace MVCApi.Application.Queries
                 _mapper = mapper;
             }
 
-            public async Task<IEnumerable<CategoryDto>> Handle(GetAllCategories request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<CategoryDto>> Handle(GetAllCategories request,
+                CancellationToken cancellationToken)
             {
                 var categories = await _categoryRepository.GetAllAsync();
                 return _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(categories);

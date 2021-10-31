@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,10 +28,7 @@ namespace MVCApi
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MVCApi", Version = "v1" });
-                });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "MVCApi", Version = "v1"}); });
 
             services.AddDbContext<EShopContext>(options =>
                 options.UseLazyLoadingProxies()
@@ -66,10 +62,10 @@ namespace MVCApi
             services.AddCors(options =>
             {
                 options.AddPolicy("cors_policy",
-                builder =>
-                {
-                    builder.SetIsOriginAllowed(isOriginAllowed: _ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-                });
+                    builder =>
+                    {
+                        builder.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                    });
             });
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
@@ -94,10 +90,7 @@ namespace MVCApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

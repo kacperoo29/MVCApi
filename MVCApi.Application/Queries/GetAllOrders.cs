@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,11 +11,10 @@ namespace MVCApi.Application.Queries
 {
     public class GetAllOrders : IRequest<IEnumerable<OrderDto>>
     {
-
         public class Handler : IRequestHandler<GetAllOrders, IEnumerable<OrderDto>>
         {
-            private readonly IDomainRepository<Order> _orderRepository;
             private readonly IMapper _mapper;
+            private readonly IDomainRepository<Order> _orderRepository;
 
             public Handler(IDomainRepository<Order> orderRepository, IMapper mapper)
             {

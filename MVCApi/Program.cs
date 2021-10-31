@@ -3,7 +3,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MVCApi.Services;
 
@@ -27,7 +26,7 @@ namespace MVCApi
                     logger.LogError(ex, "An error occurred while migrating the database.");
                 }
             }
-            
+
             return webHost;
         }
     }
@@ -39,7 +38,9 @@ namespace MVCApi
             CreateHostBuilder(args).Build().MigrateDatabase<EShopContext>().Run();
         }
 
-        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
+        public static IWebHostBuilder CreateHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
+        }
     }
 }

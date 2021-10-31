@@ -14,12 +14,13 @@ namespace MVCApi.Services
         where TEntity : BaseEntity
     {
         private readonly EShopContext _context;
-        private DbSet<TEntity> DbSet => _context.Set<TEntity>();
 
         public DomainRepository(EShopContext context)
         {
             _context = context;
         }
+
+        private DbSet<TEntity> DbSet => _context.Set<TEntity>();
 
         public async Task<Guid> AddAsync(TEntity entity)
         {
@@ -47,8 +48,8 @@ namespace MVCApi.Services
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
-            return filter != null 
-                ? await DbSet.Where(filter).ToListAsync() 
+            return filter != null
+                ? await DbSet.Where(filter).ToListAsync()
                 : await DbSet.ToListAsync();
         }
 

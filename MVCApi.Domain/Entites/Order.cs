@@ -4,11 +4,9 @@ namespace MVCApi.Domain.Entites
 {
     public class Order : BaseEntity
     {
-        public virtual Customer Customer { get; private set; }
-        public virtual ShoppingCart ShoppingCart { get; private set; }
-        public OrderState OrderState { get; private set; }
-
-        private Order() { }
+        private Order()
+        {
+        }
 
         protected Order(Customer customer, ShoppingCart shoppingCart)
         {
@@ -17,10 +15,13 @@ namespace MVCApi.Domain.Entites
             OrderState = OrderState.New;
         }
 
+        public virtual Customer Customer { get; }
+        public virtual ShoppingCart ShoppingCart { get; }
+        public OrderState OrderState { get; }
+
         public static Order Create(Customer customer, ShoppingCart shoppingCart)
         {
             return new Order(customer, shoppingCart);
         }
-
     }
 }

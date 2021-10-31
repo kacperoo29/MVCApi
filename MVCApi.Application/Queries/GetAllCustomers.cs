@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,11 +11,10 @@ namespace MVCApi.Application.Queries
 {
     public class GetAllCustomers : IRequest<IEnumerable<CustomerDto>>
     {
-
         public class Handler : IRequestHandler<GetAllCustomers, IEnumerable<CustomerDto>>
         {
-            private readonly IDomainRepository<Customer> _repository;
             private readonly IMapper _mapper;
+            private readonly IDomainRepository<Customer> _repository;
 
             public Handler(IDomainRepository<Customer> repository, IMapper mapper)
             {
@@ -24,7 +22,8 @@ namespace MVCApi.Application.Queries
                 _mapper = mapper;
             }
 
-            public async Task<IEnumerable<CustomerDto>> Handle(GetAllCustomers request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<CustomerDto>> Handle(GetAllCustomers request,
+                CancellationToken cancellationToken)
             {
                 var customers = await _repository.GetAllAsync();
 

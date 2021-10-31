@@ -15,8 +15,8 @@ namespace MVCApi.Application.Queries
 
         public class Handler : IRequestHandler<GetCustomerById, CustomerDto>
         {
-            private readonly IDomainRepository<Customer> _repository;
             private readonly IMapper _mapper;
+            private readonly IDomainRepository<Customer> _repository;
 
             public Handler(IDomainRepository<Customer> repository, IMapper mapper)
             {
@@ -25,7 +25,7 @@ namespace MVCApi.Application.Queries
             }
 
             public async Task<CustomerDto> Handle(GetCustomerById request, CancellationToken cancellationToken)
-            {     
+            {
                 var customer = await _repository.GetByIdAsync(request.CustomerId);
 
                 return _mapper.Map<Customer, CustomerDto>(customer);

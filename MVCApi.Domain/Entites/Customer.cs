@@ -5,19 +5,12 @@ namespace MVCApi.Domain.Entites
 {
     public class Customer : BaseEntity, IDomainUser
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public DateTime DateOfBirth { get; private set; }
-        public virtual ICollection<Address> Addresses { get; private set; }
-        public virtual ICollection<ContactInfo> ContactInfos { get; private set; }
-
         protected Customer()
         {
-            
         }
 
-        protected Customer(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
-            : base()
+        protected Customer(string firstName, string lastName, DateTime dateOfBirth, Address address,
+            ContactInfo contactInfo)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -28,7 +21,14 @@ namespace MVCApi.Domain.Entites
             ContactInfos.Add(contactInfo);
         }
 
-        public static Customer Create(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
+        public string FirstName { get; }
+        public string LastName { get; }
+        public DateTime DateOfBirth { get; }
+        public virtual ICollection<Address> Addresses { get; }
+        public virtual ICollection<ContactInfo> ContactInfos { get; }
+
+        public static Customer Create(string firstName, string lastName, DateTime dateOfBirth, Address address,
+            ContactInfo contactInfo)
         {
             // TODO: Business logic checks
             return new Customer(firstName, lastName, dateOfBirth, address, contactInfo);

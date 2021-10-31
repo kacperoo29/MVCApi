@@ -4,14 +4,7 @@ namespace MVCApi.Domain.Entites
 {
     public class Product : BaseEntity
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public virtual Category Category { get; private set; }
-        public virtual ICollection<ProductCart> ShoppingCarts { get; private set; }
-        public virtual ICollection<CurrencyProduct> Prices { get; private set; }
-
-
-        protected Product(string name, string description) 
+        protected Product(string name, string description)
         {
             ShoppingCarts = new List<ProductCart>();
             Prices = new List<CurrencyProduct>();
@@ -19,10 +12,15 @@ namespace MVCApi.Domain.Entites
             Description = description;
         }
 
+        public string Name { get; }
+        public string Description { get; }
+        public virtual Category Category { get; private set; }
+        public virtual ICollection<ProductCart> ShoppingCarts { get; }
+        public virtual ICollection<CurrencyProduct> Prices { get; }
+
         public static Product Create(string name, string description)
         {
             return new Product(name, description);
         }
-        
     }
 }

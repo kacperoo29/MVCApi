@@ -15,8 +15,8 @@ namespace MVCApi.Application.Queries
 
         public class Handler : IRequestHandler<GetOrderById, OrderDto>
         {
-            private readonly IDomainRepository<Order> _orderRepository;
             private readonly IMapper _mapper;
+            private readonly IDomainRepository<Order> _orderRepository;
 
             public Handler(IDomainRepository<Order> orderRepository, IMapper mapper)
             {

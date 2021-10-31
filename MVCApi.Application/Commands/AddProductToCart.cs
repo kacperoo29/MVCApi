@@ -5,9 +5,9 @@ using MediatR;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
-namespace MVCApi.Application.Commands 
+namespace MVCApi.Application.Commands
 {
-    public class AddProductToCart : IRequest<Guid> 
+    public class AddProductToCart : IRequest<Guid>
     {
         public Guid CartId { get; init; }
         public Guid ProductId { get; init; }
@@ -35,6 +35,5 @@ namespace MVCApi.Application.Commands
                 return cart.Id;
             }
         }
-
     }
 }

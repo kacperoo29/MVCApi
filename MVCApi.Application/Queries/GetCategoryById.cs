@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -20,7 +17,7 @@ namespace MVCApi.Application.Queries
         {
             private readonly IDomainRepository<Category> _categoryRepository;
             private readonly IMapper _mapper;
-            
+
             public Handler(IDomainRepository<Category> categoryRepository, IMapper mapper)
             {
                 _categoryRepository = categoryRepository;

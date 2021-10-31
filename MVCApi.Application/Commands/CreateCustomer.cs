@@ -31,9 +31,11 @@ namespace MVCApi.Application.Commands
 
             public async Task<Guid> Handle(CreateCustomer request, CancellationToken cancellationToken)
             {
-                var address = Address.Create(request.Country, request.City, request.Street, request.StreetNumber, request.PostCode);
+                var address = Address.Create(request.Country, request.City, request.Street, request.StreetNumber,
+                    request.PostCode);
                 var contactInfo = ContactInfo.Create(request.Email, request.PhoneNumber);
-                var customer = Customer.Create(request.FirstName, request.LastName, request.DateOfBirth, address, contactInfo);
+                var customer = Customer.Create(request.FirstName, request.LastName, request.DateOfBirth, address,
+                    contactInfo);
 
                 return await _customerRepository.AddAsync(customer);
             }

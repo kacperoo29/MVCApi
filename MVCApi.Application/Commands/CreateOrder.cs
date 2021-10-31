@@ -14,11 +14,12 @@ namespace MVCApi.Application.Commands
 
         public class Handler : IRequestHandler<CreateOrder, Guid>
         {
-            private readonly IDomainRepository<Order> _orderRepository;
             private readonly IDomainRepository<ShoppingCart> _cartRepository;
             private readonly IDomainRepository<Customer> _customerRepository;
+            private readonly IDomainRepository<Order> _orderRepository;
 
-            public Handler(IDomainRepository<Order> orderRepository, IDomainRepository<ShoppingCart> cartRepository, IDomainRepository<Customer> customerRepository)
+            public Handler(IDomainRepository<Order> orderRepository, IDomainRepository<ShoppingCart> cartRepository,
+                IDomainRepository<Customer> customerRepository)
             {
                 _orderRepository = orderRepository;
                 _cartRepository = cartRepository;

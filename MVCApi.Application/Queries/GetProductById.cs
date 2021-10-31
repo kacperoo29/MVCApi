@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,9 +15,9 @@ namespace MVCApi.Application.Queries
 
         public class Handler : IRequestHandler<GetProductById, ProductDto>
         {
-            private readonly IDomainRepository<Product> _repository;
             private readonly IMapper _mapper;
-            
+            private readonly IDomainRepository<Product> _repository;
+
             public Handler(IDomainRepository<Product> repository, IMapper mapper)
             {
                 _repository = repository;

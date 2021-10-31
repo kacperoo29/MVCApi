@@ -15,8 +15,8 @@ namespace MVCApi.Application.Queries
 
         public class Handler : IRequestHandler<GetCartById, ShoppingCartDto>
         {
-            private readonly IDomainRepository<ShoppingCart> _repository;
             private readonly IMapper _mapper;
+            private readonly IDomainRepository<ShoppingCart> _repository;
 
             public Handler(IDomainRepository<ShoppingCart> repository, IMapper mapper)
             {

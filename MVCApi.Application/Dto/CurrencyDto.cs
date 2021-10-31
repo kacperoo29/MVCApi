@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace MVCApi.Application.Dto
 {
     public class CurrencyDto
