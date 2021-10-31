@@ -25,9 +25,9 @@ namespace MVCApi.Services
 
         public async Task<IApplicationUser> CreateUser(string email, string userName, string password)
         {
-            var newUser = new ApplicationUser { UserName = userName, Email = email };
+            var newUser = new ApplicationUser {UserName = userName, Email = email};
             var errors = await _userManager.CreateAsync(newUser, password);
-            
+
             return newUser;
         }
 

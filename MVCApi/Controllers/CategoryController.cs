@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
+using MVCApi.Application.Dto;
 using MVCApi.Application.Queries;
-using MVCApi.Domain.Entites;
 
 namespace MVCApi.Controllers
 {
@@ -30,18 +26,16 @@ namespace MVCApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetAllCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
         {
             return Ok(await _mediator.Send(new GetAllCategories()));
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Category>> GetCategoryById([FromRoute] Guid id)
+        public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute] Guid id)
         {
-            return Ok(await _mediator.Send(new GetCategoryById { CategoryId = id }));
+            return Ok(await _mediator.Send(new GetCategoryById {CategoryId = id}));
         }
-
-
     }
 }

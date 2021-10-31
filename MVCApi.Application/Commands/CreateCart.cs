@@ -25,6 +25,5 @@ namespace MVCApi.Application.Commands
                 return await _cartRepository.AddAsync(cart);
             }
         }
-
     }
 }

@@ -2,13 +2,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using MVCApi.Domain;
-using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Commands
 {
     public class CreateUser : IRequest<Guid>
-    {        
+    {
         public string Email { get; init; }
         public string UserName { get; init; }
         public string Password { get; init; }
@@ -23,9 +21,8 @@ namespace MVCApi.Application.Commands
             }
 
             public async Task<Guid> Handle(CreateUser request, CancellationToken cancellationToken)
-               {            
+            {
                 var user = await _userService.CreateUser(request.Email, request.UserName, request.Password);
-                
 
                 return user.Id;
             }

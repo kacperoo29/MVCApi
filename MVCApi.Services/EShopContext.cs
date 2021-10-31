@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,11 @@ namespace MVCApi.Services
 {
     public class EShopContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
+        public EShopContext(DbContextOptions<EShopContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Product> Products { get; private set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; private set; }
         public DbSet<Customer> Customers { get; private set; }
@@ -17,15 +21,12 @@ namespace MVCApi.Services
         public DbSet<Address> Addresses { get; private set; }
         public DbSet<Order> Orders { get; private set; }
 
-        public EShopContext(DbContextOptions<EShopContext> options)
-            : base(options)
-        {
-
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);        
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(x => (Customer) x.DomainUser);
         }
     }
 }

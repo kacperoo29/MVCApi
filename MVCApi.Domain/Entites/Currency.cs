@@ -6,6 +6,6 @@ namespace MVCApi.Domain.Entites
     {
         public string Code { get; private set; }
         public int DecimalPlaces { get; private set; }
-        public ICollection<CurrencyProduct> Products { get; private set; }
+        public virtual ICollection<CurrencyProduct> Products { get; private set; }
     }
 }

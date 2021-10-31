@@ -1,6 +1,4 @@
-using System;
 using System.Threading.Tasks;
-using MVCApi.Application;
 using MVCApi.Domain;
 
 namespace MVCApi.Application

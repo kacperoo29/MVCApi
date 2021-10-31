@@ -1,28 +1,34 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
+using MVCApi.Application.Dto;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Queries
 {
-    public class GetOrderById : IRequest<Order>
+    public class GetOrderById : IRequest<OrderDto>
     {
         public Guid OrderId { get; init; }
 
-        public class Handler : IRequestHandler<GetOrderById, Order>
+        public class Handler : IRequestHandler<GetOrderById, OrderDto>
         {
+            private readonly IMapper _mapper;
             private readonly IDomainRepository<Order> _orderRepository;
 
-            public Handler(IDomainRepository<Order> orderRepository)
+            public Handler(IDomainRepository<Order> orderRepository, IMapper mapper)
             {
                 _orderRepository = orderRepository;
+                _mapper = mapper;
             }
 
-            public async Task<Order> Handle(GetOrderById request, CancellationToken cancellationToken)
+            public async Task<OrderDto> Handle(GetOrderById request, CancellationToken cancellationToken)
             {
-                return await _orderRepository.GetByIdAsync(request.OrderId);
+                var order = await _orderRepository.GetByIdAsync(request.OrderId);
+
+                return _mapper.Map<Order, OrderDto>(order);
             }
         }
     }

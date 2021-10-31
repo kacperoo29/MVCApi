@@ -4,13 +4,12 @@ namespace MVCApi.Domain.Entites
 {
     public class ShoppingCart : BaseEntity
     {
-        public ICollection<ProductCart> Products { get; private set; }
-
         protected ShoppingCart()
-            : base()
         {
             Products = new List<ProductCart>();
         }
+
+        public virtual ICollection<ProductCart> Products { get; }
 
         public static ShoppingCart Create()
         {
@@ -23,6 +22,5 @@ namespace MVCApi.Domain.Entites
 
             Products.Add(new ProductCart(product, this, count));
         }
-
     }
 }
