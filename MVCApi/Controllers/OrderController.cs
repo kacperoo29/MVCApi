@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
+using MVCApi.Application.DTOs;
 using MVCApi.Application.Queries;
 using MVCApi.Domain.Entites;
 
@@ -28,13 +29,13 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Customer>> GetOrderById([FromRoute] Guid id)
+        public async Task<ActionResult<OrderDTO>> GetOrderById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetOrderById { OrderId = id }));
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrders()
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllOrders()
         {
             return Ok(await _mediator.Send(new GetAllOrders()));
         }

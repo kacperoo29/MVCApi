@@ -20,12 +20,15 @@ namespace MVCApi.Services
         public EShopContext(DbContextOptions<EShopContext> options)
             : base(options)
         {
-
+        
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);        
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(x => (Customer)x.DomainUser);
         }
     }
 }

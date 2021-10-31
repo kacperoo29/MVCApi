@@ -1,14 +1,13 @@
 using System;
+using System.Dynamic;
 
 namespace MVCApi.Domain.Entites
 {
     public class ContactInfo : BaseEntity
     {
-        public string Email { get; private set; }        
+        public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
-
-        public Guid CustomerId { get; private set; }
-        public Customer Customer { get; private set; }
+        public virtual Customer Customer { get; private set; }
 
         protected ContactInfo(string email, string phoneNumber)
             : base()
@@ -21,12 +20,5 @@ namespace MVCApi.Domain.Entites
         {
             return new ContactInfo(email, phoneNumber);
         }
-
-        public void LinkCustomer(Customer customer)
-        {
-            CustomerId = customer.Id;
-            Customer = customer;
-        }
-
     }
 }

@@ -4,7 +4,7 @@ namespace MVCApi.Domain.Entites
 {
     public class ShoppingCart : BaseEntity
     {
-        public ICollection<ProductCart> Products { get; private set; }
+        public virtual ICollection<ProductCart> Products { get; private set; }
 
         protected ShoppingCart()
             : base()

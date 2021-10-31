@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-namespace MVCApi.Domain.Entites
+namespace MVCApi.Application.DTOs
 {
-    public class Currency : BaseEntity
+    public class CurrencyDTO
     {
         public string Code { get; private set; }
         public int DecimalPlaces { get; private set; }
-        public virtual ICollection<CurrencyProduct> Products { get; private set; }
+        public decimal Value { get; private set; }
     }
 }

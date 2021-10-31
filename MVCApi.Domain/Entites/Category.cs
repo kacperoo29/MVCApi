@@ -7,9 +7,9 @@ namespace MVCApi.Domain.Entites
     {
         public string Name { get; private set; }
         public Guid? ParentId { get; private set; }
-        public Category Parent { get; private set; }
-        public ICollection<Category> Children { get; private set; }
-        public ICollection<Product> Products { get; private set; }
+        public virtual Category Parent { get; private set; }
+        public virtual ICollection<Category> Children { get; private set; }
+        public virtual ICollection<Product> Products { get; private set; }
 
         protected Category(string name)
             : base()

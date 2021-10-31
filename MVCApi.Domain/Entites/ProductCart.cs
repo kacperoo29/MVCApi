@@ -2,8 +2,8 @@ namespace MVCApi.Domain.Entites
 {
     public class ProductCart : BaseEntity
     {
-        public ShoppingCart ShoppingCart { get; private set; }
-        public Product Product { get; private set; }
+        public virtual ShoppingCart ShoppingCart { get; private set; }
+        public virtual Product Product { get; private set; }
         public int Count { get; private set; }
 
         private ProductCart() { }

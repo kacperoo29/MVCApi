@@ -4,8 +4,8 @@ namespace MVCApi.Domain.Entites
 {
     public class Order : BaseEntity
     {
-        public Customer Customer { get; private set; }
-        public ShoppingCart ShoppingCart { get; private set; }
+        public virtual Customer Customer { get; private set; }
+        public virtual ShoppingCart ShoppingCart { get; private set; }
         public OrderState OrderState { get; private set; }
 
         private Order() { }

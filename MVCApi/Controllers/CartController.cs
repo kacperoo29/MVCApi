@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
+using MVCApi.Application.DTOs;
 using MVCApi.Application.Queries;
 using MVCApi.Domain.Entites;
 
@@ -30,7 +31,7 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{CartId}")]
-        public async Task<ActionResult<ShoppingCart>> GetCartById([FromRoute] GetCartById query)
+        public async Task<ActionResult<ShoppingCartDTO>> GetCartById([FromRoute] GetCartById query)
         {
             return Ok(await _mediator.Send(query));
         }

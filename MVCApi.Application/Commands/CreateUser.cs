@@ -2,8 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using MVCApi.Domain;
-using MVCApi.Domain.Entites;
 
 namespace MVCApi.Application.Commands
 {

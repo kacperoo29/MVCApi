@@ -7,6 +7,7 @@ namespace MVCApi.Domain.Entites
         public string Street { get; private set; }
         public string StreetNumber { get; private set; }
         public string PostCode { get; private set; }
+        public virtual Customer Customer { get; private set; }
 
         protected Address(string country, string city, string street, string streetNumber, string postCode)
             : base()

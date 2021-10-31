@@ -8,12 +8,12 @@ namespace MVCApi.Domain.Entites
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public DateTime DateOfBirth { get; private set; }
-        public ICollection<Address> Addresses { get; private set; }
-        public ContactInfo ContactInfo { get; private set; }
+        public virtual ICollection<Address> Addresses { get; private set; }
+        public virtual ICollection<ContactInfo> ContactInfos { get; private set; }
 
-        private Customer()
+        protected Customer()
         {
-            Addresses = new List<Address>();
+            
         }
 
         protected Customer(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)
@@ -24,7 +24,8 @@ namespace MVCApi.Domain.Entites
             DateOfBirth = dateOfBirth;
             Addresses = new List<Address>();
             Addresses.Add(address);
-            ContactInfo = contactInfo;
+            ContactInfos = new List<ContactInfo>();
+            ContactInfos.Add(contactInfo);
         }
 
         public static Customer Create(string firstName, string lastName, DateTime dateOfBirth, Address address, ContactInfo contactInfo)

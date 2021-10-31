@@ -4,14 +4,16 @@ using MVCApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCApi.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    partial class EShopContextModelSnapshot : ModelSnapshot
+    [Migration("20211031103500_DomainAppUserMap")]
+    partial class DomainAppUserMap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace MVCApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
@@ -95,7 +97,8 @@ namespace MVCApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("ContactInfos");
                 });
@@ -482,11 +485,9 @@ namespace MVCApi.Migrations
 
             modelBuilder.Entity("MVCApi.Domain.Entites.Address", b =>
                 {
-                    b.HasOne("MVCApi.Domain.Entites.Customer", "Customer")
+                    b.HasOne("MVCApi.Domain.Entites.Customer", null)
                         .WithMany("Addresses")
                         .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.Category", b =>
@@ -501,8 +502,10 @@ namespace MVCApi.Migrations
             modelBuilder.Entity("MVCApi.Domain.Entites.ContactInfo", b =>
                 {
                     b.HasOne("MVCApi.Domain.Entites.Customer", "Customer")
-                        .WithMany("ContactInfos")
-                        .HasForeignKey("CustomerId");
+                        .WithOne("ContactInfo")
+                        .HasForeignKey("MVCApi.Domain.Entites.ContactInfo", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });
@@ -637,7 +640,7 @@ namespace MVCApi.Migrations
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("ContactInfos");
+                    b.Navigation("ContactInfo");
                 });
 
             modelBuilder.Entity("MVCApi.Domain.Entites.Product", b =>

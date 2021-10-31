@@ -2,8 +2,8 @@ namespace MVCApi.Domain.Entites
 {
     public class CurrencyProduct : BaseEntity
     {
-        public Product Product { get; private set; }
-        public Currency Currency { get; private set; }
+        public virtual Product Product { get; private set; }
+        public virtual Currency Currency { get; private set; }
         public decimal Value { get; private set; }
 
         private CurrencyProduct() { }

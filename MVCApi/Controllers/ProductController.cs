@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
+using MVCApi.Application.DTOs;
 using MVCApi.Application.Queries;
-using MVCApi.Domain.Entites;
 
 namespace MVCApi.Controllers 
 {
@@ -25,7 +24,7 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{ProductId}")]
-        public async Task<ActionResult<Product>> GetCartById([FromRoute] GetProductById query)
+        public async Task<ActionResult<ProductDTO>> GetProductById([FromRoute] GetProductById query)
         {
             return Ok(await _mediator.Send(query));
         }

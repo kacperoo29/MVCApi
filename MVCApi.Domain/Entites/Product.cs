@@ -6,9 +6,9 @@ namespace MVCApi.Domain.Entites
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public Category Category { get; private set; }
-        public ICollection<ProductCart> ShoppingCarts { get; private set; }
-        public ICollection<CurrencyProduct> Prices { get; private set; }
+        public virtual Category Category { get; private set; }
+        public virtual ICollection<ProductCart> ShoppingCarts { get; private set; }
+        public virtual ICollection<CurrencyProduct> Prices { get; private set; }
 
 
         protected Product(string name, string description) 

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,13 +28,16 @@ namespace MVCApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MVCApi", Version = "v1" });
-            });
 
-            services.AddDbContext<EShopContext>(options
-                => options.UseSqlServer(Configuration.GetConnectionString("eshopdb"), b => b.MigrationsAssembly("MVCApi")));
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MVCApi", Version = "v1" });
+                });
+
+            services.AddDbContext<EShopContext>(options =>
+                options.UseLazyLoadingProxies()
+                    .UseSqlServer(Configuration.GetConnectionString("eshopdb"),
+                        b => b.MigrationsAssembly("MVCApi")));
 
             services.AddMediatR(typeof(CreateCustomer));
 
@@ -48,7 +52,8 @@ namespace MVCApi
                 options.Password.RequiredLength = 8;
                 options.Password.RequiredUniqueChars = 1;
 
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
                 options.User.RequireUniqueEmail = false;
             });
 
@@ -66,6 +71,8 @@ namespace MVCApi
                     builder.SetIsOriginAllowed(isOriginAllowed: _ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                 });
             });
+
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
