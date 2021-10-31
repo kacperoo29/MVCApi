@@ -13,8 +13,8 @@ namespace MVCApi.Domain.Entites
             Count = count;
         }
 
-        public virtual ShoppingCart ShoppingCart { get; }
-        public virtual Product Product { get; }
-        public int Count { get; }
+        public virtual ShoppingCart ShoppingCart { get; private set; }
+        public virtual Product Product { get; private set; }
+        public int Count { get; private set; }
     }
 }

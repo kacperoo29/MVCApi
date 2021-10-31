@@ -13,8 +13,8 @@ namespace MVCApi.Domain.Entites
             Value = value;
         }
 
-        public virtual Product Product { get; }
-        public virtual Currency Currency { get; }
-        public decimal Value { get; }
+        public virtual Product Product { get; private set; }
+        public virtual Currency Currency { get; private set; }
+        public decimal Value { get; private set; }
     }
 }

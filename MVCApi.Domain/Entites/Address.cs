@@ -11,11 +11,11 @@ namespace MVCApi.Domain.Entites
             PostCode = postCode;
         }
 
-        public string Country { get; }
-        public string City { get; }
-        public string Street { get; }
-        public string StreetNumber { get; }
-        public string PostCode { get; }
+        public string Country { get; private set; }
+        public string City { get; private set; }
+        public string Street { get; private set; }
+        public string StreetNumber { get; private set; }
+        public string PostCode { get; private set; }
         public virtual Customer Customer { get; private set; }
 
         public static Address Create(string country, string city, string street, string streetNumber, string postCode)

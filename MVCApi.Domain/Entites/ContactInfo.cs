@@ -8,8 +8,8 @@ namespace MVCApi.Domain.Entites
             PhoneNumber = phoneNumber;
         }
 
-        public string Email { get; }
-        public string PhoneNumber { get; }
+        public string Email { get; private set; }
+        public string PhoneNumber { get; private set; }
         public virtual Customer Customer { get; private set; }
 
         public static ContactInfo Create(string email, string phoneNumber)

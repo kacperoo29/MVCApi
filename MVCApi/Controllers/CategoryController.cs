@@ -25,6 +25,12 @@ namespace MVCApi.Controllers
             return Ok(await _mediator.Send(command));
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Guid>> CreateSubcategory([FromBody] CreateSubcategory command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
         {

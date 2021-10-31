@@ -12,11 +12,11 @@ namespace MVCApi.Domain.Entites
             Description = description;
         }
 
-        public string Name { get; }
-        public string Description { get; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
         public virtual Category Category { get; private set; }
-        public virtual ICollection<ProductCart> ShoppingCarts { get; }
-        public virtual ICollection<CurrencyProduct> Prices { get; }
+        public virtual ICollection<ProductCart> ShoppingCarts { get; private set; }
+        public virtual ICollection<CurrencyProduct> Prices { get; private set; }
 
         public static Product Create(string name, string description)
         {
