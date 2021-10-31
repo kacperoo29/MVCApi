@@ -13,7 +13,9 @@ namespace MVCApi.Application
             CreateMap<Customer, CustomerDTO>();
             CreateMap<Category, CategoryDTO>();
             CreateMap<Currency, CurrencyDTO>();
+            CreateMap<CurrencyProduct, CurrencyProductDTO>();
             CreateMap<Product, ProductDTO>();
+            CreateMap<ProductCart, ProductCartDTO>();
             CreateMap<ShoppingCart, ShoppingCartDTO>();
             CreateMap<Order, OrderDTO>();
         }

@@ -6,6 +6,5 @@ namespace MVCApi.Application.DTOs
     {
         public string Code { get; private set; }
         public int DecimalPlaces { get; private set; }
-        public decimal Value { get; private set; }
     }
 }
