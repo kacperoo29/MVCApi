@@ -26,7 +26,13 @@ namespace MVCApi.Services
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>()
-                .HasOne(x => (Customer) x.DomainUser);
+                .HasOne(x => (Customer)x.DomainUser);
+
+            modelBuilder.Entity<ProductCart>()
+                .HasKey(pc => new { pc.ProductId, pc.ShoppingCartId });
+
+            modelBuilder.Entity<CurrencyProduct>()
+                .HasKey(cp => new { cp.CurrencyId, cp.ProductId });
         }
     }
 }

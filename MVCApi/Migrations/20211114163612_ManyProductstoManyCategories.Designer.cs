@@ -4,14 +4,16 @@ using MVCApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCApi.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    partial class EShopContextModelSnapshot : ModelSnapshot
+    [Migration("20211114163612_ManyProductstoManyCategories")]
+    partial class ManyProductstoManyCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,16 +139,25 @@ namespace MVCApi.Migrations
 
             modelBuilder.Entity("MVCApi.Domain.Entites.CurrencyProduct", b =>
                 {
-                    b.Property<Guid>("CurrencyId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid?>("CurrencyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("CurrencyId", "ProductId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrencyId");
 
                     b.HasIndex("ProductId");
 
@@ -225,16 +236,25 @@ namespace MVCApi.Migrations
 
             modelBuilder.Entity("MVCApi.Domain.Entites.ProductCart", b =>
                 {
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ShoppingCartId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "ShoppingCartId");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ShoppingCartId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("ShoppingCartId");
 
@@ -518,15 +538,11 @@ namespace MVCApi.Migrations
                 {
                     b.HasOne("MVCApi.Domain.Entites.Currency", "Currency")
                         .WithMany("Products")
-                        .HasForeignKey("CurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CurrencyId");
 
                     b.HasOne("MVCApi.Domain.Entites.Product", "Product")
                         .WithMany("Prices")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Currency");
 
@@ -552,15 +568,11 @@ namespace MVCApi.Migrations
                 {
                     b.HasOne("MVCApi.Domain.Entites.Product", "Product")
                         .WithMany("ShoppingCarts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("MVCApi.Domain.Entites.ShoppingCart", "ShoppingCart")
                         .WithMany("Products")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShoppingCartId");
 
                     b.Navigation("Product");
 

@@ -8,7 +8,7 @@ namespace MVCApi.Application.Dto
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public CategoryDto Category { get; set; }
+        public ICollection<CategoryDto> Categories { get; set; }
         public ICollection<CurrencyProductDto> Prices { get; set; }
     }
 }

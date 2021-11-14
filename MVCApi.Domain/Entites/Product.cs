@@ -14,7 +14,7 @@ namespace MVCApi.Domain.Entites
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public virtual Category Category { get; private set; }
+        public virtual ICollection<Category> Categories { get; private set; }
         public virtual ICollection<ProductCart> ShoppingCarts { get; private set; }
         public virtual ICollection<CurrencyProduct> Prices { get; private set; }
 
