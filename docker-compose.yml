@@ -29,6 +29,8 @@ services:
       - 3000:3000
     depends_on:
       - api
+    volumes:
+      - MVCApi.Client:/app
 
 volumes:
   db_data:
