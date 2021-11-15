@@ -1,7 +1,7 @@
 import './App.css'
 
 //import axios from 'axios'
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { CustomerDto, CustomerApi } from './api/index'
 
 export default function App() {

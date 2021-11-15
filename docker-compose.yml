@@ -30,7 +30,9 @@ services:
     depends_on:
       - api
     volumes:
-      - MVCApi.Client:/app
+      - type: bind
+        source: ./MVCApi.Client
+        target: /app
 
 volumes:
   db_data:
