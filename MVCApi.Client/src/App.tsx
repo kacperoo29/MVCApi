@@ -1,14 +1,16 @@
 import './App.css'
 
 //import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CustomerDto, CustomerApi } from './api/index'
 
 export default function App() {
   const [customers, setCustomers] = useState<CustomerDto[] | []>([])
   const api = new CustomerApi();
 
-  api.apiCustomerGetAllCustomersGet().then(response => setCustomers(response))
+  useEffect(() => {
+    api.apiCustomerGetAllCustomersGet().then(response => setCustomers(response))
+  }, [])
 
   return (
     <ul>
