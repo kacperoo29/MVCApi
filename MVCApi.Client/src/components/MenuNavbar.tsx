@@ -12,6 +12,7 @@ export default function MenuNavbar(){
                   <Nav className="me-auto">
                     <Nav.Link href="/">Home page</Nav.Link>
                     <Nav.Link href="/orders">Orders</Nav.Link>
+                    <Nav.Link href="/products">Products</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Container>
