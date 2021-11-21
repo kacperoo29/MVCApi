@@ -91,4 +91,28 @@ export class ProductApi extends runtime.BaseAPI {
         return await response.value();
     }
 
+    //Test
+
+    async apiProductGetAllProductsGetRaw(): Promise<runtime.ApiResponse<Array<ProductDto>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Product/GetAllProducts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductDtoFromJSON));
+    }
+
+    /**
+     */
+    async apiProductGetAllProductsGet(): Promise<Array<ProductDto>> {
+        const response = await this.apiProductGetAllProductsGetRaw();
+        return await response.value();
+    }
+
 }

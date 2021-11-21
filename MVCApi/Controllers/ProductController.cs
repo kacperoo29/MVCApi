@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
 using MVCApi.Application.Queries;
+using System.Collections.Generic;
 
 namespace MVCApi.Controllers
 {
@@ -29,6 +30,12 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] GetProductById query)
         {
             return Ok(await _mediator.Send(query));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
+        {
+            return Ok(await _mediator.Send(new GetAllProducts()));
         }
     }
 }
