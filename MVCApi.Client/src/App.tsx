@@ -5,6 +5,9 @@ import CustomerForm from './components/CustomerForm'
 
 export default function App() {
   return (
-    <CustomerForm />
+    <>
+      <CustomerForm />
+      <Customers />
+    </>
   )
 }

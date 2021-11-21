@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React, { useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { CreateCustomer } from '../api/index'
+import { CreateCustomer, CustomerApi } from '../api/index'
 
 // TODO: Some nicer way to pick address and phone number
 
@@ -114,12 +114,22 @@ export default function CustomerForm(props: any) {
         event.stopPropagation()
 
         if (validation()) {
-            console.log("submitting")
+            let api = new CustomerApi()
+            console.log(customer.dateOfBirth)
+            try {
+                await api.apiCustomerCreateCustomerPost({ createCustomer: customer })
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
 
     const handleChangeCustomer = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCustomer({ ...customer, [event.target.name]: event.target.value })
+        console.log(event.target.value)
+        if (event.target.name === 'dateOfBirth')
+            setCustomer({ ...customer, [event.target.name]: new Date(event.target.valueAsNumber) })
+        else
+            setCustomer({ ...customer, [event.target.name]: event.target.value })
     }
 
     return <Form noValidate onSubmit={handleSubmit}>
