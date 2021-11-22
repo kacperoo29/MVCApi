@@ -2,26 +2,20 @@ import React, { useEffect, useState } from 'react'
 import Cookies from 'universal-cookie'
 import { CartApi, ShoppingCartDto } from '../api'
 import { Table } from 'react-bootstrap'
+import moment from 'moment'
+import { getOrCreateCart } from '../util/CartUtil'
 
 export default function Cart() {
     const [cart, setCart] = useState<ShoppingCartDto>({})
-    const cookies = new Cookies()
-    //let cartId: string | null | undefined = cookies.get("cartId") 
-    const [cartId, setCartId] = useState<string | null | undefined>(cookies.get("cartId"))
+    const [cartId, setCartId] = useState<string | null | undefined>(null)
 
     useEffect(() => {
-        const api = new CartApi()
-        if (!cartId || cartId === 'undefined') {
-            api.apiCartCreateCartPost({}).then(response => {
-                setCartId(response)
-                // eslint-disable-next-line
-                cookies.set("cartId", cartId)
-            })
-        }
-
-        if (cartId)
+        getOrCreateCart().then(id => setCartId(id))
+        
+        if (cartId) {
+            const api = new CartApi()
             api.apiCartGetCartByIdCartIdGet({ cartId }).then(response => response && setCart(response))
-
+        }
     }, [cartId])
 
     return (<Table striped bordered hover>
