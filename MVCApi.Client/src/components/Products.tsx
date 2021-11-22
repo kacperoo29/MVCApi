@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { ProductDto, ProductApi, CartApi, AddProductToCart } from '../api'
+import { ProductDto, ProductApi, CartApi } from '../api'
 import { getOrCreateCart } from '../util/CartUtil';
+import { FormattedNumber, useIntl } from 'react-intl'
+import LocaleCurrency from 'locale-currency'
 
 export default function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
+    const intl = useIntl()
 
     useEffect((api = new ProductApi()) => {
         api.apiProductGetAllProductsGet().then(response => setProducts(response))
@@ -15,10 +18,10 @@ export default function Products() {
         let cart = await api.apiCartGetCartByIdCartIdGet({ cartId })
 
         if (cart.products?.filter(p => p.product?.id === productId).length === 0) {
-            let response = await api.apiCartAddProductToCartPut({ addProductToCart: { cartId: cartId, productId: productId, count: 1 } })
+            await api.apiCartAddProductToCartPut({ addProductToCart: { cartId: cartId, productId: productId, count: 1 } })
         }
     }
-
+    
     return (
         <>
             {products.map(product => (
@@ -30,8 +33,8 @@ export default function Products() {
                         <h4>{product.name}</h4>
                         <p>{product.description}</p>
                     </div>
-                    <div className="col-md-2 product-price">
-                        $19.99
+                    <div className="col-md-2 product-price">                        
+                        <FormattedNumber value={19.99} style='currency' currency={LocaleCurrency.getCurrency(intl.locale)} />                        
                     </div>
                     <div className="col-md-1">
                         <button className='btn btn-primary' onClick={async () => await handleAdd(product.id!)}>Add to cart</button>
