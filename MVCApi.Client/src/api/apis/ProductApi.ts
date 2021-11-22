@@ -65,6 +65,30 @@ export class ProductApi extends runtime.BaseAPI {
 
     /**
      */
+    async apiProductGetAllProductsGetRaw(): Promise<runtime.ApiResponse<Array<ProductDto>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Product/GetAllProducts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductDtoFromJSON));
+    }
+
+    /**
+     */
+    async apiProductGetAllProductsGet(): Promise<Array<ProductDto>> {
+        const response = await this.apiProductGetAllProductsGetRaw();
+        return await response.value();
+    }
+
+    /**
+     */
     async apiProductGetProductByIdProductIdGetRaw(requestParameters: ApiProductGetProductByIdProductIdGetRequest): Promise<runtime.ApiResponse<ProductDto>> {
         if (requestParameters.productId === null || requestParameters.productId === undefined) {
             throw new runtime.RequiredError('productId','Required parameter requestParameters.productId was null or undefined when calling apiProductGetProductByIdProductIdGet.');
@@ -88,30 +112,6 @@ export class ProductApi extends runtime.BaseAPI {
      */
     async apiProductGetProductByIdProductIdGet(requestParameters: ApiProductGetProductByIdProductIdGetRequest): Promise<ProductDto> {
         const response = await this.apiProductGetProductByIdProductIdGetRaw(requestParameters);
-        return await response.value();
-    }
-
-    //Test
-
-    async apiProductGetAllProductsGetRaw(): Promise<runtime.ApiResponse<Array<ProductDto>>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/Product/GetAllProducts`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProductDtoFromJSON));
-    }
-
-    /**
-     */
-    async apiProductGetAllProductsGet(): Promise<Array<ProductDto>> {
-        const response = await this.apiProductGetAllProductsGetRaw();
         return await response.value();
     }
 

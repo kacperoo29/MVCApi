@@ -4,7 +4,7 @@ namespace MVCApi.Domain.Entites
 {
     public class ProductCart
     {
-        private ProductCart()
+        protected ProductCart()
         {
         }
 

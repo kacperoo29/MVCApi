@@ -31,6 +31,12 @@ export interface CreateProduct {
      * @memberof CreateProduct
      */
     description?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateProduct
+     */
+    image?: string | null;
 }
 
 export function CreateProductFromJSON(json: any): CreateProduct {
@@ -45,6 +51,7 @@ export function CreateProductFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'image': !exists(json, 'image') ? undefined : json['image'],
     };
 }
 
@@ -59,6 +66,7 @@ export function CreateProductToJSON(value?: CreateProduct | null): any {
         
         'name': value.name,
         'description': value.description,
+        'image': value.image,
     };
 }
 

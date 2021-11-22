@@ -11,6 +11,7 @@ namespace MVCApi.Application.Commands
     {
         public string Name { get; init; }
         public string Description { get; init; }
+        public string Image { get; init; }
 
         public class Handler : IRequestHandler<CreateProduct, Guid>
         {
@@ -23,7 +24,7 @@ namespace MVCApi.Application.Commands
 
             public async Task<Guid> Handle(CreateProduct request, CancellationToken cancellationToken)
             {
-                var product = Product.Create(request.Name, request.Description);
+                var product = Product.Create(request.Name, request.Description, request.Image);
 
                 return await _productRepository.AddAsync(product);
             }

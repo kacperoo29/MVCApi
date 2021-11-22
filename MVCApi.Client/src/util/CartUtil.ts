@@ -1,6 +1,6 @@
 import moment from 'moment'
 import Cookies from 'universal-cookie'
-import { CartApi, ShoppingCartDto } from '../api'
+import { CartApi } from '../api'
 
 export async function getOrCreateCart(): Promise<string> {
     const api = new CartApi()

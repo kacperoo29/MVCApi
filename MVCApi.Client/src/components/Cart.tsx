@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Cookies from 'universal-cookie'
 import { CartApi, ShoppingCartDto } from '../api'
 import { Table } from 'react-bootstrap'
-import moment from 'moment'
 import { getOrCreateCart } from '../util/CartUtil'
 
 export default function Cart() {
@@ -14,7 +12,8 @@ export default function Cart() {
         
         if (cartId) {
             const api = new CartApi()
-            api.apiCartGetCartByIdCartIdGet({ cartId }).then(response => response && setCart(response))
+            api.apiCartGetCartByIdCartIdGet({ cartId }).then(response => setCart(response))
+            console.log(cart)
         }
     }, [cartId])
 
@@ -26,7 +25,7 @@ export default function Cart() {
             </tr>
         </thead>
         <tbody>
-            {cart.products && cart.products.map(product => (
+            {cart.products?.map(product => (
                 <tr key={product.product?.id}>
                     <td>{product.product?.name}</td>
                     <td>{product.count}</td>
