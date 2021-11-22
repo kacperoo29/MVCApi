@@ -3,10 +3,9 @@ import { OrderDto, OrderApi } from '../api/index'
 import { Table } from 'react-bootstrap'
 
 export default function Orders(){
-    const [orders, setOrders] = useState<OrderDto[] | []>([])
-    const api = new OrderApi();
+    const [orders, setOrders] = useState<OrderDto[] | []>([])    
 
-    useEffect(()=>{
+    useEffect((api = new OrderApi())=>{
         api.apiOrderGetAllOrdersGet().then(response => setOrders(response))
     }, []);
 

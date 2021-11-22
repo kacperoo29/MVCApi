@@ -27,7 +27,7 @@ namespace MVCApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateCart([FromBody] CreateCart command)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(new CreateCart()));
         }
 
         [HttpGet]

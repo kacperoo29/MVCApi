@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { ProductDto, ProductApi } from '../api/index'
 import { Table } from 'react-bootstrap'
 
-export default function Products(){
+export default function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
-    const api = new ProductApi();
 
-    useEffect(()=>{
+    useEffect((api = new ProductApi()) => {
         api.apiProductGetAllProductsGet().then(response => setProducts(response))
     }, []);
 
-    return(
+    return (
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -22,9 +21,9 @@ export default function Products(){
             <tbody>
                 {products.map(product => (
                     <tr key={product.id}>
-                    <td>{product.id}</td>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
+                        <td>{product.id}</td>
+                        <td>{product.name}</td>
+                        <td>{product.description}</td>
                     </tr>
                 ))}
             </tbody>

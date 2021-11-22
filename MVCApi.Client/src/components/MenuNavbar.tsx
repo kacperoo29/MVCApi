@@ -1,5 +1,5 @@
 import Navbar from 'react-bootstrap/Navbar';
-import { Container, NavDropdown, Nav } from 'react-bootstrap';
+import { Container, Nav } from 'react-bootstrap';
 
 export default function MenuNavbar(){
     return(
@@ -13,6 +13,7 @@ export default function MenuNavbar(){
                     <Nav.Link href="/">Home page</Nav.Link>
                     <Nav.Link href="/orders">Orders</Nav.Link>
                     <Nav.Link href="/products">Products</Nav.Link>
+                    <Nav.Link href="/cart">Cart</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Container>
