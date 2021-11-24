@@ -69,6 +69,8 @@ namespace MVCApi
             });
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
+            services.AddScoped<ICurrencyService, CurrencyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

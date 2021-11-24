@@ -9,7 +9,7 @@ export default function Products() {
     const intl = useIntl()
 
     useEffect((api = new ProductApi()) => {
-        api.apiProductGetAllProductsGet().then(response => setProducts(response))
+        api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) }).then(response => setProducts(response))
     }, []);
 
     const handleAdd = async (productId: string) => {
@@ -29,14 +29,14 @@ export default function Products() {
                     <div className="col-md-2">
                         <img src={product.image!} alt={product.name + '_image'} className='img-fluid' />
                     </div>
-                    <div className="col-md-7 product-detail">
+                    <div className="col-md-6 product-detail">
                         <h4>{product.name}</h4>
                         <p>{product.description}</p>
                     </div>
                     <div className="col-md-2 product-price">                        
-                        <FormattedNumber value={19.99} style='currency' currency={LocaleCurrency.getCurrency(intl.locale)} />                        
+                        <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />                        
                     </div>
-                    <div className="col-md-1">
+                    <div className="col-md-2">
                         <button className='btn btn-primary' onClick={async () => await handleAdd(product.id!)}>Add to cart</button>
                     </div>
                 </div>

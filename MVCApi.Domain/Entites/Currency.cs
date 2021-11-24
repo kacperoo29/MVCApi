@@ -10,6 +10,11 @@ namespace MVCApi.Domain.Entites
         public int DecimalPlaces { get; private set; }
         public virtual ICollection<CurrencyProduct> Products { get; private set; }
 
+        protected Currency()
+        {
+
+        }
+
         protected Currency(string code, int decimalPlaces)
         {
             Code = code;

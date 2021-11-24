@@ -33,6 +33,12 @@ namespace MVCApi.Services
 
             modelBuilder.Entity<CurrencyProduct>()
                 .HasKey(cp => new { cp.CurrencyId, cp.ProductId });
+
+            modelBuilder.Entity<Currency>()
+                .HasIndex(c => c.Code).IsUnique();
+
+            modelBuilder.Entity<CurrencyProduct>()
+                .Property(cp => cp.Value).HasPrecision(19, 4);
         }
     }
 }

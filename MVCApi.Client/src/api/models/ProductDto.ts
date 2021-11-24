@@ -62,10 +62,10 @@ export interface ProductDto {
     categories?: Array<CategoryDto> | null;
     /**
      * 
-     * @type {Array<CurrencyProductDto>}
+     * @type {CurrencyProductDto}
      * @memberof ProductDto
      */
-    prices?: Array<CurrencyProductDto> | null;
+    price?: CurrencyProductDto;
 }
 
 export function ProductDtoFromJSON(json: any): ProductDto {
@@ -83,7 +83,7 @@ export function ProductDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'description': !exists(json, 'description') ? undefined : json['description'],
         'image': !exists(json, 'image') ? undefined : json['image'],
         'categories': !exists(json, 'categories') ? undefined : (json['categories'] === null ? null : (json['categories'] as Array<any>).map(CategoryDtoFromJSON)),
-        'prices': !exists(json, 'prices') ? undefined : (json['prices'] === null ? null : (json['prices'] as Array<any>).map(CurrencyProductDtoFromJSON)),
+        'price': !exists(json, 'price') ? undefined : CurrencyProductDtoFromJSON(json['price']),
     };
 }
 
@@ -101,7 +101,7 @@ export function ProductDtoToJSON(value?: ProductDto | null): any {
         'description': value.description,
         'image': value.image,
         'categories': value.categories === undefined ? undefined : (value.categories === null ? null : (value.categories as Array<any>).map(CategoryDtoToJSON)),
-        'prices': value.prices === undefined ? undefined : (value.prices === null ? null : (value.prices as Array<any>).map(CurrencyProductDtoToJSON)),
+        'price': CurrencyProductDtoToJSON(value.price),
     };
 }
 

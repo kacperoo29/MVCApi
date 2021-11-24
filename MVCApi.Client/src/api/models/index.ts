@@ -11,6 +11,7 @@ export * from './CreateUser';
 export * from './CurrencyDto';
 export * from './CurrencyProductDto';
 export * from './CustomerDto';
+export * from './ImportCurrencies';
 export * from './OrderDto';
 export * from './OrderState';
 export * from './ProductCartDto';
