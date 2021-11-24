@@ -10,6 +10,6 @@ namespace MVCApi.Application.Dto
         public string Description { get; set; }
         public string Image { get; set; }
         public ICollection<CategoryDto> Categories { get; set; }
-        public ICollection<CurrencyProductDto> Prices { get; set; }
+        public CurrencyProductDto Price { get; set; }
     }
 }

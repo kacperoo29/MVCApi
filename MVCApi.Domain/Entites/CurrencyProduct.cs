@@ -4,7 +4,7 @@ namespace MVCApi.Domain.Entites
 {
     public class CurrencyProduct
     {
-        private CurrencyProduct()
+        protected CurrencyProduct()
         {
         }
 

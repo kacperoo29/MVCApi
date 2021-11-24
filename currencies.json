@@ -1,0 +1,666 @@
+[
+  {
+    "Code": "AFN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "EUR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ALL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "DZD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "USD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AOA",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "XCD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ARS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AMD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AWG",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AUD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AZN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BSD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BHD",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "BDT",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BBD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BYN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BZD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "XOF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "BMD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "INR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BTN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BOB",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BOV",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BAM",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BWP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NOK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BRL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BND",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BGN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "BIF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "CVE",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KHR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "XAF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "CAD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KYD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CLP",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "CLF",
+    "DecimalPlaces": 4
+  },
+  {
+    "Code": "CNY",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "COP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "COU",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KMF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "CDF",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NZD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CRC",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "HRK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CUP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CUC",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ANG",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CZK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "DKK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "DJF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "DOP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "EGP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SVC",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ERN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SZL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ETB",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "FKP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "FJD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "XPF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "GMD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GEL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GHS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GIP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GTQ",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GBP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "GNF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "GYD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "HTG",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "HNL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "HKD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "HUF",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ISK",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "IDR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "IRR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "IQD",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "ILS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "JMD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "JPY",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "JOD",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "KZT",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KES",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KPW",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "KRW",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "KWD",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "KGS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LAK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LBP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LSL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ZAR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LRD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LYD",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "CHF",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MOP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MKD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MGA",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MWK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MYR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MVR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MRU",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MUR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MXN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MXV",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MDL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MNT",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MAD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MZN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "MMK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NAD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NPR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NIO",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "NGN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "OMR",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "PKR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "PAB",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "PGK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "PYG",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "PEN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "PHP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "PLN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "QAR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "RON",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "RUB",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "RWF",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "SHP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "WST",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "STN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SAR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "RSD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SCR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SLL",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SGD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SBD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SOS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SSP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "LKR",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SDG",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SRD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SEK",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CHE",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "CHW",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "SYP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TWD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TJS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TZS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "THB",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TOP",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TTD",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TND",
+    "DecimalPlaces": 3
+  },
+  {
+    "Code": "TRY",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "TMT",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "UGX",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "UAH",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "AED",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "USN",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "UYU",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "UYI",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "UYW",
+    "DecimalPlaces": 4
+  },
+  {
+    "Code": "UZS",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "VUV",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "VES",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "VND",
+    "DecimalPlaces": 0
+  },
+  {
+    "Code": "YER",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ZMW",
+    "DecimalPlaces": 2
+  },
+  {
+    "Code": "ZWL",
+    "DecimalPlaces": 2
+  }
+]

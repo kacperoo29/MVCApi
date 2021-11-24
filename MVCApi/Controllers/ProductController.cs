@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
 using MVCApi.Application.Queries;
-using System.Collections.Generic;
 
 namespace MVCApi.Controllers
 {
@@ -26,16 +26,16 @@ namespace MVCApi.Controllers
         }
 
         [HttpGet]
-        [Route("{ProductId}")]
-        public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] GetProductById query)
+        [Route("{id}")]
+        public async Task<ActionResult<ProductDto>> GetProductById([FromRoute] Guid id, [FromQuery] string currencyCode)
         {
-            return Ok(await _mediator.Send(query));
+            return Ok(await _mediator.Send(new GetProductById { ProductId = id, CurrencyCode = currencyCode }));
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts([FromQuery] string currencyCode)
         {
-            return Ok(await _mediator.Send(new GetAllProducts()));
+            return Ok(await _mediator.Send(new GetAllProducts { CurrencyCode = currencyCode }));
         }
     }
 }

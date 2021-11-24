@@ -24,12 +24,6 @@ export interface CurrencyDto {
      * @type {string}
      * @memberof CurrencyDto
      */
-    id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CurrencyDto
-     */
     code?: string | null;
     /**
      * 
@@ -49,7 +43,6 @@ export function CurrencyDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
         'code': !exists(json, 'code') ? undefined : json['code'],
         'decimalPlaces': !exists(json, 'decimalPlaces') ? undefined : json['decimalPlaces'],
     };
@@ -64,7 +57,6 @@ export function CurrencyDtoToJSON(value?: CurrencyDto | null): any {
     }
     return {
         
-        'id': value.id,
         'code': value.code,
         'decimalPlaces': value.decimalPlaces,
     };

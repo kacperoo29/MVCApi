@@ -1,6 +1,6 @@
-.openapi-generator-ignore
 apis/CartApi.ts
 apis/CategoryApi.ts
+apis/CurrencyApi.ts
 apis/CustomerApi.ts
 apis/OrderApi.ts
 apis/ProductApi.ts
@@ -20,6 +20,7 @@ models/CreateUser.ts
 models/CurrencyDto.ts
 models/CurrencyProductDto.ts
 models/CustomerDto.ts
+models/ImportCurrencies.ts
 models/OrderDto.ts
 models/OrderState.ts
 models/ProductCartDto.ts

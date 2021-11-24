@@ -327,6 +327,66 @@
         }
       }
     },
+    "/api/Currency/ImportCurrencies": {
+      "post": {
+        "tags": [
+          "Currency"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportCurrencies"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportCurrencies"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportCurrencies"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Customer/CreateCustomer": {
       "post": {
         "tags": [
@@ -636,19 +696,27 @@
         }
       }
     },
-    "/api/Product/GetProductById/{ProductId}": {
+    "/api/Product/GetProductById/{id}": {
       "get": {
         "tags": [
           "Product"
         ],
         "parameters": [
           {
-            "name": "ProductId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
             }
           }
         ],
@@ -680,6 +748,16 @@
       "get": {
         "tags": [
           "Product"
+        ],
+        "parameters": [
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -824,10 +902,6 @@
       "CurrencyDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "code": {
             "type": "string",
             "nullable": true
@@ -878,12 +952,8 @@
             },
             "nullable": true
           },
-          "prices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CurrencyProductDto"
-            },
-            "nullable": true
+          "price": {
+            "$ref": "#/components/schemas/CurrencyProductDto"
           }
         },
         "additionalProperties": false
@@ -938,6 +1008,19 @@
           "parentId": {
             "type": "string",
             "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImportCurrencies": {
+        "type": "object",
+        "properties": {
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurrencyDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1128,6 +1211,10 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false

@@ -13,7 +13,6 @@ export default function Cart() {
         if (cartId) {
             const api = new CartApi()
             api.apiCartGetCartByIdCartIdGet({ cartId }).then(response => setCart(response))
-            console.log(cart)
         }
     }, [cartId])
 

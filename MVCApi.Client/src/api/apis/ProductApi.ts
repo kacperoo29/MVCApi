@@ -27,8 +27,13 @@ export interface ApiProductCreateProductPostRequest {
     createProduct?: CreateProduct;
 }
 
-export interface ApiProductGetProductByIdProductIdGetRequest {
-    productId: string;
+export interface ApiProductGetAllProductsGetRequest {
+    currencyCode?: string | null;
+}
+
+export interface ApiProductGetProductByIdIdGetRequest {
+    id: string;
+    currencyCode?: string | null;
 }
 
 /**
@@ -65,8 +70,12 @@ export class ProductApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiProductGetAllProductsGetRaw(): Promise<runtime.ApiResponse<Array<ProductDto>>> {
+    async apiProductGetAllProductsGetRaw(requestParameters: ApiProductGetAllProductsGetRequest): Promise<runtime.ApiResponse<Array<ProductDto>>> {
         const queryParameters: any = {};
+
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -82,24 +91,28 @@ export class ProductApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiProductGetAllProductsGet(): Promise<Array<ProductDto>> {
-        const response = await this.apiProductGetAllProductsGetRaw();
+    async apiProductGetAllProductsGet(requestParameters: ApiProductGetAllProductsGetRequest): Promise<Array<ProductDto>> {
+        const response = await this.apiProductGetAllProductsGetRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async apiProductGetProductByIdProductIdGetRaw(requestParameters: ApiProductGetProductByIdProductIdGetRequest): Promise<runtime.ApiResponse<ProductDto>> {
-        if (requestParameters.productId === null || requestParameters.productId === undefined) {
-            throw new runtime.RequiredError('productId','Required parameter requestParameters.productId was null or undefined when calling apiProductGetProductByIdProductIdGet.');
+    async apiProductGetProductByIdIdGetRaw(requestParameters: ApiProductGetProductByIdIdGetRequest): Promise<runtime.ApiResponse<ProductDto>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling apiProductGetProductByIdIdGet.');
         }
 
         const queryParameters: any = {};
 
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/Product/GetProductById/{ProductId}`.replace(`{${"ProductId"}}`, encodeURIComponent(String(requestParameters.productId))),
+            path: `/api/Product/GetProductById/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -110,8 +123,8 @@ export class ProductApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiProductGetProductByIdProductIdGet(requestParameters: ApiProductGetProductByIdProductIdGetRequest): Promise<ProductDto> {
-        const response = await this.apiProductGetProductByIdProductIdGetRaw(requestParameters);
+    async apiProductGetProductByIdIdGet(requestParameters: ApiProductGetProductByIdIdGetRequest): Promise<ProductDto> {
+        const response = await this.apiProductGetProductByIdIdGetRaw(requestParameters);
         return await response.value();
     }
 
