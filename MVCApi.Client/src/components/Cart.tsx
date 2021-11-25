@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { CartApi, ShoppingCartDto } from '../api'
+import { ShoppingCartDto } from '../api'
 import { Table } from 'react-bootstrap'
 import { getOrCreateCart } from '../util/CartUtil'
+import { FormattedNumber, useIntl } from 'react-intl'
+import LocaleCurrency from 'locale-currency'
 
 export default function Cart() {
     const [cart, setCart] = useState<ShoppingCartDto>({})
-    const [cartId, setCartId] = useState<string | null | undefined>(null)
+    const intl = useIntl()
 
     useEffect(() => {
-        getOrCreateCart().then(id => setCartId(id))
-        
-        if (cartId) {
-            const api = new CartApi()
-            api.apiCartGetCartByIdCartIdGet({ cartId }).then(response => setCart(response))
-        }
-    }, [cartId])
+        getOrCreateCart(LocaleCurrency.getCurrency(intl.locale))
+            .then(cart => setCart(cart))
+    }, [intl.locale])
 
     return (<Table striped bordered hover>
         <thead>
             <tr>
                 <th>Product</th>
                 <th>Count</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +27,13 @@ export default function Cart() {
                 <tr key={product.product?.id}>
                     <td>{product.product?.name}</td>
                     <td>{product.count}</td>
+                    <td>
+                        <FormattedNumber
+                            value={product.product?.price?.value!}
+                            style={"currency"}
+                            currency={product.product?.price?.currency?.code!}
+                        />
+                    </td>
                 </tr>
             ))}
         </tbody>

@@ -9,19 +9,19 @@ export default function Products() {
     const intl = useIntl()
 
     useEffect((api = new ProductApi()) => {
-        api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) }).then(response => setProducts(response))
-    }, []);
+        api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) })
+            .then(response => setProducts(response))
+    }, [intl.locale]);
 
     const handleAdd = async (productId: string) => {
-        let cartId = await getOrCreateCart()
         const api = new CartApi()
-        let cart = await api.apiCartGetCartByIdCartIdGet({ cartId })
+        let cart = await getOrCreateCart(LocaleCurrency.getCurrency(intl.locale))
 
         if (cart.products?.filter(p => p.product?.id === productId).length === 0) {
-            await api.apiCartAddProductToCartPut({ addProductToCart: { cartId: cartId, productId: productId, count: 1 } })
+            await api.apiCartAddProductToCartPut({ addProductToCart: { cartId: cart.id, productId: productId, count: 1 } })
         }
     }
-    
+
     return (
         <>
             {products.map(product => (
@@ -33,8 +33,8 @@ export default function Products() {
                         <h4>{product.name}</h4>
                         <p>{product.description}</p>
                     </div>
-                    <div className="col-md-2 product-price">                        
-                        <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />                        
+                    <div className="col-md-2 product-price">
+                        <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />
                     </div>
                     <div className="col-md-2">
                         <button className='btn btn-primary' onClick={async () => await handleAdd(product.id!)}>Add to cart</button>

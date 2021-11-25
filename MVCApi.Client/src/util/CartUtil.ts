@@ -1,8 +1,8 @@
 import moment from 'moment'
 import Cookies from 'universal-cookie'
-import { CartApi } from '../api'
+import { CartApi, ShoppingCartDto } from '../api'
 
-export async function getOrCreateCart(): Promise<string> {
+export async function getOrCreateCart(currencyCode: string): Promise<ShoppingCartDto> {
     const api = new CartApi()
     const cookies = new Cookies()
 
@@ -11,7 +11,7 @@ export async function getOrCreateCart(): Promise<string> {
         let response = await api.apiCartCreateCartPost({});
         cartId = response
         cookies.set("cartId", cartId, { expires: moment().add(7, 'days').toDate() })
-    }
+    }    
 
-    return cookies.get("cartId")
+    return api.apiCartGetCartByIdIdGet({ id: cartId, currencyCode: currencyCode })
 }

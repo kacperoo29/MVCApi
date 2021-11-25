@@ -31,10 +31,10 @@ namespace MVCApi.Controllers
         }
 
         [HttpGet]
-        [Route("{CartId}")]
-        public async Task<ActionResult<ShoppingCartDto>> GetCartById([FromRoute] GetCartById query)
+        [Route("{id}")]
+        public async Task<ActionResult<ShoppingCartDto>> GetCartById([FromRoute] Guid id, [FromQuery] string currencyCode)
         {
-            return Ok(await _mediator.Send(query));
+            return Ok(await _mediator.Send(new GetCartById { CartId = id, CurrencyCode = currencyCode }));
         }
     }
 }

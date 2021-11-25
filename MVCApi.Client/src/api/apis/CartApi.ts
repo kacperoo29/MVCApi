@@ -31,8 +31,9 @@ export interface ApiCartCreateCartPostRequest {
     body?: object;
 }
 
-export interface ApiCartGetCartByIdCartIdGetRequest {
-    cartId: string;
+export interface ApiCartGetCartByIdIdGetRequest {
+    id: string;
+    currencyCode?: string | null;
 }
 
 /**
@@ -96,17 +97,21 @@ export class CartApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiCartGetCartByIdCartIdGetRaw(requestParameters: ApiCartGetCartByIdCartIdGetRequest): Promise<runtime.ApiResponse<ShoppingCartDto>> {
-        if (requestParameters.cartId === null || requestParameters.cartId === undefined) {
-            throw new runtime.RequiredError('cartId','Required parameter requestParameters.cartId was null or undefined when calling apiCartGetCartByIdCartIdGet.');
+    async apiCartGetCartByIdIdGetRaw(requestParameters: ApiCartGetCartByIdIdGetRequest): Promise<runtime.ApiResponse<ShoppingCartDto>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling apiCartGetCartByIdIdGet.');
         }
 
         const queryParameters: any = {};
 
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/Cart/GetCartById/{CartId}`.replace(`{${"CartId"}}`, encodeURIComponent(String(requestParameters.cartId))),
+            path: `/api/Cart/GetCartById/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -117,8 +122,8 @@ export class CartApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiCartGetCartByIdCartIdGet(requestParameters: ApiCartGetCartByIdCartIdGetRequest): Promise<ShoppingCartDto> {
-        const response = await this.apiCartGetCartByIdCartIdGetRaw(requestParameters);
+    async apiCartGetCartByIdIdGet(requestParameters: ApiCartGetCartByIdIdGetRequest): Promise<ShoppingCartDto> {
+        const response = await this.apiCartGetCartByIdIdGetRaw(requestParameters);
         return await response.value();
     }
 
