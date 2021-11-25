@@ -33,6 +33,7 @@ services:
       - type: bind
         source: ./MVCApi.Client
         target: /app
+      - /app/node_modules/
 
 volumes:
   db_data:
