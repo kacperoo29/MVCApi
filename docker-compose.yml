@@ -30,6 +30,7 @@ services:
     depends_on:
       - api
     volumes:
+      - /app/node_modules/
       - type: bind
         source: ./MVCApi.Client
         target: /app
