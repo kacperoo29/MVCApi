@@ -5,7 +5,7 @@ namespace MVCApi.Domain.Entites
 {
     public class Order : BaseEntity
     {
-        private Order()
+        protected Order()
         {
         }
 

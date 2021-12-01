@@ -83,6 +83,7 @@ export function Products() {
                         </div>
                     ))}
                 </div>
+                <div><Link to="/products/create">Add product</Link></div>
             </div>
             <Pagination
                 pageIndex={pagination.pageIndex?.valueOf()!}
