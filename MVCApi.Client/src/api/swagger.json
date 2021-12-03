@@ -107,19 +107,27 @@
         }
       }
     },
-    "/api/Cart/GetCartById/{CartId}": {
+    "/api/Cart/GetCartById/{id}": {
       "get": {
         "tags": [
           "Cart"
         ],
         "parameters": [
           {
-            "name": "CartId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
             }
           }
         ],
