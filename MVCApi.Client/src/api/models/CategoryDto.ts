@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    ProductDto,
-    ProductDtoFromJSON,
-    ProductDtoFromJSONTyped,
-    ProductDtoToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -40,22 +33,10 @@ export interface CategoryDto {
     name?: string | null;
     /**
      * 
-     * @type {CategoryDto}
-     * @memberof CategoryDto
-     */
-    parent?: CategoryDto;
-    /**
-     * 
      * @type {Array<CategoryDto>}
      * @memberof CategoryDto
      */
     children?: Array<CategoryDto> | null;
-    /**
-     * 
-     * @type {Array<ProductDto>}
-     * @memberof CategoryDto
-     */
-    products?: Array<ProductDto> | null;
 }
 
 export function CategoryDtoFromJSON(json: any): CategoryDto {
@@ -70,9 +51,7 @@ export function CategoryDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'parent': !exists(json, 'parent') ? undefined : CategoryDtoFromJSON(json['parent']),
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(CategoryDtoFromJSON)),
-        'products': !exists(json, 'products') ? undefined : (json['products'] === null ? null : (json['products'] as Array<any>).map(ProductDtoFromJSON)),
     };
 }
 
@@ -87,9 +66,7 @@ export function CategoryDtoToJSON(value?: CategoryDto | null): any {
         
         'id': value.id,
         'name': value.name,
-        'parent': CategoryDtoToJSON(value.parent),
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(CategoryDtoToJSON)),
-        'products': value.products === undefined ? undefined : (value.products === null ? null : (value.products as Array<any>).map(ProductDtoToJSON)),
     };
 }
 

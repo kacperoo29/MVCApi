@@ -437,6 +437,44 @@
         }
       }
     },
+    "/api/Category/GetRootCategories": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Currency/ImportCurrencies": {
       "post": {
         "tags": [
@@ -989,20 +1027,10 @@
             "type": "string",
             "nullable": true
           },
-          "parent": {
-            "$ref": "#/components/schemas/CategoryDto"
-          },
           "children": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CategoryDto"
-            },
-            "nullable": true
-          },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProductDto"
             },
             "nullable": true
           }

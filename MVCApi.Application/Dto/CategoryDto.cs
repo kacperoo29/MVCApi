@@ -7,8 +7,6 @@ namespace MVCApi.Application.Dto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual CategoryDto Parent { get; set; }
         public virtual ICollection<CategoryDto> Children { get; set; }
-        public virtual ICollection<ProductDto> Products { get; set; }
     }
 }

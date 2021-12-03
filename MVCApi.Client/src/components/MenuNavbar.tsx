@@ -13,6 +13,7 @@ export default function MenuNavbar() {
 							<Nav.Link href="/">Home page</Nav.Link>
 							<Nav.Link href="/orders">Orders</Nav.Link>
 							<Nav.Link href="/products">Products</Nav.Link>
+							<Nav.Link href="/categories">Categories</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
 					<Navbar.Collapse className="justify-content-end">

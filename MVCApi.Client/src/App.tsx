@@ -5,6 +5,7 @@ import Orders from './components/Orders';
 import Products from './components/Products';
 import MenuNavbar from './components/MenuNavbar';
 import Cart from './components/Cart'
+import Categories from './components/Categories'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/categories" element={<Categories />} />
           </Routes>
         </BrowserRouter>
         </div>
