@@ -10,6 +10,7 @@ index.ts
 models/AddProductToCart.ts
 models/AddressDto.ts
 models/CategoryDto.ts
+models/ChangeProductCountInCart.ts
 models/ContactInfoDto.ts
 models/CreateCategory.ts
 models/CreateCustomer.ts

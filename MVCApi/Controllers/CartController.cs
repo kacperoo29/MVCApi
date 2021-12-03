@@ -36,5 +36,11 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(new GetCartById { CartId = id, CurrencyCode = currencyCode }));
         }
+
+        [HttpPut]
+        public async Task<ActionResult<Guid>> ChangeProductCount([FromBody] ChangeProductCountInCart command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
     }
 }

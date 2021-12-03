@@ -3,6 +3,7 @@ import { ProductDto, ProductApi, CartApi } from '../api'
 import { getOrCreateCart } from '../util/CartUtil';
 import { FormattedNumber, useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
+import ProductSmall from './ProductSmall'
 
 export default function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
@@ -30,16 +31,7 @@ export default function Products() {
         <>
             {products.map(product => (
                 <div key={product.id} className="row product">
-                    <div className="col-md-2">
-                        <img src={product.image!} alt={product.name + '_image'} className='img-fluid' />
-                    </div>
-                    <div className="col-md-6 product-detail">
-                        <h4>{product.name}</h4>
-                        <p>{product.description}</p>
-                    </div>
-                    <div className="col-md-2 product-price">
-                        <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />
-                    </div>
+                    <ProductSmall product={product} />
                     <div className="col-md-2">
                         <button className='btn btn-primary' onClick={(e) => handleAdd(e, product.id!)}>Add to cart</button>
                     </div>

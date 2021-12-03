@@ -18,6 +18,9 @@ import {
     AddProductToCart,
     AddProductToCartFromJSON,
     AddProductToCartToJSON,
+    ChangeProductCountInCart,
+    ChangeProductCountInCartFromJSON,
+    ChangeProductCountInCartToJSON,
     ShoppingCartDto,
     ShoppingCartDtoFromJSON,
     ShoppingCartDtoToJSON,
@@ -25,6 +28,10 @@ import {
 
 export interface ApiCartAddProductToCartPutRequest {
     addProductToCart?: AddProductToCart;
+}
+
+export interface ApiCartChangeProductCountPutRequest {
+    changeProductCountInCart?: ChangeProductCountInCart;
 }
 
 export interface ApiCartCreateCartPostRequest {
@@ -65,6 +72,33 @@ export class CartApi extends runtime.BaseAPI {
      */
     async apiCartAddProductToCartPut(requestParameters: ApiCartAddProductToCartPutRequest): Promise<string> {
         const response = await this.apiCartAddProductToCartPutRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiCartChangeProductCountPutRaw(requestParameters: ApiCartChangeProductCountPutRequest): Promise<runtime.ApiResponse<string>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Cart/ChangeProductCount`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ChangeProductCountInCartToJSON(requestParameters.changeProductCountInCart),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiCartChangeProductCountPut(requestParameters: ApiCartChangeProductCountPutRequest): Promise<string> {
+        const response = await this.apiCartChangeProductCountPutRaw(requestParameters);
         return await response.value();
     }
 

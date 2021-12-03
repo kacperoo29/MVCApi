@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MVCApi.Domain.Entites
 {
@@ -29,6 +30,13 @@ namespace MVCApi.Domain.Entites
             foreach (var item in Products)
                 if (item.Product.Id == productId)
                     Products.Remove(item);
+        }
+
+        public void ChangeProductCount(Guid productId, int count)
+        {
+            var product = Products.FirstOrDefault(x => x.ProductId == productId);
+            if (product != null)
+                product.SetCount(count);
         }
 
         public void Clear()

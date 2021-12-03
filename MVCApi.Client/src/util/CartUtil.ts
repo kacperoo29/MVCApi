@@ -11,12 +11,9 @@ export async function getOrCreateCart(currencyCode: string): Promise<ShoppingCar
 
     const release = await mutex.acquire()
     let cartId = cookies.get("cartId")
-    console.log(cartId)
     if (!cartId || cartId === 'undefined') {        
         let response = await api.apiCartCreateCartPost({});
-
         cartId = response
-        console.log(cartId)
         cookies.set("cartId", cartId, { expires: moment().add(7, 'days').toDate(), path: '/' })
     }
     release()

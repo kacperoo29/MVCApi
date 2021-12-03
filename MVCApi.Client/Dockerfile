@@ -13,4 +13,4 @@ COPY . ./
 
 RUN chown -Rh node /app/node_modules
 USER node
-CMD ["npm", "start"]
+CMD ["npm", "start", "--inspect"]
