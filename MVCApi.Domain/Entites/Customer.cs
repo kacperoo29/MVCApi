@@ -57,5 +57,24 @@ namespace MVCApi.Domain.Entites
         {
             LastName = lastName;
         }
+
+        public void ChangeDateOfBirth(DateTime dateOfBirth){
+            if (dateOfBirth.Date > DateTime.Now.Date.AddYears(-EShopConsts.MinCustomerAge))
+                throw new CustomerTooYoungException();
+                 
+            DateOfBirth = dateOfBirth;
+        }
+
+        public void ChangeAddress(Address address){
+            //Temp - will change later
+            Addresses = new List<Address>();
+            Addresses.Add(address);
+        }
+
+        public void ChangeContactInfo(ContactInfo contactInfo){
+            //Temp - will change later
+            ContactInfos = new List<ContactInfo>();
+            ContactInfos.Add(contactInfo);
+        }
     }
 }

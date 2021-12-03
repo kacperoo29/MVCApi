@@ -37,5 +37,13 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(new GetAllCustomers()));
         }
-    }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<ActionResult<Guid>> EditCustomer([FromRoute] Guid id, [FromBody] EditCustomer command)
+        {
+            command.CustomerId = id;
+            return Ok(await _mediator.Send(command));
+        }
+    } 
 }
