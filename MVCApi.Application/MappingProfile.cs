@@ -58,6 +58,7 @@ namespace MVCApi.Application
             CreateMap<ShoppingCart, ShoppingCartDto>();
             CreateMap<Order, OrderDto>();
             CreateMap(typeof(IPaginatedList<>), typeof(IPaginatedList<>)).ConvertUsing(typeof(PaginatedListMapping<,>));
+            //.ConvertUsing(typeof(PaginatedListMapping<,>));
         }
         private class PaginatedListMapping<TSource, TDestination>
             : ITypeConverter<IPaginatedList<TSource>, IPaginatedList<TDestination>>
@@ -70,13 +71,13 @@ namespace MVCApi.Application
 
             public IPaginatedList<TDestination> Convert(IPaginatedList<TSource> source, IPaginatedList<TDestination> destination, ResolutionContext context)
             {
-                var list = _mapper.Map<IList<TSource>, List<TDestination>>(source, opt =>
+                var list = _mapper.Map<IEnumerable<TSource>, List<TDestination>>(source.Items, opt =>
                 {
                     opt.Items["currencyCode"] = context.Items["currencyCode"];
                     opt.Items["currencyService"] = context.Items["currencyService"];
                 });
 
-                return new PaginatedList<TDestination>(list, source.Count, source.PageIndex, source.PageSize);
+                return new PaginatedList<TDestination>(list, list.Count, source.PageIndex, source.PageSize);
             }
         }
     }

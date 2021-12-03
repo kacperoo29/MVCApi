@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    ProductDto,
+    ProductDtoFromJSON,
+    ProductDtoFromJSONTyped,
+    ProductDtoToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -25,6 +32,12 @@ export interface ProductDtoIPaginatedList {
      * @memberof ProductDtoIPaginatedList
      */
     readonly pageIndex?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductDtoIPaginatedList
+     */
+    readonly pageSize?: number;
     /**
      * 
      * @type {number}
@@ -43,6 +56,12 @@ export interface ProductDtoIPaginatedList {
      * @memberof ProductDtoIPaginatedList
      */
     readonly hasNextPage?: boolean;
+    /**
+     * 
+     * @type {Array<ProductDto>}
+     * @memberof ProductDtoIPaginatedList
+     */
+    readonly items?: Array<ProductDto> | null;
 }
 
 export function ProductDtoIPaginatedListFromJSON(json: any): ProductDtoIPaginatedList {
@@ -56,9 +75,11 @@ export function ProductDtoIPaginatedListFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'pageIndex': !exists(json, 'pageIndex') ? undefined : json['pageIndex'],
+        'pageSize': !exists(json, 'pageSize') ? undefined : json['pageSize'],
         'totalPages': !exists(json, 'totalPages') ? undefined : json['totalPages'],
         'hasPreviousPage': !exists(json, 'hasPreviousPage') ? undefined : json['hasPreviousPage'],
         'hasNextPage': !exists(json, 'hasNextPage') ? undefined : json['hasNextPage'],
+        'items': !exists(json, 'items') ? undefined : (json['items'] === null ? null : (json['items'] as Array<any>).map(ProductDtoFromJSON)),
     };
 }
 

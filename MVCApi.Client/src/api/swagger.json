@@ -1452,6 +1452,11 @@
             "format": "int32",
             "readOnly": true
           },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
           "totalPages": {
             "type": "integer",
             "format": "int32",
@@ -1463,6 +1468,14 @@
           },
           "hasNextPage": {
             "type": "boolean",
+            "readOnly": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDto"
+            },
+            "nullable": true,
             "readOnly": true
           }
         },

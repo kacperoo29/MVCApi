@@ -42,7 +42,11 @@ namespace MVCApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IPaginatedList<ProductDto>>> GetPaginatedProducts([FromQuery] int pageNumber, [FromQuery] int pageSize, [FromQuery] string currencyCode) 
         {
-            return Ok(await _mediator.Send(new GetProductsPaginated { PageNumber = pageNumber, PageSize = pageSize, CurrencyCode = currencyCode }));
+            var products = await _mediator.Send(new GetProductsPaginated { 
+                PageNumber = pageNumber, PageSize = pageSize, CurrencyCode = currencyCode
+            });
+
+            return Ok(products);
         }
     }
 }

@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { ProductDto, ProductApi, CartApi } from '../api'
+import { ProductDto, ProductApi, CartApi, ProductDtoIPaginatedList } from '../api'
 import { getOrCreateCart } from '../util/CartUtil';
 import { useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
 import ProductSmall from './ProductSmall'
+import Pagination from './Pagination'
+
+type ProductsProps = {
+
+}
 
 export default function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
+    const [pagination, setPagination] = useState<ProductDtoIPaginatedList>({})
+    const [page, setPage] = useState<Number>(1)
+    const [pageSize, setPageSize] = useState<Number>(25)
     const intl = useIntl()
 
     useEffect((api = new ProductApi()) => {
-        api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) })
-            .then(response => setProducts(response))
+        // api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) })
+        //     .then(response => setProducts(response))
+        api.apiProductGetPaginatedProductsGet({
+            pageNumber: page.valueOf(),
+            pageSize: pageSize.valueOf(),
+            currencyCode: LocaleCurrency.getCurrency(intl.locale)
+        }).then(response => {
+            setPagination(response)
+            setProducts(response.items!)
+        })
     }, [intl.locale]);
 
     const handleAdd = (e: React.MouseEvent<HTMLElement>, productId: string) => {
@@ -37,6 +53,11 @@ export default function Products() {
                     </div>
                 </div>
             ))}
+            <Pagination
+                pageIndex={pagination.pageIndex?.valueOf()!}
+                totalPages={pagination.totalPages?.valueOf()!}
+                hasNextPage={pagination.hasNextPage!}
+                hasPreviousPage={pagination.hasPreviousPage!}/>
         </>
     );
 }
