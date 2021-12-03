@@ -58,18 +58,18 @@ namespace MVCApi.Services
             return await DbSet.FindAsync(id);
         }
 
-        public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
+        public async Task<IPaginatedList<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
             Expression<Func<TEntity, bool>> filter = null)
         {
             if (pageNumber < 1)
-                return new List<TEntity>();
+                return default;
 
             if (pageSize < ServicesConstants.MinPageSize || pageSize > ServicesConstants.MaxPageSize)
                 throw new InvalidPageSizeException(pageSize);
 
             return filter != null
-                ? await DbSet.Where(filter).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync()
-                : await DbSet.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+                ? await PaginationHelpers<TEntity>.CreateAsync(DbSet, pageNumber, pageSize, filter)
+                : await PaginationHelpers<TEntity>.CreateAsync(DbSet, pageNumber, pageSize);
         }
     }
 }

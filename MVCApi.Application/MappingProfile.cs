@@ -1,9 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using AutoMapper;
 using MVCApi.Application.Dto;
+using MVCApi.Domain;
 using MVCApi.Domain.Consts;
 using MVCApi.Domain.Entites;
 
@@ -56,6 +57,27 @@ namespace MVCApi.Application
             CreateMap<ProductCart, ProductCartDto>();
             CreateMap<ShoppingCart, ShoppingCartDto>();
             CreateMap<Order, OrderDto>();
+            CreateMap(typeof(IPaginatedList<>), typeof(IPaginatedList<>)).ConvertUsing(typeof(PaginatedListMapping<,>));
+        }
+        private class PaginatedListMapping<TSource, TDestination>
+            : ITypeConverter<IPaginatedList<TSource>, IPaginatedList<TDestination>>
+        {
+            private readonly IMapper _mapper;
+            public PaginatedListMapping(IMapper mapper)
+            {
+                _mapper = mapper;
+            }
+
+            public IPaginatedList<TDestination> Convert(IPaginatedList<TSource> source, IPaginatedList<TDestination> destination, ResolutionContext context)
+            {
+                var list = _mapper.Map<IList<TSource>, List<TDestination>>(source, opt =>
+                {
+                    opt.Items["currencyCode"] = context.Items["currencyCode"];
+                    opt.Items["currencyService"] = context.Items["currencyService"];
+                });
+
+                return new PaginatedList<TDestination>(list, source.Count, source.PageIndex, source.PageSize);
+            }
         }
     }
 }

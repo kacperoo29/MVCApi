@@ -10,7 +10,7 @@ namespace MVCApi.Domain
     {
         Task<TEntity> GetByIdAsync(Guid id);
 
-        Task<IEnumerable<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
+        Task<IPaginatedList<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
             Expression<Func<TEntity, bool>> filter = null);
 
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);

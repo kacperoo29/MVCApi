@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
 using MVCApi.Application.Queries;
+using MVCApi.Domain;
 
 namespace MVCApi.Controllers
 {
@@ -36,6 +37,12 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts([FromQuery] string currencyCode)
         {
             return Ok(await _mediator.Send(new GetAllProducts { CurrencyCode = currencyCode }));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IPaginatedList<ProductDto>>> GetPaginatedProducts([FromQuery] int pageNumber, [FromQuery] int pageSize, [FromQuery] string currencyCode) 
+        {
+            return Ok(await _mediator.Send(new GetProductsPaginated { PageNumber = pageNumber, PageSize = pageSize, CurrencyCode = currencyCode }));
         }
     }
 }
