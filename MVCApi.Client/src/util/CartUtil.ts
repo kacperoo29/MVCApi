@@ -11,12 +11,16 @@ export async function getOrCreateCart(currencyCode: string): Promise<ShoppingCar
 
     const release = await mutex.acquire()
     let cartId = cookies.get("cartId")
-    if (!cartId || cartId === 'undefined') {
+    console.log(cartId)
+    if (!cartId || cartId === 'undefined') {        
         let response = await api.apiCartCreateCartPost({});
+
         cartId = response
-        cookies.set("cartId", cartId, { expires: moment().add(7, 'days').toDate() })
+        console.log(cartId)
+        cookies.set("cartId", cartId, { expires: moment().add(7, 'days').toDate(), path: '/' })
     }
     release()
+    let cart = await api.apiCartGetCartByIdIdGet({ id: cartId, currencyCode: currencyCode })
 
-    return api.apiCartGetCartByIdIdGet({ id: cartId, currencyCode: currencyCode })
+    return cart
 }

@@ -13,13 +13,17 @@ export default function Products() {
             .then(response => setProducts(response))
     }, [intl.locale]);
 
-    const handleAdd = async (productId: string) => {
+    const handleAdd = (e: React.MouseEvent<HTMLElement>, productId: string) => {
         const api = new CartApi()
-        let cart = await getOrCreateCart(LocaleCurrency.getCurrency(intl.locale))
 
-        if (cart.products?.filter(p => p.product?.id === productId).length === 0) {
-            await api.apiCartAddProductToCartPut({ addProductToCart: { cartId: cart.id, productId: productId, count: 1 } })
-        }
+        getOrCreateCart(LocaleCurrency.getCurrency(intl.locale))
+            .then(response => {
+                if (response.products?.filter(p => p.product?.id === productId).length === 0) {
+                    api.apiCartAddProductToCartPut({ addProductToCart: { cartId: response.id, productId: productId, count: 1 } })
+                        .catch(e => console.log(e))
+                }
+            })
+            .catch(e => console.log(e))
     }
 
     return (
@@ -37,7 +41,7 @@ export default function Products() {
                         <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />
                     </div>
                     <div className="col-md-2">
-                        <button className='btn btn-primary' onClick={async () => await handleAdd(product.id!)}>Add to cart</button>
+                        <button className='btn btn-primary' onClick={(e) => handleAdd(e, product.id!)}>Add to cart</button>
                     </div>
                 </div>
             ))}

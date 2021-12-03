@@ -12,6 +12,7 @@ export default function Cart() {
     useEffect(() => {
         getOrCreateCart(LocaleCurrency.getCurrency(intl.locale))
             .then(cart => setCart(cart))
+            .catch(e => console.log(e))
     }, [intl.locale])
 
     return (<Table striped bordered hover>
