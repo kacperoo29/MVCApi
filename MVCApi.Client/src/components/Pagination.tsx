@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 
 type PaginationProps = {
     pageIndex: number,
     totalPages: number,
     hasNextPage: boolean,
-    hasPreviousPage: boolean
+    hasPreviousPage: boolean,
+    setPage: React.Dispatch<SetStateAction<Number>>,
+    setPageSize: React.Dispatch<SetStateAction<Number>>
 }
 
-export default function Pagination({  pageIndex, totalPages, hasNextPage, hasPreviousPage }: PaginationProps) {
+export default function Pagination({ pageIndex, totalPages, hasNextPage, hasPreviousPage, setPage, setPageSize }: PaginationProps) {
     var current = pageIndex,
         last = totalPages,
         delta = 2,
@@ -18,7 +20,7 @@ export default function Pagination({  pageIndex, totalPages, hasNextPage, hasPre
         l;
 
     for (let i = 1; i <= last; i++) {
-        if (i == 1 || i == last || i >= left && i < right) {
+        if (i === 1 || i === last || i >= left && i < right) {
             range.push(i);
         }
     }
@@ -39,20 +41,26 @@ export default function Pagination({  pageIndex, totalPages, hasNextPage, hasPre
         <nav>
             <ul className='pagination justify-content-center'>
                 {hasPreviousPage &&
-                    <li className="page-item">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
+                    <li onClick={e => setPage(1)} className="page-item">
+                        <a className="page-link">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span className="sr-only">Previous</span>
+                        </a>
                     </li>}
-                {rangeWithDots.map((i, k) => 
-                    <li className="page-item" key={k}>
-                        <span className="page-link">{i}</span>
+                {rangeWithDots.map((i, k) =>
+                    <li onClick={e => {
+                        if (typeof i === "number") setPage(i)
+                    }} className="page-item" key={k}>
+                        <a className="page-link">{i}</a>
                     </li>
                 )}
 
                 {hasNextPage &&
-                    <li className="page-item">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
+                    <li onClick={e => setPage(totalPages)} className="page-item">
+                        <a className="page-link">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span className="sr-only">Next</span>
+                        </a>
                     </li>}
             </ul>
         </nav>

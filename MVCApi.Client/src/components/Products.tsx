@@ -18,8 +18,6 @@ export default function Products() {
     const intl = useIntl()
 
     useEffect((api = new ProductApi()) => {
-        // api.apiProductGetAllProductsGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) })
-        //     .then(response => setProducts(response))
         api.apiProductGetPaginatedProductsGet({
             pageNumber: page.valueOf(),
             pageSize: pageSize.valueOf(),
@@ -28,7 +26,7 @@ export default function Products() {
             setPagination(response)
             setProducts(response.items!)
         })
-    }, [intl.locale]);
+    }, [intl.locale, page, pageSize]);
 
     const handleAdd = (e: React.MouseEvent<HTMLElement>, productId: string) => {
         const api = new CartApi()
@@ -57,7 +55,10 @@ export default function Products() {
                 pageIndex={pagination.pageIndex?.valueOf()!}
                 totalPages={pagination.totalPages?.valueOf()!}
                 hasNextPage={pagination.hasNextPage!}
-                hasPreviousPage={pagination.hasPreviousPage!}/>
+                hasPreviousPage={pagination.hasPreviousPage!}
+                setPage={setPage}
+                setPageSize={setPageSize}
+            />
         </>
     );
 }
