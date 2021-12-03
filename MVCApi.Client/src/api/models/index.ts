@@ -1,6 +1,7 @@
 export * from './AddProductToCart';
 export * from './AddressDto';
 export * from './CategoryDto';
+export * from './ChangeProductCountInCart';
 export * from './ContactInfoDto';
 export * from './CreateCategory';
 export * from './CreateCustomer';
@@ -16,4 +17,5 @@ export * from './OrderDto';
 export * from './OrderState';
 export * from './ProductCartDto';
 export * from './ProductDto';
+export * from './RemoveProductFromCart';
 export * from './ShoppingCartDto';

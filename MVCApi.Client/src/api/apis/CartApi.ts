@@ -18,6 +18,12 @@ import {
     AddProductToCart,
     AddProductToCartFromJSON,
     AddProductToCartToJSON,
+    ChangeProductCountInCart,
+    ChangeProductCountInCartFromJSON,
+    ChangeProductCountInCartToJSON,
+    RemoveProductFromCart,
+    RemoveProductFromCartFromJSON,
+    RemoveProductFromCartToJSON,
     ShoppingCartDto,
     ShoppingCartDtoFromJSON,
     ShoppingCartDtoToJSON,
@@ -27,6 +33,10 @@ export interface ApiCartAddProductToCartPutRequest {
     addProductToCart?: AddProductToCart;
 }
 
+export interface ApiCartChangeProductCountPutRequest {
+    changeProductCountInCart?: ChangeProductCountInCart;
+}
+
 export interface ApiCartCreateCartPostRequest {
     body?: object;
 }
@@ -34,6 +44,10 @@ export interface ApiCartCreateCartPostRequest {
 export interface ApiCartGetCartByIdIdGetRequest {
     id: string;
     currencyCode?: string | null;
+}
+
+export interface ApiCartRemoveProductDeleteRequest {
+    removeProductFromCart?: RemoveProductFromCart;
 }
 
 /**
@@ -65,6 +79,33 @@ export class CartApi extends runtime.BaseAPI {
      */
     async apiCartAddProductToCartPut(requestParameters: ApiCartAddProductToCartPutRequest): Promise<string> {
         const response = await this.apiCartAddProductToCartPutRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiCartChangeProductCountPutRaw(requestParameters: ApiCartChangeProductCountPutRequest): Promise<runtime.ApiResponse<string>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Cart/ChangeProductCount`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ChangeProductCountInCartToJSON(requestParameters.changeProductCountInCart),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiCartChangeProductCountPut(requestParameters: ApiCartChangeProductCountPutRequest): Promise<string> {
+        const response = await this.apiCartChangeProductCountPutRaw(requestParameters);
         return await response.value();
     }
 
@@ -124,6 +165,33 @@ export class CartApi extends runtime.BaseAPI {
      */
     async apiCartGetCartByIdIdGet(requestParameters: ApiCartGetCartByIdIdGetRequest): Promise<ShoppingCartDto> {
         const response = await this.apiCartGetCartByIdIdGetRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiCartRemoveProductDeleteRaw(requestParameters: ApiCartRemoveProductDeleteRequest): Promise<runtime.ApiResponse<string>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Cart/RemoveProduct`,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: RemoveProductFromCartToJSON(requestParameters.removeProductFromCart),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiCartRemoveProductDelete(requestParameters: ApiCartRemoveProductDeleteRequest): Promise<string> {
+        const response = await this.apiCartRemoveProductDeleteRaw(requestParameters);
         return await response.value();
     }
 

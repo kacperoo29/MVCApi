@@ -10,6 +10,7 @@ index.ts
 models/AddProductToCart.ts
 models/AddressDto.ts
 models/CategoryDto.ts
+models/ChangeProductCountInCart.ts
 models/ContactInfoDto.ts
 models/CreateCategory.ts
 models/CreateCustomer.ts
@@ -25,6 +26,7 @@ models/OrderDto.ts
 models/OrderState.ts
 models/ProductCartDto.ts
 models/ProductDto.ts
+models/RemoveProductFromCart.ts
 models/ShoppingCartDto.ts
 models/index.ts
 runtime.ts

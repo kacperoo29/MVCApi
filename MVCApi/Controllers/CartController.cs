@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,18 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<ShoppingCartDto>> GetCartById([FromRoute] Guid id, [FromQuery] string currencyCode)
         {
             return Ok(await _mediator.Send(new GetCartById { CartId = id, CurrencyCode = currencyCode }));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Guid>> ChangeProductCount([FromBody] ChangeProductCountInCart command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> RemoveProduct([FromBody] RemoveProductFromCart command) 
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

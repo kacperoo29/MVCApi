@@ -22,5 +22,10 @@ namespace MVCApi.Domain.Entites
         public virtual Product Product { get; private set; }
         public virtual Guid ProductId { get; private set; }
         public int Count { get; private set; }
+
+        public void SetCount(int count) {
+            // TODO: Make sure enough is in stock
+            Count = count;
+        }
     }
 }
