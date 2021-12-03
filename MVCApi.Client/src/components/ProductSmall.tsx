@@ -13,7 +13,7 @@ export default function ProductSmall(props: any) {
                 <p>{product.description}</p>
             </div>
             <div className="col-md-2 product-price">
-                <FormattedNumber value={product.price?.value!} style='currency' currency={product.price?.currency?.code!} />
+                <FormattedNumber value={product.price?.value!} style={`currency`} currency={product.price?.currency?.code!} />
             </div>
         </>
     )

@@ -28,8 +28,13 @@ namespace MVCApi.Domain.Entites
         public void RemoveProduct(Guid productId)
         {
             foreach (var item in Products)
+            {
                 if (item.Product.Id == productId)
+                {
                     Products.Remove(item);
+                    break;
+                }
+            }
         }
 
         public void ChangeProductCount(Guid productId, int count)

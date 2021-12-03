@@ -35,29 +35,37 @@ export default function Cart() {
         }).catch(e => console.log(e))
     }
 
-    return <div className='row'>
-        <div className="col col-lg-9">
-            {cart.products?.map(product => (
-                <div key={product.product?.id} className="row product">
-                    <ProductSmall product={product.product!} />
-                    <div className="col-md-1">
-                        <input className="form-control input-sm" type="number" min="1" step="1" value={product.count} onChange={e => changeCount(e, product.product?.id!)} />
-                    </div>
-                    <div className="col-md-1">
-                        <button className="btn"><i className="bi bi-trash text-danger"></i></button>
-                    </div>
-                </div>
-            ))}
-        </div>
-        <div className="col col-lg-3 product">
-            <h4>
-                Total price:
-            </h4>
-            <p className="product-price">
-                <FormattedNumber value={total.valueOf()} style='currency' currency={LocaleCurrency.getCurrency(intl.locale)} />
-            </p>
-            <button className="btn btn-primary">Confirm order</button>
-        </div>
-    </div>
+    const handleRemove = (e: React.MouseEvent<HTMLButtonElement>, productId: string) => {
+        const api = new CartApi()
+        api.apiCartRemoveProductDelete({ removeProductFromCart: { productId: productId, cartId: cart.id } })
+            .then(response => setChanged(true))
+            .catch(e => console.log(e))
+    }
 
+    return (
+        <div className='row'>
+            <div className="col col-lg-10">
+                {cart.products?.map(product => (
+                    <div key={product.product?.id} className="row product">
+                        <ProductSmall product={product.product!} />
+                        <div className="col-md-1">
+                            <input className="form-control input-sm" type="number" min="1" step="1" value={product.count} onChange={e => changeCount(e, product.product?.id!)} />
+                        </div>
+                        <div className="col-md-1">
+                            <button onClick={e => handleRemove(e, product.product?.id!)} className="btn"><i className="bi bi-trash text-danger"></i></button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div className="col col-lg-2 product">
+                <h4>
+                    Total price:
+                </h4>
+                <p className="product-price">
+                    <FormattedNumber value={total.valueOf()} style={`currency`} currency={LocaleCurrency.getCurrency(intl.locale)} />
+                </p>
+                <button className="btn btn-primary">Confirm order</button>
+            </div>
+        </div>
+    )
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +40,12 @@ namespace MVCApi.Controllers
 
         [HttpPut]
         public async Task<ActionResult<Guid>> ChangeProductCount([FromBody] ChangeProductCountInCart command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> RemoveProduct([FromBody] RemoveProductFromCart command) 
         {
             return Ok(await _mediator.Send(command));
         }

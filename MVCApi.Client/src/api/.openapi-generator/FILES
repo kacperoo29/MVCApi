@@ -26,6 +26,7 @@ models/OrderDto.ts
 models/OrderState.ts
 models/ProductCartDto.ts
 models/ProductDto.ts
+models/RemoveProductFromCart.ts
 models/ShoppingCartDto.ts
 models/index.ts
 runtime.ts

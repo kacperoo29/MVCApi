@@ -17,4 +17,5 @@ export * from './OrderDto';
 export * from './OrderState';
 export * from './ProductCartDto';
 export * from './ProductDto';
+export * from './RemoveProductFromCart';
 export * from './ShoppingCartDto';
