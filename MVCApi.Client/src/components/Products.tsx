@@ -22,7 +22,6 @@ export default function Products() {
     const categoryId = location.state?.categoryId
     const [categories, setCategories] = useState<CategoryDto[]>([])
 
-
     useEffect((api = new ProductApi()) => {
         const categoryApi = new CategoryApi()
         const args: any = {
@@ -37,6 +36,10 @@ export default function Products() {
                 .then(response => {
                     setPagination(response)
                     setProducts(response.items!)
+                })
+            categoryApi.apiCategoryGetCategoryByIdIdGet({id: categoryId})
+                .then(response => {
+                    setCategories([response])
                 })
         } else {
             api.apiProductGetPaginatedProductsGet(args)
@@ -62,12 +65,12 @@ export default function Products() {
                 }
             })
             .catch(e => console.log(e))
-    }
+    }  
 
     return (
         <>
             <div className="row">
-                <div className="col-lg-3">
+                <div className="col-lg-3">                    
                     {categories.map(category =>
                         <CategoryTree category={category} />
                     )}

@@ -6,6 +6,7 @@ type CategoryTreeProps = {
     category: CategoryDto
 }
 
+// TODO: Make down and up limit from root
 export default function CategoryTree({ category }: CategoryTreeProps) {
     return (
         <>
