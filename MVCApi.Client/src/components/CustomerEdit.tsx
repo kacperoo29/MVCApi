@@ -39,13 +39,29 @@ export default function CustomerEdit(props: any) {
     });
     
 
-    useEffect(() =>
+    /*useEffect(() =>
     {
         axios.get<CustomerDto>(`http://localhost:5000/api/Customer/GetCustomerById/${id}`)
             .then(response => {
                 setCustomer(response.data)
             })
-    }, [])
+        
+    }, [])*/
+    //XDDD
+    var requestId = "";
+
+    if(id!==undefined){
+        requestId = id;
+    }
+
+    console.log("Testid: "+requestId);
+    useEffect((api = new CustomerApi()) => {
+        api.apiCustomerGetCustomerByIdIdGet({id: requestId}).then(response => setCustomer(response))
+    }, []);
+
+    console.log(customer.firstName);
+    console.log(customer.dateOfBirth);
+    console.log(moment(customer.dateOfBirth).format("YYYY-MM-DD"));
 
     const validation = (): boolean => {
         let valid = true
@@ -139,7 +155,7 @@ export default function CustomerEdit(props: any) {
         event.stopPropagation()
 
         if (validation()) {
-            let api = new CustomerApi()
+            //let api = new CustomerApi()
             //console.log(customer.dateOfBirth)
             try {
                 const response = await axios.put(`http://localhost:5000/api/Customer/EditCustomer/${id}`, formValue)
@@ -160,58 +176,58 @@ export default function CustomerEdit(props: any) {
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>First name</Form.Label>
-                <Form.Control value={customer.firstName?.toString()} isInvalid={!!errors['firstName']} required type="text" placeholder='First name' name='firstName' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.firstName?.toString()} isInvalid={!!errors['firstName']} required type="text" placeholder='First name' name='firstName' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['firstName']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col}>
                 <Form.Label>Last name</Form.Label>
-                <Form.Control value={customer.lastName?.toString()} isInvalid={!!errors['lastName']} required type="text" placeholder='Last name' name='lastName' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.lastName?.toString()} isInvalid={!!errors['lastName']} required type="text" placeholder='Last name' name='lastName' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['lastName']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col}>
                 <Form.Label>Date of birth</Form.Label>
-                <Form.Control value={customer.dateOfBirth?.toString()} isInvalid={!!errors['dateOfBirth']} required type="date" name='dateOfBirth' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={moment(customer?.dateOfBirth).format("YYYY-MM-DD")} isInvalid={!!errors['dateOfBirth']} required type="date" name='dateOfBirth' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['dateOfBirth']}</Form.Control.Feedback>
             </Form.Group>
         </Row>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Country</Form.Label>
-                <Form.Control value={customer.addresses?.pop()?.country?.toString()} isInvalid={!!errors['country']} required type="text" placeholder='Country' name='country' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.addresses?.pop()?.country?.toString()} isInvalid={!!errors['country']} required type="text" placeholder='Country' name='country' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['country']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col}>
                 <Form.Label>City</Form.Label>
-                <Form.Control value={customer.addresses?.pop()?.city?.toString()} isInvalid={!!errors['city']} required type="text" placeholder='City' name='city' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.addresses?.pop()?.city?.toString()} isInvalid={!!errors['city']} required type="text" placeholder='City' name='city' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['city']}</Form.Control.Feedback>
             </Form.Group>    
         </Row>
         <Row>
             <Form.Group as={Col}>
                 <Form.Label>Street</Form.Label>
-                <Form.Control value={customer.addresses?.pop()?.street?.toString()} isInvalid={!!errors['street']} required type="text" placeholder='Street' name='street' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.addresses?.pop()?.street?.toString()} isInvalid={!!errors['street']} required type="text" placeholder='Street' name='street' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['street']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group xs={1} as={Col}>
                 <Form.Label>Street number</Form.Label>
-                <Form.Control value={customer.addresses?.pop()?.streetNumber?.toString()} isInvalid={!!errors['streetNumber']} required type="text" placeholder='Street number' name='streetNumber' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.addresses?.pop()?.streetNumber?.toString()} isInvalid={!!errors['streetNumber']} required type="text" placeholder='Street number' name='streetNumber' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['streetNumber']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group xs={2} as={Col}>
                 <Form.Label>Post code</Form.Label>
-                <Form.Control value={customer.addresses?.pop()?.postCode?.toString()} isInvalid={!!errors['postCode']} required type="text" placeholder='Post code' name='postCode' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.addresses?.pop()?.postCode?.toString()} isInvalid={!!errors['postCode']} required type="text" placeholder='Post code' name='postCode' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['postCode']}</Form.Control.Feedback>
             </Form.Group>
         </Row>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Email</Form.Label>
-                <Form.Control value={customer.contactInfos?.pop()?.email?.toString()} isInvalid={!!errors['email']} required type="email" placeholder='Email' name='email' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.contactInfos?.pop()?.email?.toString()} isInvalid={!!errors['email']} required type="email" placeholder='Email' name='email' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['email']}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col}>
                 <Form.Label>Phone number</Form.Label>
-                <Form.Control value={customer.contactInfos?.pop()?.phoneNumber?.toString()} isInvalid={!!errors['phoneNumber']} required type="text" placeholder='Phone number' name='phoneNumber' onChange={handleChangeCustomer} />
+                <Form.Control defaultValue={customer.contactInfos?.pop()?.phoneNumber?.toString()} isInvalid={!!errors['phoneNumber']} required type="text" placeholder='Phone number' name='phoneNumber' onChange={handleChangeCustomer} />
                 <Form.Control.Feedback type='invalid'>{errors['phoneNumber']}</Form.Control.Feedback>
             </Form.Group>
         </Row>

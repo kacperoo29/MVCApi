@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MVCApi.Domain.Consts;
 using MVCApi.Domain.Exceptions;
+using System.Linq;
 
 namespace MVCApi.Domain.Entites
 {
@@ -67,14 +68,12 @@ namespace MVCApi.Domain.Entites
 
         public void ChangeAddress(Address address){
             //Temp - will change later
-            Addresses = new List<Address>();
-            Addresses.Add(address);
+            Addresses.FirstOrDefault().Change(address.Country, address.City, address.Street, address.StreetNumber, address.PostCode);
         }
 
         public void ChangeContactInfo(ContactInfo contactInfo){
             //Temp - will change later
-            ContactInfos = new List<ContactInfo>();
-            ContactInfos.Add(contactInfo);
+            ContactInfos.FirstOrDefault().Change(contactInfo.Email, contactInfo.PhoneNumber);
         }
     }
 }

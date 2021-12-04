@@ -16,5 +16,10 @@ namespace MVCApi.Domain.Entites
         {
             return new ContactInfo(email, phoneNumber);
         }
+
+        public void Change(string email, string phoneNumber){
+            Email = email;
+            PhoneNumber = phoneNumber;
+        }
     }
 }
