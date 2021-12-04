@@ -149,4 +149,28 @@ export class CategoryApi extends runtime.BaseAPI {
         return await response.value();
     }
 
+    /**
+     */
+    async apiCategoryGetRootCategoriesGetRaw(): Promise<runtime.ApiResponse<Array<CategoryDto>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Category/GetRootCategories`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CategoryDtoFromJSON));
+    }
+
+    /**
+     */
+    async apiCategoryGetRootCategoriesGet(): Promise<Array<CategoryDto>> {
+        const response = await this.apiCategoryGetRootCategoriesGetRaw();
+        return await response.value();
+    }
+
 }

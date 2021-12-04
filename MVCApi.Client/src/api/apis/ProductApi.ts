@@ -21,6 +21,9 @@ import {
     ProductDto,
     ProductDtoFromJSON,
     ProductDtoToJSON,
+    ProductDtoIPaginatedList,
+    ProductDtoIPaginatedListFromJSON,
+    ProductDtoIPaginatedListToJSON,
 } from '../models';
 
 export interface ApiProductCreateProductPostRequest {
@@ -28,6 +31,19 @@ export interface ApiProductCreateProductPostRequest {
 }
 
 export interface ApiProductGetAllProductsGetRequest {
+    currencyCode?: string | null;
+}
+
+export interface ApiProductGetPaginatedProductsByCategoryGetRequest {
+    pageNumber?: number;
+    pageSize?: number;
+    currencyCode?: string | null;
+    categoryId?: string;
+}
+
+export interface ApiProductGetPaginatedProductsGetRequest {
+    pageNumber?: number;
+    pageSize?: number;
     currencyCode?: string | null;
 }
 
@@ -93,6 +109,82 @@ export class ProductApi extends runtime.BaseAPI {
      */
     async apiProductGetAllProductsGet(requestParameters: ApiProductGetAllProductsGetRequest): Promise<Array<ProductDto>> {
         const response = await this.apiProductGetAllProductsGetRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiProductGetPaginatedProductsByCategoryGetRaw(requestParameters: ApiProductGetPaginatedProductsByCategoryGetRequest): Promise<runtime.ApiResponse<ProductDtoIPaginatedList>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.pageNumber !== undefined) {
+            queryParameters['pageNumber'] = requestParameters.pageNumber;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
+
+        if (requestParameters.categoryId !== undefined) {
+            queryParameters['categoryId'] = requestParameters.categoryId;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Product/GetPaginatedProductsByCategory`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProductDtoIPaginatedListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async apiProductGetPaginatedProductsByCategoryGet(requestParameters: ApiProductGetPaginatedProductsByCategoryGetRequest): Promise<ProductDtoIPaginatedList> {
+        const response = await this.apiProductGetPaginatedProductsByCategoryGetRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiProductGetPaginatedProductsGetRaw(requestParameters: ApiProductGetPaginatedProductsGetRequest): Promise<runtime.ApiResponse<ProductDtoIPaginatedList>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.pageNumber !== undefined) {
+            queryParameters['pageNumber'] = requestParameters.pageNumber;
+        }
+
+        if (requestParameters.pageSize !== undefined) {
+            queryParameters['pageSize'] = requestParameters.pageSize;
+        }
+
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Product/GetPaginatedProducts`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProductDtoIPaginatedListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async apiProductGetPaginatedProductsGet(requestParameters: ApiProductGetPaginatedProductsGetRequest): Promise<ProductDtoIPaginatedList> {
+        const response = await this.apiProductGetPaginatedProductsGetRaw(requestParameters);
         return await response.value();
     }
 

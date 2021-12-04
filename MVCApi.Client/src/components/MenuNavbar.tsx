@@ -1,22 +1,24 @@
 import Navbar from 'react-bootstrap/Navbar';
 import { Container, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function MenuNavbar() {
 	return (
 		<div>
 			<Navbar bg="light" expand="lg">
 				<Container>
-					<Navbar.Brand href="/">Shop</Navbar.Brand>
+					<Link className="navbar-brand" to="/">Shop</Link>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
-							<Nav.Link href="/">Home page</Nav.Link>
-							<Nav.Link href="/orders">Orders</Nav.Link>
-							<Nav.Link href="/products">Products</Nav.Link>
+							<Link to='/' className="nav-link">Home page</Link>
+							<Link to='/orders' className="nav-link">Orders</Link>
+							<Link to='/products' className="nav-link">Products</Link>
+							<Link to='/categories' className="nav-link">Categories</Link>
 						</Nav>
 					</Navbar.Collapse>
 					<Navbar.Collapse className="justify-content-end">
-						<Nav.Link href="/cart"><i className="bi bi-cart4"></i></Nav.Link>
+						<Link to="/cart" className="nav-link"><i className="bi bi-cart4"></i></Link>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
