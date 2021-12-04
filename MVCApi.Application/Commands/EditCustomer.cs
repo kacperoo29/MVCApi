@@ -44,8 +44,7 @@ namespace MVCApi.Application.Commands
                     customer.ChangeLastName(request.LastName);
                     customer.ChangeDateOfBirth(request.DateOfBirth);
                     
-                    var address = Address.Create(request.Country, request.City, request.Street, request.StreetNumber,
-                    request.PostCode);
+                    var address = Address.Create(request.Country, request.City, request.Street, request.StreetNumber, request.PostCode);
                     var contactInfo = ContactInfo.Create(request.Email, request.PhoneNumber);
 
                     customer.ChangeAddress(address);
