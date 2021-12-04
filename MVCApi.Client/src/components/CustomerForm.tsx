@@ -115,7 +115,6 @@ export default function CustomerForm(props: any) {
 
         if (validation()) {
             let api = new CustomerApi()
-            console.log(customer.dateOfBirth)
             try {
                 await api.apiCustomerCreateCustomerPost({ createCustomer: customer })
             } catch (e) {
@@ -125,7 +124,6 @@ export default function CustomerForm(props: any) {
     }
 
     const handleChangeCustomer = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value)
         if (event.target.name === 'dateOfBirth')
             setCustomer({ ...customer, [event.target.name]: new Date(event.target.valueAsNumber) })
         else

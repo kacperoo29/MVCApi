@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using MVCApi.Application;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
 using MVCApi.Services.Exceptions;
@@ -70,6 +74,14 @@ namespace MVCApi.Services
             return filter != null
                 ? await PaginationHelpers<TEntity>.CreateAsync(DbSet, pageNumber, pageSize, filter)
                 : await PaginationHelpers<TEntity>.CreateAsync(DbSet, pageNumber, pageSize);
+        }
+
+        public async Task<IPaginatedList<TEntity>> SqlQueryPaginated(string query, int pageNumber, int pageSize)
+        {
+            var result = await DbSet.FromSqlRaw(query).ToListAsync();
+            var count = await DbSet.CountAsync();
+
+            return new PaginatedList<TEntity>(result, count, pageNumber, pageSize);
         }
     }
 }

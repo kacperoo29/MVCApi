@@ -49,5 +49,10 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(new GetRootCategories()));
         }
+
+        [HttpPut]
+        public async Task<ActionResult<Guid>> AddProductToCategory([FromBody] AddProductToCategory command) {
+            return Ok(await _mediator.Send(command));
+        }
     }
 }

@@ -20,7 +20,7 @@ export default function Pagination({ pageIndex, totalPages, hasNextPage, hasPrev
         l;
 
     for (let i = 1; i <= last; i++) {
-        if (i === 1 || i === last || i >= left && i < right) {
+        if ((i === 1 || i === last || i >= left) && i < right) {
             range.push(i);
         }
     }
@@ -42,25 +42,25 @@ export default function Pagination({ pageIndex, totalPages, hasNextPage, hasPrev
             <ul className='pagination justify-content-center'>
                 {hasPreviousPage &&
                     <li onClick={e => setPage(1)} className="page-item">
-                        <a className="page-link">
+                        <span className="page-link">
                             <span aria-hidden="true">&laquo;</span>
                             <span className="sr-only">Previous</span>
-                        </a>
+                        </span>
                     </li>}
                 {rangeWithDots.map((i, k) =>
                     <li onClick={e => {
                         if (typeof i === "number") setPage(i)
                     }} className="page-item" key={k}>
-                        <a className="page-link">{i}</a>
+                        <span className="page-link">{i}</span>
                     </li>
                 )}
 
                 {hasNextPage &&
                     <li onClick={e => setPage(totalPages)} className="page-item">
-                        <a className="page-link">
+                        <span className="page-link">
                             <span aria-hidden="true">&raquo;</span>
                             <span className="sr-only">Next</span>
-                        </a>
+                        </span>
                     </li>}
             </ul>
         </nav>

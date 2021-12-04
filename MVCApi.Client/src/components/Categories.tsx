@@ -14,8 +14,7 @@ export default function Categories() {
     return (
         <>
             {categories.map(category =>                
-                <div className='col-md-4'>
-                    <h4>{category.name}</h4>
+                <div key={category.id} className='col-md-4'>
                     <CategoryTree category={category} />
                 </div>
             )}

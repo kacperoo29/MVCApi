@@ -13,6 +13,8 @@ namespace MVCApi.Domain
         Task<IPaginatedList<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize,
             Expression<Func<TEntity, bool>> filter = null);
 
+        Task<IPaginatedList<TEntity>> SqlQueryPaginated(string query, int pageNumber, int pageSize);
+
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);
         Task<Guid> AddAsync(TEntity entity);
         Task<Guid> EditAsync(TEntity entity);

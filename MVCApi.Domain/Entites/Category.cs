@@ -34,5 +34,10 @@ namespace MVCApi.Domain.Entites
         {
             return new Category(name, parent);
         }
+
+        public void AddProduct(Product product) {
+            if (!Products.Contains(product))
+                Products.Add(product);
+        }
     }
 }
