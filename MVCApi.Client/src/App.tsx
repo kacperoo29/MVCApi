@@ -5,8 +5,13 @@ import Orders from './components/Orders';
 import Products from './components/Products';
 import MenuNavbar from './components/MenuNavbar';
 import CustomerEdit from './components/CustomerEdit';
+<<<<<<< HEAD
 import ContactInfoEdit from './components/AddressEdit';
 import AddressEdit from './components/ContactInfoEdit';
+=======
+import ContactInfoEdit from './components/ContactInfoEdit';
+import AddressEdit from './components/AddressEdit';
+>>>>>>> 6b2667abaaac64f826af88c7c52dbadb364da6ea
 import Cart from './components/Cart'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
