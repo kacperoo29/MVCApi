@@ -35,5 +35,17 @@ namespace MVCApi.Domain.Entites
         {
             Prices.Add(cp);
         }
+
+        public void ChangeName(string name){
+            Name = name;
+        }
+
+        public void ChangeDescription(string description){
+            Description = description;
+        }
+
+        public void ChangeImage(string image){
+            Image = image;
+        }
     }
 }
