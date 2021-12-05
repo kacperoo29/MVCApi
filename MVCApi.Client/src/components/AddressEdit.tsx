@@ -1,8 +1,7 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { AddressDto } from '../api/index'
-import axios from "axios";
+import { AddressDto, AddressApi } from '../api'
 import { useParams } from 'react-router';
 
 // TODO: Some nicer way to pick address and phone number
@@ -16,17 +15,17 @@ interface EditAddressErrors {
 }
 
 export default function AddressEdit(props: any) {
-    const {id} : any = useParams();
+    const { id }: any = useParams();
     const [address, setAddress] = useState<AddressDto>({})
     const [errors, setErrors] = useState<EditAddressErrors>({})
-    
+
     //var requestId = "";
 
-    useEffect(() =>
-    {
-        axios.get<AddressDto>(`http://localhost:5000/api/Address/GetAddressById/${id}`)
+    useEffect(() => {
+        const api = new AddressApi();
+        api.apiAddressGetAddressByIdIdGet({ id: id })
             .then(response => {
-                setAddress(response.data)
+                setAddress(response)
             })
     }, [])
 
@@ -74,12 +73,13 @@ export default function AddressEdit(props: any) {
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        const api = new AddressApi()
         event.preventDefault()
         event.stopPropagation()
 
         if (validation()) {
             try {
-                const response = await axios.put(`http://localhost:5000/api/Address/EditAddress/${id}`, address)
+                const response = await api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
             } catch (e) {
                 console.log(e)
             }
@@ -88,8 +88,8 @@ export default function AddressEdit(props: any) {
 
     const handleChangeAddress = (event: { target: { name: any; value: any; }; }) => {
         setAddress({
-          ...address,
-          [event.target.name]: event.target.value
+            ...address,
+            [event.target.name]: event.target.value
         });
     }
 

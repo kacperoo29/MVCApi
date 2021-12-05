@@ -1,8 +1,7 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { ContactInfoDto } from '../api/index'
-import axios from "axios";
+import { ContactInfoDto, ContactInfoApi } from '../api'
 import { useParams } from 'react-router';
 
 // TODO: Some nicer way to pick address and phone number
@@ -13,21 +12,21 @@ interface EditContactInfoErrors {
 }
 
 export default function ContactInfoEdit(props: any) {
-    const { id } : any = useParams();
+    const { id }: any = useParams();
     const [contactInfo, setContactInfo] = useState<ContactInfoDto>({})
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
-    
+
     var requestId = "";
 
-    if(id!==undefined){
+    if (id !== undefined) {
         requestId = id;
     }
 
-    useEffect(() =>
-    {
-        axios.get<ContactInfoDto>(`http://localhost:5000/api/ContactInfo/GetContactInfoById/${id}`)
+    useEffect(() => {
+        const api = new ContactInfoApi()
+        api.apiContactInfoGetContactInfoByIdIdGet({ id: id })
             .then(response => {
-                setContactInfo(response.data)
+                setContactInfo(response)
             })
     }, [])
 
@@ -54,13 +53,14 @@ export default function ContactInfoEdit(props: any) {
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        const api = new ContactInfoApi()
         event.preventDefault()
         event.stopPropagation()
-        
+
 
         if (validation()) {
             try {
-                const response = await axios.put(`http://localhost:5000/api/ContactInfo/EditContactInfo/${id}`, contactInfo)
+                const response = await api.apiContactInfoEditContactInfoIdPut({ id: id, editContactInfo: contactInfo })
             } catch (e) {
                 console.log(e)
             }
@@ -69,8 +69,8 @@ export default function ContactInfoEdit(props: any) {
 
     const handleChangeContactInfo = (event: { target: { name: any; value: any; }; }) => {
         setContactInfo({
-          ...contactInfo,
-          [event.target.name]: event.target.value
+            ...contactInfo,
+            [event.target.name]: event.target.value
         });
     }
 
