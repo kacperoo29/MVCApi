@@ -10,7 +10,7 @@ type ProductsProps = {
     categoryId?: string
 }
 
-export default function Products() {
+export function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
     const [pagination, setPagination] = useState<ProductDtoIPaginatedList>({})
     const [page, setPage] = useState<Number>(1)

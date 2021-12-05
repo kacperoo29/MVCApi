@@ -1,41 +1,27 @@
 import './App.css'
 
-import Customers from './components/Customers';
-import Orders from './components/Orders';
-import Products from './components/Products';
-import MenuNavbar from './components/MenuNavbar';
-import CustomerEdit from './components/CustomerEdit';
-<<<<<<< HEAD
-import ContactInfoEdit from './components/AddressEdit';
-import AddressEdit from './components/ContactInfoEdit';
-=======
-import ContactInfoEdit from './components/ContactInfoEdit';
-import AddressEdit from './components/AddressEdit';
->>>>>>> 6b2667abaaac64f826af88c7c52dbadb364da6ea
-import Cart from './components/Cart'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Customers, Orders, Products, MenuNavbar, Cart, Categories, CustomerEdit } from './components'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl';
 
 export default function App() {
-  return (
-    <div>
-      <IntlProvider locale={navigator.language}>
-      <MenuNavbar />
-      <div className='container'>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Customers />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/customer/:id/edit" element={<CustomerEdit/>}/>
-            <Route path="/contactInfo/:id/edit" element={<ContactInfoEdit/>}/>
-            <Route path="/address/:id/edit" element={<AddressEdit/>}/>
-            
-          </Routes>
-        </BrowserRouter>
+    return (
+        <div>
+            <IntlProvider locale={navigator.language}>                
+                    <BrowserRouter>
+                    <MenuNavbar />
+                    <div className='container'>
+                        <Switch>
+                            <Route exact path="/" component={Customers} />
+                            <Route path="/orders" component={Orders} />
+                            <Route path="/products" component={Products} />
+                            <Route path="/cart" component={Cart} />
+                            <Route path="/categories" component={Categories} />
+                            <Route path="/customer/:id/edit" component={CustomerEdit} />
+                        </Switch>
+                        </div>
+                    </BrowserRouter>                
+            </IntlProvider>
         </div>
-        </IntlProvider>
-    </div>
-  );
+    );
 }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { CustomerDto, CustomerApi } from '../api/index'
 import axios from "axios";
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 // TODO: Some nicer way to pick address and phone number
 
@@ -11,17 +11,10 @@ interface EditCustomerErrors {
     firstName?: string | null,
     lastName?: string | null,
     dateOfBirth?: string | null,
-    country?: string | null,
-    city?: string | null,
-    street?: string | null,
-    streetNumber?: string | null,
-    postCode?: string | null,
-    email?: string | null,
-    phoneNumber?: string | null
 }
 
-export default function CustomerEdit(props: any) {
-    const { id } = useParams();
+export function CustomerEdit() {
+    const {id} : any = useParams();
     const [customer, setCustomer] = useState<CustomerDto>({})
     const [errors, setErrors] = useState<EditCustomerErrors>({})
     
@@ -92,7 +85,8 @@ export default function CustomerEdit(props: any) {
         });
     }
 
-    return <Form noValidate onSubmit={handleSubmit}>
+    return(
+        <Form noValidate onSubmit={handleSubmit}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>First name</Form.Label>
@@ -114,4 +108,5 @@ export default function CustomerEdit(props: any) {
             <Button type="submit">Submit</Button>
         </Row>
     </Form>
+    );
 }

@@ -16,15 +16,11 @@ interface EditAddressErrors {
 }
 
 export default function AddressEdit(props: any) {
-    const { id } = useParams();
+    const {id} : any = useParams();
     const [address, setAddress] = useState<AddressDto>({})
     const [errors, setErrors] = useState<EditAddressErrors>({})
     
-    var requestId = "";
-
-    if(id!==undefined){
-        requestId = id;
-    }
+    //var requestId = "";
 
     useEffect(() =>
     {

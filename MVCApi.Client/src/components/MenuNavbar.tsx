@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default function MenuNavbar() {
+export function MenuNavbar() {
 	return (
 		<div>
 			<Navbar bg="light" expand="lg">

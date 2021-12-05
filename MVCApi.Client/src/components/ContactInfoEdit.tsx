@@ -13,7 +13,7 @@ interface EditContactInfoErrors {
 }
 
 export default function ContactInfoEdit(props: any) {
-    const { id } = useParams();
+    const { id } : any = useParams();
     const [contactInfo, setContactInfo] = useState<ContactInfoDto>({})
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
     
