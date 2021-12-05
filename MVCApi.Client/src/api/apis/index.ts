@@ -1,5 +1,7 @@
+export * from './AddressApi';
 export * from './CartApi';
 export * from './CategoryApi';
+export * from './ContactInfoApi';
 export * from './CurrencyApi';
 export * from './CustomerApi';
 export * from './OrderApi';

@@ -1,5 +1,7 @@
+apis/AddressApi.ts
 apis/CartApi.ts
 apis/CategoryApi.ts
+apis/ContactInfoApi.ts
 apis/CurrencyApi.ts
 apis/CustomerApi.ts
 apis/OrderApi.ts
@@ -22,6 +24,10 @@ models/CreateUser.ts
 models/CurrencyDto.ts
 models/CurrencyProductDto.ts
 models/CustomerDto.ts
+models/EditAddress.ts
+models/EditContactInfo.ts
+models/EditCustomer.ts
+models/EditProduct.ts
 models/ImportCurrencies.ts
 models/OrderDto.ts
 models/OrderState.ts

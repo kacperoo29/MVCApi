@@ -21,10 +21,18 @@ import {
     CustomerDto,
     CustomerDtoFromJSON,
     CustomerDtoToJSON,
+    EditCustomer,
+    EditCustomerFromJSON,
+    EditCustomerToJSON,
 } from '../models';
 
 export interface ApiCustomerCreateCustomerPostRequest {
     createCustomer?: CreateCustomer;
+}
+
+export interface ApiCustomerEditCustomerIdPutRequest {
+    id: string;
+    editCustomer?: EditCustomer;
 }
 
 export interface ApiCustomerGetCustomerByIdIdGetRequest {
@@ -60,6 +68,37 @@ export class CustomerApi extends runtime.BaseAPI {
      */
     async apiCustomerCreateCustomerPost(requestParameters: ApiCustomerCreateCustomerPostRequest): Promise<string> {
         const response = await this.apiCustomerCreateCustomerPostRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiCustomerEditCustomerIdPutRaw(requestParameters: ApiCustomerEditCustomerIdPutRequest): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling apiCustomerEditCustomerIdPut.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Customer/EditCustomer/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EditCustomerToJSON(requestParameters.editCustomer),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiCustomerEditCustomerIdPut(requestParameters: ApiCustomerEditCustomerIdPutRequest): Promise<string> {
+        const response = await this.apiCustomerEditCustomerIdPutRaw(requestParameters);
         return await response.value();
     }
 
