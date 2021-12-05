@@ -65,15 +65,5 @@ namespace MVCApi.Domain.Entites
                  
             DateOfBirth = dateOfBirth;
         }
-
-        public void ChangeAddress(Address address){
-            //Temp - will change later
-            Addresses.FirstOrDefault().Change(address.Country, address.City, address.Street, address.StreetNumber, address.PostCode);
-        }
-
-        public void ChangeContactInfo(ContactInfo contactInfo){
-            //Temp - will change later
-            ContactInfos.FirstOrDefault().Change(contactInfo.Email, contactInfo.PhoneNumber);
-        }
     }
 }

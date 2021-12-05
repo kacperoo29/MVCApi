@@ -23,15 +23,30 @@ namespace MVCApi.Domain.Entites
             return new Address(country, city, street, streetNumber, postCode);
         }
 
-        public void Change(string country, string city, string street, string streetNumber, string postCode)
+        public void ChangeCountry(string country)
         {
             Country = country;
-            City = city;
-            Street = street;
-            StreetNumber = streetNumber;
-            PostCode = postCode;
         }
 
+        public void ChangeCity(string city)
+        {
+            City = city;
+        }
+
+        public void ChangeStreet(string street)
+        {
+            Street = street;
+        }
+
+        public void ChangeStreetNumber(string streetNumber)
+        {
+            StreetNumber = streetNumber;
+        }
+
+        public void ChangePostCode(string postCode)
+        {
+            PostCode = postCode;
+        }
 
     }
 }
