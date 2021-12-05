@@ -16,10 +16,6 @@ export default function ContactInfoEdit(props: any) {
     const { id } = useParams();
     const [contactInfo, setContactInfo] = useState<ContactInfoDto>({})
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
-    /*const [contactInfo, setcontactInfo] = useState({
-        email: '',
-        phoneNumber: '',
-    });*/
     
     var requestId = "";
 

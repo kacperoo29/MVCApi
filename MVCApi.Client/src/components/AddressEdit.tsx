@@ -19,13 +19,6 @@ export default function AddressEdit(props: any) {
     const { id } = useParams();
     const [address, setAddress] = useState<AddressDto>({})
     const [errors, setErrors] = useState<EditAddressErrors>({})
-    /*const [address, setaddress] = useState({
-        country: '',
-        city: '',
-        street: '',
-        streetNumber: '',
-        postCode: '',
-    });*/
     
     var requestId = "";
 

@@ -24,11 +24,6 @@ export default function CustomerEdit(props: any) {
     const { id } = useParams();
     const [customer, setCustomer] = useState<CustomerDto>({})
     const [errors, setErrors] = useState<EditCustomerErrors>({})
-    /*const [customer, setcustomer] = useState({
-        firstName: '',
-        lastName: '',
-        dateOfBirth: '',
-    });*/
     
     var requestId = "";
 
