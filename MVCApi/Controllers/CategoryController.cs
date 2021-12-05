@@ -41,7 +41,7 @@ namespace MVCApi.Controllers
         [Route("{id}")]
         public async Task<ActionResult<CategoryDto>> GetCategoryById([FromRoute] Guid id)
         {
-            return Ok(await _mediator.Send(new GetCategoryById {CategoryId = id}));
+            return Ok(await _mediator.Send(new GetCategoryById { CategoryId = id }));
         }
 
         [HttpGet]
@@ -51,8 +51,15 @@ namespace MVCApi.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<Guid>> AddProductToCategory([FromBody] AddProductToCategory command) {
+        public async Task<ActionResult<Guid>> AddProductToCategory([FromBody] AddProductToCategory command)
+        {
             return Ok(await _mediator.Send(command));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<CategoryDto>> GetRootCategory([FromQuery] Guid id)
+        {
+            return Ok(await _mediator.Send(new GetRootCategory { CategoryId = id }));
         }
     }
 }

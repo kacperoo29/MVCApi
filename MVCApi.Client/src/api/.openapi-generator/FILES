@@ -8,6 +8,7 @@ apis/UserApi.ts
 apis/index.ts
 index.ts
 models/AddProductToCart.ts
+models/AddProductToCategory.ts
 models/AddressDto.ts
 models/CategoryDto.ts
 models/ChangeProductCountInCart.ts

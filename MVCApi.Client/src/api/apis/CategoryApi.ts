@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    AddProductToCategory,
+    AddProductToCategoryFromJSON,
+    AddProductToCategoryToJSON,
     CategoryDto,
     CategoryDtoFromJSON,
     CategoryDtoToJSON,
@@ -25,6 +28,10 @@ import {
     CreateSubcategoryFromJSON,
     CreateSubcategoryToJSON,
 } from '../models';
+
+export interface ApiCategoryAddProductToCategoryPutRequest {
+    addProductToCategory?: AddProductToCategory;
+}
 
 export interface ApiCategoryCreateCategoryPostRequest {
     createCategory?: CreateCategory;
@@ -38,10 +45,41 @@ export interface ApiCategoryGetCategoryByIdIdGetRequest {
     id: string;
 }
 
+export interface ApiCategoryGetRootCategoryGetRequest {
+    id?: string;
+}
+
 /**
  * 
  */
 export class CategoryApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async apiCategoryAddProductToCategoryPutRaw(requestParameters: ApiCategoryAddProductToCategoryPutRequest): Promise<runtime.ApiResponse<string>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Category/AddProductToCategory`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AddProductToCategoryToJSON(requestParameters.addProductToCategory),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiCategoryAddProductToCategoryPut(requestParameters: ApiCategoryAddProductToCategoryPutRequest): Promise<string> {
+        const response = await this.apiCategoryAddProductToCategoryPutRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */
@@ -170,6 +208,34 @@ export class CategoryApi extends runtime.BaseAPI {
      */
     async apiCategoryGetRootCategoriesGet(): Promise<Array<CategoryDto>> {
         const response = await this.apiCategoryGetRootCategoriesGetRaw();
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiCategoryGetRootCategoryGetRaw(requestParameters: ApiCategoryGetRootCategoryGetRequest): Promise<runtime.ApiResponse<CategoryDto>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.id !== undefined) {
+            queryParameters['id'] = requestParameters.id;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Category/GetRootCategory`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoryDtoFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async apiCategoryGetRootCategoryGet(requestParameters: ApiCategoryGetRootCategoryGetRequest): Promise<CategoryDto> {
+        const response = await this.apiCategoryGetRootCategoryGetRaw(requestParameters);
         return await response.value();
     }
 
