@@ -18,6 +18,9 @@ import {
     CreateProduct,
     CreateProductFromJSON,
     CreateProductToJSON,
+    EditProduct,
+    EditProductFromJSON,
+    EditProductToJSON,
     ProductDto,
     ProductDtoFromJSON,
     ProductDtoToJSON,
@@ -28,6 +31,11 @@ import {
 
 export interface ApiProductCreateProductPostRequest {
     createProduct?: CreateProduct;
+}
+
+export interface ApiProductEditProductIdPutRequest {
+    id: string;
+    editProduct?: EditProduct;
 }
 
 export interface ApiProductGetAllProductsGetRequest {
@@ -81,6 +89,37 @@ export class ProductApi extends runtime.BaseAPI {
      */
     async apiProductCreateProductPost(requestParameters: ApiProductCreateProductPostRequest): Promise<string> {
         const response = await this.apiProductCreateProductPostRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     */
+    async apiProductEditProductIdPutRaw(requestParameters: ApiProductEditProductIdPutRequest): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling apiProductEditProductIdPut.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/Product/EditProduct/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EditProductToJSON(requestParameters.editProduct),
+        });
+
+        return new runtime.TextApiResponse(response) as any;
+    }
+
+    /**
+     */
+    async apiProductEditProductIdPut(requestParameters: ApiProductEditProductIdPutRequest): Promise<string> {
+        const response = await this.apiProductEditProductIdPutRaw(requestParameters);
         return await response.value();
     }
 

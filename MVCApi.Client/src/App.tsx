@@ -1,6 +1,6 @@
 import './App.css'
 
-import { Customers, Orders, Products, MenuNavbar, Cart, Categories } from './components'
+import { Customers, Orders, Products, MenuNavbar, Cart, Categories, CustomerEdit } from './components'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl';
 
@@ -17,6 +17,7 @@ export default function App() {
                             <Route path="/products" component={Products} />
                             <Route path="/cart" component={Cart} />
                             <Route path="/categories" component={Categories} />
+                            <Route path="/customer/:id/edit" component={CustomerEdit} />
                         </Switch>
                         </div>
                     </BrowserRouter>                

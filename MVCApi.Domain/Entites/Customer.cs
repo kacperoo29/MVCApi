@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MVCApi.Domain.Consts;
 using MVCApi.Domain.Exceptions;
+using System.Linq;
 
 namespace MVCApi.Domain.Entites
 {
@@ -56,6 +57,13 @@ namespace MVCApi.Domain.Entites
         public void ChangeLastName(string lastName)
         {
             LastName = lastName;
+        }
+
+        public void ChangeDateOfBirth(DateTime dateOfBirth){
+            if (dateOfBirth.Date > DateTime.Now.Date.AddYears(-EShopConsts.MinCustomerAge))
+                throw new CustomerTooYoungException();
+                 
+            DateOfBirth = dateOfBirth;
         }
     }
 }

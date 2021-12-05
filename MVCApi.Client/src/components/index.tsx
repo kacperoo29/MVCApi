@@ -9,4 +9,4 @@ export * from './Orders'
 export * from './Pagination'
 export * from './Products'
 export * from './ProductSmall'
-
+export * from './CustomerEdit'
