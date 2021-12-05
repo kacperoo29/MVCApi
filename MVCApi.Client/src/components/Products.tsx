@@ -3,16 +3,14 @@ import { ProductDto, ProductApi, CartApi, ProductDtoIPaginatedList, CategoryDto,
 import { getOrCreateCart } from '../util/CartUtil';
 import { useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
-import ProductSmall from './ProductSmall'
-import Pagination from './Pagination'
 import { useLocation } from 'react-router';
-import CategoryTree from './CategoryTree';
+import { ProductSmall, Pagination, CategoryTree } from './';
 
 type ProductsProps = {
     categoryId?: string
 }
 
-export default function Products() {
+export function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
     const [pagination, setPagination] = useState<ProductDtoIPaginatedList>({})
     const [page, setPage] = useState<Number>(1)

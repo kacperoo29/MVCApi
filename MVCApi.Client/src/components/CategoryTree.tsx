@@ -7,7 +7,7 @@ type CategoryTreeProps = {
 }
 
 // TODO: Make down and up limit from root
-export default function CategoryTree({ category }: CategoryTreeProps) {
+export function CategoryTree({ category }: CategoryTreeProps) {
     return (
         <>
             <ul className="list-group">

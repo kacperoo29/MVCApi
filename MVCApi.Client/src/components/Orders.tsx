@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { OrderDto, OrderApi } from '../api/index'
 import { Table } from 'react-bootstrap'
 
-export default function Orders() {
+export function Orders() {
     const [orders, setOrders] = useState<OrderDto[] | []>([])
 
     useEffect((api = new OrderApi()) => {

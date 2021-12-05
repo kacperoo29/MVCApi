@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedNumber } from 'react-intl'
 
-export default function ProductSmall(props: any) {
+export function ProductSmall(props: any) {
     let product = props.product
     return (
         <>

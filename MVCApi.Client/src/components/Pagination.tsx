@@ -9,7 +9,7 @@ type PaginationProps = {
     setPageSize: React.Dispatch<SetStateAction<Number>>
 }
 
-export default function Pagination({ pageIndex, totalPages, hasNextPage, hasPreviousPage, setPage, setPageSize }: PaginationProps) {
+export function Pagination({ pageIndex, totalPages, hasNextPage, hasPreviousPage, setPage, setPageSize }: PaginationProps) {
     var current = pageIndex,
         last = totalPages,
         delta = 2,

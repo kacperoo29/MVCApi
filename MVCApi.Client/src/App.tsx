@@ -1,11 +1,6 @@
 import './App.css'
 
-import Customers from './components/Customers';
-import Orders from './components/Orders';
-import Products from './components/Products';
-import MenuNavbar from './components/MenuNavbar';
-import Cart from './components/Cart'
-import Categories from './components/Categories'
+import { Customers, Orders, Products, MenuNavbar, Cart, Categories } from './components'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl';
 

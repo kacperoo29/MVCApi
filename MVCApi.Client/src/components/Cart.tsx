@@ -3,9 +3,9 @@ import { CartApi, ShoppingCartDto } from '../api'
 import { getOrCreateCart } from '../util/CartUtil'
 import { FormattedNumber, useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
-import ProductSmall from './ProductSmall'
+import { ProductSmall } from './'
 
-export default function Cart() {
+export function Cart() {
     const [cart, setCart] = useState<ShoppingCartDto>({})
     const [total, setTotal] = useState<Number>(0.0)
     const [changed, setChanged] = useState<boolean>(false)

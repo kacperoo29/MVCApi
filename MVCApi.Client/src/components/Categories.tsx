@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CategoryApi, CategoryDto } from '../api'
-import CategoryTree from './CategoryTree'
+import { CategoryTree } from './'
 
-export default function Categories() {
+export function Categories() {
     const [categories, setCategories] = useState<CategoryDto[]>([])
 
     useEffect(() => {
@@ -12,12 +12,12 @@ export default function Categories() {
     }, [])
 
     return (
-        <>
+        <div className="row">
             {categories.map(category =>                
                 <div key={category.id} className='col-md-4'>
                     <CategoryTree category={category} />
                 </div>
             )}
-        </>
+        </div>
     )
 }

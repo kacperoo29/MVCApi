@@ -3,7 +3,7 @@ import { CustomerDto, CustomerApi } from '../api/index'
 import { Dropdown } from 'react-bootstrap'
 import { useIntl } from 'react-intl'
 
-export default function Customers(props: any) {
+export function Customers(props: any) {
 	const [customers, setCustomers] = useState<CustomerDto[] | []>([])
 	const intl = useIntl()
 
