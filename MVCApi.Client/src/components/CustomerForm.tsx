@@ -130,7 +130,7 @@ export function CustomerForm(props: any) {
             setCustomer({ ...customer, [event.target.name]: event.target.value })
     }
 
-    return <Form noValidate onSubmit={handleSubmit}>
+    return <Form noValidate onSubmit={async () => handleSubmit}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>First name</Form.Label>

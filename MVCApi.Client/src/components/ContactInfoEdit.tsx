@@ -74,7 +74,7 @@ export default function ContactInfoEdit(props: any) {
         });
     }
 
-    return <Form noValidate onSubmit={handleSubmit}>
+    return <Form noValidate onSubmit={async () => handleSubmit}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Email</Form.Label>
