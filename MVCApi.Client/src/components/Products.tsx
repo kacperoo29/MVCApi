@@ -69,9 +69,6 @@ export function Products() {
     return (
         <>
             <div className="row">
-                <Link to="/products/create">Add product</Link>
-            </div>
-            <div className="row">
                 <div className="col-lg-3">                    
                     {categories.map(category =>
                         <CategoryTree category={category} />
