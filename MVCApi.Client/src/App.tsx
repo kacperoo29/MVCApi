@@ -14,7 +14,7 @@ export default function App() {
 						<Switch>
 							<Route exact path="/" component={Customers} />
 							<Route path="/orders" component={Orders} />
-							<Route path="/products" component={Products} />
+							<Route exact path="/products" component={Products} />
 							<Route path="/cart" component={Cart} />
 							<Route path="/categories" component={Categories} />
 							<Route path="/customer/:id/edit" component={CustomerEdit} />

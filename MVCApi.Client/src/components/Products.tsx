@@ -83,8 +83,8 @@ export function Products() {
                             </div>
                         </div>
                     ))}
-                </div>
-                <button className='btn btn-primary'><Link to="/products/create">Add product</Link></button>
+                    <Link className='btn btn-primary' to="/products/create">Add product</Link>
+                </div>                
             </div>
             <Pagination
                 pageIndex={pagination.pageIndex?.valueOf()!}

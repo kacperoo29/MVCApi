@@ -86,7 +86,7 @@ export function CustomerEdit() {
     }
 
     return (
-        <Form noValidate onSubmit={handleSubmit}>
+        <Form noValidate onSubmit={async (e) => handleSubmit(e)}>
             <Row className="mb-2">
                 <Form.Group as={Col}>
                     <Form.Label>First name</Form.Label>
