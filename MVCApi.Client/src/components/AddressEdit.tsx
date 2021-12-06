@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { AddressDto, AddressApi } from '../api'
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 
 // TODO: Some nicer way to pick address and phone number
 
@@ -14,10 +14,11 @@ interface EditAddressErrors {
     postCode?: string | null,
 }
 
-export default function AddressEdit(props: any) {
+export function AddressEdit(props: any) {
     const { id }: any = useParams();
-    const [address, setAddress] = useState<AddressDto>({})
-    const [errors, setErrors] = useState<EditAddressErrors>({})
+    const [address, setAddress] = useState<AddressDto>({});
+    const [errors, setErrors] = useState<EditAddressErrors>({});
+    const history = useHistory();
 
     //var requestId = "";
 
@@ -80,6 +81,7 @@ export default function AddressEdit(props: any) {
         if (validation()) {
             try {
                 const response = await api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
+                history.push('/');
             } catch (e) {
                 console.log(e)
             }

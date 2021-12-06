@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { ContactInfoDto, ContactInfoApi } from '../api'
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 
 // TODO: Some nicer way to pick address and phone number
 
@@ -11,10 +11,11 @@ interface EditContactInfoErrors {
     phoneNumber?: string | null
 }
 
-export default function ContactInfoEdit(props: any) {
+export function ContactInfoEdit(props: any) {
     const { id }: any = useParams();
     const [contactInfo, setContactInfo] = useState<ContactInfoDto>({})
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
+    const history = useHistory();
 
     var requestId = "";
 
@@ -61,6 +62,7 @@ export default function ContactInfoEdit(props: any) {
         if (validation()) {
             try {
                 const response = await api.apiContactInfoEditContactInfoIdPut({ id: id, editContactInfo: contactInfo })
+                history.push('/');
             } catch (e) {
                 console.log(e)
             }
