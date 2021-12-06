@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React, { useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { CreateProduct, ProductApi } from '../api/index'
@@ -10,8 +9,8 @@ interface CreateProductErrors {
     price?: string | null,
 }
 
-export default function ProductForm(props: any){
-    
+export function ProductForm(props: any) {
+
     const [product, setProduct] = useState<CreateProduct>({})
     const [errors, setErrors] = useState<CreateProductErrors>({})
 
@@ -37,19 +36,20 @@ export default function ProductForm(props: any){
         if (!product.image) {
             newErrors.image = "Product image must be set!";
             valid = false;
-        } else {         
+        } else {
             // Additional checks
         }
 
         if (!product.price) {
             newErrors.price = "Product image must be set!";
             valid = false;
-        } else {         
-            if(product.price.valueOf()<0){
+        } else {
+            if (product.price.valueOf() < 0) {
                 newErrors.price = "Price must be greater than 0";
                 valid = false;
             }
         }
+        setErrors(newErrors)
 
         return valid;
     }
@@ -70,11 +70,11 @@ export default function ProductForm(props: any){
     }
 
     const handleChangeProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
-            setProduct({ ...product, [event.target.name]: event.target.value })
+        setProduct({ ...product, [event.target.name]: event.target.value })
     }
 
-    return(
-        
+    return (
+
         <Form onSubmit={handleSubmit}>
             <Row className="mb-2">
                 <Form.Group as={Col}>

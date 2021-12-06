@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
 import { useLocation } from 'react-router';
 import { ProductSmall, Pagination, CategoryTree } from './';
+import { Link } from 'react-router-dom';
 
 type ProductsProps = {
     categoryId?: string
@@ -83,7 +84,7 @@ export function Products() {
                         </div>
                     ))}
                 </div>
-                <div><Link to="/products/create">Add product</Link></div>
+                <button className='btn btn-primary'><Link to="/products/create">Add product</Link></button>
             </div>
             <Pagination
                 pageIndex={pagination.pageIndex?.valueOf()!}
