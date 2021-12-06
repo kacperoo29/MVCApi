@@ -69,6 +69,9 @@ export function Products() {
     return (
         <>
             <div className="row">
+                <Link to="/products/create">Add product</Link>
+            </div>
+            <div className="row">
                 <div className="col-lg-3">                    
                     {categories.map(category =>
                         <CategoryTree category={category} />
@@ -80,6 +83,7 @@ export function Products() {
                             <ProductSmall product={product} />
                             <div className="col-md-2">
                                 <button className='btn btn-primary' onClick={(e) => handleAdd(e, product.id!)}>Add to cart</button>
+                                <Link to={`/products/${product.id}/edit`}><button className='btn btn-primary'>Edit</button></Link>
                             </div>
                         </div>
                     ))}

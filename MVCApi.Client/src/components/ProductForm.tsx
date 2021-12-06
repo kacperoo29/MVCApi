@@ -31,15 +31,15 @@ export function ProductForm(props: any) {
         }
 
         if (!product.description) {
-            newErrors.description = "Description must be set!";
-            valid = false;
+            newErrors.description= "Description must be set"
+            valid = false
         } else {
             // Additional checks
         }
 
         if (!product.image) {
-            newErrors.image = "Product image must be set!";
-            valid = false;
+            newErrors.image= "Image must be set"
+            valid = false
         } else {
             // Additional checks
         }

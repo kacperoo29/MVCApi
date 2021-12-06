@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CustomerDto, CustomerApi } from '../api/index'
 import { Dropdown } from 'react-bootstrap'
 import { useIntl } from 'react-intl'
+import { Link } from 'react-router-dom'
 
 export function Customers(props: any) {
 	const [customers, setCustomers] = useState<CustomerDto[] | []>([])
@@ -17,9 +18,10 @@ export function Customers(props: any) {
 		{customers.map((customer, id) => (
 			<div key={customer.id} className="rounded border p-2">
 				<div className="row">
-					<p className="col-md-4">First name: {customer.firstName}</p>
-					<p className="col-md-4">Last name: {customer.lastName}</p>
-					<p className="col-md-4">Date of birth: {new Date(customer.dateOfBirth!).toLocaleDateString(intl.locale)}</p>
+					<p className="col-md-3">First name: {customer.firstName}</p>
+					<p className="col-md-3">Last name: {customer.lastName}</p>
+					<p className="col-md-3">Date of birth: {new Date(customer.dateOfBirth!).toLocaleDateString(intl.locale)}</p>
+					<p className="col-md-3"><Link to={`/customer/${customer.id}/edit`}>Edit</Link></p>
 				</div>
 				<div className="row">					
 					<Dropdown className="col-md-6">
@@ -28,7 +30,10 @@ export function Customers(props: any) {
 						</Dropdown.Toggle>
 						<Dropdown.Menu>
 							{customer.addresses && customer.addresses.map(address =>
-								<Dropdown.Item key={address.id}>{address.country + ', ' + address.postCode + ' ' + address.city + ', ' + address.street + ' ' + address.streetNumber}</Dropdown.Item>
+								<Dropdown.Item key={address.id}>
+									{'Country: ' + address.country + ', ' + 'Post code: ' + address.postCode + ', ' + 'City:' + address.city + ', ' + 'Street: ' + address.street + ' ' + 'Street number: ' + address.streetNumber + ' '}
+									<Link to={`/address/${address.id}/edit`}>Edit</Link>
+								</Dropdown.Item>
 							)}
 						</Dropdown.Menu>
 					</Dropdown>
@@ -38,7 +43,7 @@ export function Customers(props: any) {
 						</Dropdown.Toggle>
 						<Dropdown.Menu>
 							{customer.contactInfos && customer.contactInfos.map(contact =>
-								<Dropdown.Item key={contact.id}>{contact.email + ', ' + contact.phoneNumber}</Dropdown.Item>
+								<Dropdown.Item key={contact.id}>{'Email: '+contact.email + ', ' + ' Phone number: ' + contact.phoneNumber+' '}<Link to={`/contactinfo/${contact.id}/edit`}>Edit</Link></Dropdown.Item>
 							)}
 						</Dropdown.Menu>
 					</Dropdown>

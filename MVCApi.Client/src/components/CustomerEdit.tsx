@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { CustomerDto, CustomerApi } from '../api/index'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 // TODO: Some nicer way to pick address and phone number
 
@@ -16,6 +16,7 @@ export function CustomerEdit() {
     const { id }: any = useParams();
     const [customer, setCustomer] = useState<CustomerDto>({})
     const [errors, setErrors] = useState<EditCustomerErrors>({})
+    const history = useHistory();
 
     var requestId = "";
 
@@ -72,10 +73,12 @@ export function CustomerEdit() {
         if (validation()) {
             try {
                 await api.apiCustomerEditCustomerIdPut({ id: id, editCustomer: customer })
+                history.push('/');
             } catch (e) {
                 console.log(e)
             }
         }
+        
     }
 
     const handleChangeCustomer = (event: { target: { name: any; value: any; }; }) => {
