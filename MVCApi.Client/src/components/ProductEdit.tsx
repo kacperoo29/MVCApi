@@ -61,15 +61,15 @@ export function ProductEdit(props: any) {
         return valid
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const api = new ProductApi()
         event.preventDefault()
         event.stopPropagation()
 
         if (validation()) {
             try {
-                await api.apiProductEditProductIdPut({ id: id, editProduct: product })
-                history.push('/products');
+                api.apiProductEditProductIdPut({ id: id, editProduct: product })
+                    .then(r => history.push('/products'))
             } catch (e) {
                 console.log(e)
             }
@@ -81,7 +81,7 @@ export function ProductEdit(props: any) {
             setProduct({ ...product, [event.target.name]: event.target.value })
     }
 
-    return <Form noValidate onSubmit={handleSubmit}>
+    return <Form noValidate onSubmit={e => handleSubmit(e)}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Product name</Form.Label>

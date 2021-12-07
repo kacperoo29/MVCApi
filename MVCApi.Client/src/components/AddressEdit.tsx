@@ -73,15 +73,15 @@ export function AddressEdit(props: any) {
         return valid
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const api = new AddressApi()
         event.preventDefault()
         event.stopPropagation()
 
         if (validation()) {
             try {
-                const response = await api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
-                history.push('/');
+                api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
+                    .then(r => history.push('/'))
             } catch (e) {
                 console.log(e)
             }
@@ -95,7 +95,7 @@ export function AddressEdit(props: any) {
         });
     }
 
-    return <Form noValidate onSubmit={handleSubmit}>
+    return <Form noValidate onSubmit={e => handleSubmit(e)}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Country</Form.Label>

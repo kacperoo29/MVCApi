@@ -109,14 +109,14 @@ export function CustomerForm(props: any) {
         return valid
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         event.stopPropagation()
 
         if (validation()) {
             let api = new CustomerApi()
             try {
-                await api.apiCustomerCreateCustomerPost({ createCustomer: customer })
+                api.apiCustomerCreateCustomerPost({ createCustomer: customer })
             } catch (e) {
                 console.log(e)
             }
@@ -130,7 +130,7 @@ export function CustomerForm(props: any) {
             setCustomer({ ...customer, [event.target.name]: event.target.value })
     }
 
-    return <Form noValidate onSubmit={async () => handleSubmit}>
+    return <Form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>First name</Form.Label>

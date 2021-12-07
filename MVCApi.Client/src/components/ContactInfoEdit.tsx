@@ -53,7 +53,7 @@ export function ContactInfoEdit(props: any) {
         return valid
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const api = new ContactInfoApi()
         event.preventDefault()
         event.stopPropagation()
@@ -61,8 +61,8 @@ export function ContactInfoEdit(props: any) {
 
         if (validation()) {
             try {
-                const response = await api.apiContactInfoEditContactInfoIdPut({ id: id, editContactInfo: contactInfo })
-                history.push('/');
+                api.apiContactInfoEditContactInfoIdPut({ id: id, editContactInfo: contactInfo })
+                    .then(r => history.push('/'))
             } catch (e) {
                 console.log(e)
             }
@@ -76,7 +76,7 @@ export function ContactInfoEdit(props: any) {
         });
     }
 
-    return <Form noValidate onSubmit={async () => handleSubmit}>
+    return <Form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Row className="mb-2">
             <Form.Group as={Col}>
                 <Form.Label>Email</Form.Label>
