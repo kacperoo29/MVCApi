@@ -14,8 +14,8 @@ interface CreateProductErrors {
     image?: string | null,
 }
 
-export function ProductEdit(props: any) {
-    const { id }: any = useParams();
+export function ProductEdit(props: { id: string }) {
+    const { id }: { id: string} = useParams();
     const [product, setProduct] = useState<ProductDto>({})
     const [errors, setErrors] = useState<CreateProductErrors>({});
     const history = useHistory();

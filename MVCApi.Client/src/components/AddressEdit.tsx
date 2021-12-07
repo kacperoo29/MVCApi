@@ -14,8 +14,8 @@ interface EditAddressErrors {
     postCode?: string | null,
 }
 
-export function AddressEdit(props: any) {
-    const { id }: any = useParams();
+export function AddressEdit(props: { id: string }) {
+    const { id }: { id: string } = useParams();
     const [address, setAddress] = useState<AddressDto>({});
     const [errors, setErrors] = useState<EditAddressErrors>({});
     const history = useHistory();
@@ -88,7 +88,7 @@ export function AddressEdit(props: any) {
         }
     }
 
-    const handleChangeAddress = (event: { target: { name: any; value: any; }; }) => {
+    const handleChangeAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAddress({
             ...address,
             [event.target.name]: event.target.value

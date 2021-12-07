@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap'
 import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
 
-export function Customers(props: any) {
+export function Customers() {
 	const [customers, setCustomers] = useState<CustomerDto[] | []>([])
 	const intl = useIntl()
 

@@ -18,7 +18,7 @@ interface CreateCustomerErrors {
     phoneNumber?: string | null
 }
 
-export function CustomerForm(props: any) {
+export function CustomerForm() {
     const [customer, setCustomer] = useState<CreateCustomer>({})
     const [errors, setErrors] = useState<CreateCustomerErrors>({})
 

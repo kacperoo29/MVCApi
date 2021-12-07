@@ -11,8 +11,8 @@ interface EditContactInfoErrors {
     phoneNumber?: string | null
 }
 
-export function ContactInfoEdit(props: any) {
-    const { id }: any = useParams();
+export function ContactInfoEdit(props: { id: string }) {
+    const { id }: { id: string} = useParams();
     const [contactInfo, setContactInfo] = useState<ContactInfoDto>({})
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
     const history = useHistory();
@@ -69,7 +69,7 @@ export function ContactInfoEdit(props: any) {
         }
     }
 
-    const handleChangeContactInfo = (event: { target: { name: any; value: any; }; }) => {
+    const handleChangeContactInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContactInfo({
             ...contactInfo,
             [event.target.name]: event.target.value

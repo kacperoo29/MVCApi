@@ -13,7 +13,7 @@ interface EditCustomerErrors {
 }
 
 export function CustomerEdit() {
-    const { id }: any = useParams();
+    const { id }: { id: string } = useParams();
     const [customer, setCustomer] = useState<CustomerDto>({})
     const [errors, setErrors] = useState<EditCustomerErrors>({})
     const history = useHistory();
@@ -82,7 +82,7 @@ export function CustomerEdit() {
         
     }
 
-    const handleChangeCustomer = (event: { target: { name: any; value: any; }; }) => {
+    const handleChangeCustomer = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCustomer({
             ...customer,
             [event.target.name]: event.target.value

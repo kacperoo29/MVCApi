@@ -1,0 +1,192 @@
+@startuml
+
+title MVCApi Schemas Diagram
+
+entity AddProductToCart { 
+    cartId: UUID
+    productId: UUID
+    count: Integer
+}
+
+entity AddProductToCategory { 
+    categoryId: UUID
+    productId: UUID
+}
+
+entity AddressDto { 
+    id: UUID
+    country: String
+    city: String
+    street: String
+    streetNumber: String
+    postCode: String
+}
+
+entity CategoryDto { 
+    id: UUID
+    name: String
+    children: List<CategoryDto>
+}
+
+entity ChangeProductCountInCart { 
+    cartId: UUID
+    productId: UUID
+    count: Integer
+}
+
+entity ContactInfoDto { 
+    id: UUID
+    email: String
+    phoneNumber: String
+}
+
+entity CreateCategory { 
+    name: String
+}
+
+entity CreateCustomer { 
+    firstName: String
+    lastName: String
+    dateOfBirth: Date
+    country: String
+    city: String
+    street: String
+    streetNumber: String
+    postCode: String
+    email: String
+    phoneNumber: String
+}
+
+entity CreateOrder { 
+    cartId: UUID
+    customerId: UUID
+}
+
+entity CreateProduct { 
+    name: String
+    description: String
+    image: String
+    price: Double
+}
+
+entity CreateSubcategory { 
+    name: String
+    parentId: UUID
+}
+
+entity CreateUser { 
+    email: String
+    userName: String
+    password: String
+}
+
+entity CurrencyDto { 
+    code: String
+    decimalPlaces: Integer
+}
+
+entity CurrencyProductDto { 
+    currency: CurrencyDto
+    value: Double
+}
+
+entity CustomerDto { 
+    id: UUID
+    firstName: String
+    lastName: String
+    dateOfBirth: Date
+    addresses: List<AddressDto>
+    contactInfos: List<ContactInfoDto>
+}
+
+entity EditAddress { 
+    id: UUID
+    country: String
+    city: String
+    street: String
+    streetNumber: String
+    postCode: String
+}
+
+entity EditContactInfo { 
+    contactInfoId: UUID
+    email: String
+    phoneNumber: String
+}
+
+entity EditCustomer { 
+    customerId: UUID
+    firstName: String
+    lastName: String
+    dateOfBirth: Date
+}
+
+entity EditProduct { 
+    productId: UUID
+    name: String
+    description: String
+    image: String
+}
+
+entity ImportCurrencies { 
+    currencies: List<CurrencyDto>
+}
+
+entity OrderDto { 
+    id: UUID
+    customer: CustomerDto
+    shoppingCart: ShoppingCartDto
+    orderState: OrderState
+}
+
+entity OrderState { 
+}
+
+entity ProductCartDto { 
+    product: ProductDto
+    count: Integer
+}
+
+entity ProductDto { 
+    id: UUID
+    name: String
+    description: String
+    image: String
+    categories: List<CategoryDto>
+    price: CurrencyProductDto
+}
+
+entity ProductDtoIPaginatedList { 
+    pageIndex: Integer
+    pageSize: Integer
+    totalPages: Integer
+    hasPreviousPage: Boolean
+    hasNextPage: Boolean
+    items: List<ProductDto>
+}
+
+entity RemoveProductFromCart { 
+    cartId: UUID
+    productId: UUID
+}
+
+entity ShoppingCartDto { 
+    id: UUID
+    products: List<ProductCartDto>
+}
+
+
+ShoppingCartDto -- "0..*" ProductCartDto : products
+ProductCartDto -- ProductDto : product
+CustomerDto -- "0..*" AddressDto : addresses
+CustomerDto -- "0..*" ContactInfoDto : contactInfos
+ProductDto -- "0..*" CategoryDto : categories
+ProductDto -- CurrencyProductDto : price
+ProductDtoIPaginatedList -- "0..*" ProductDto : items
+CurrencyProductDto -- CurrencyDto : currency
+ImportCurrencies -- "0..*" CurrencyDto : currencies
+CategoryDto -- "0..*" CategoryDto : children
+OrderDto -- CustomerDto : customer
+OrderDto -- ShoppingCartDto : shoppingCart
+
+@enduml

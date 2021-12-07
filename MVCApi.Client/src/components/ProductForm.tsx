@@ -11,7 +11,7 @@ interface CreateProductErrors {
     category?: string | null
 }
 
-export function ProductForm(props: any) {
+export function ProductForm() {
     const [product, setProduct] = useState<CreateProduct>({})
     const [errors, setErrors] = useState<CreateProductErrors>({})
     const [categories, setCategories] = useState<CategoryDto[]>([])

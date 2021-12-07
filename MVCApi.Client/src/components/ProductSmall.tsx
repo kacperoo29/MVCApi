@@ -1,7 +1,8 @@
 import React from 'react'
 import { FormattedNumber } from 'react-intl'
+import { ProductDto } from '../api'
 
-export function ProductSmall(props: any) {
+export function ProductSmall(props: { product: ProductDto}) {
     let product = props.product
     return (
         <>
