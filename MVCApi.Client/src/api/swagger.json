@@ -1116,6 +1116,16 @@
         "tags": [
           "Order"
         ],
+        "parameters": [
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",

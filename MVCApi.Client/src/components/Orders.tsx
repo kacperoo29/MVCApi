@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { OrderDto, OrderApi } from '../api/index'
 import { Table } from 'react-bootstrap'
+import { useIntl } from 'react-intl'
+import LocaleCurrency from 'locale-currency'
 
 export function Orders() {
     const [orders, setOrders] = useState<OrderDto[] | []>([])
+    const intl = useIntl()
 
     useEffect((api = new OrderApi()) => {
-        api.apiOrderGetAllOrdersGet().then(response => setOrders(response))
-    }, []);
+        api.apiOrderGetAllOrdersGet({ currencyCode: LocaleCurrency.getCurrency(intl.locale) })
+            .then(response => setOrders(response))
+    }, [intl.locale]);
 
     return (
         <Table striped bordered hover>
