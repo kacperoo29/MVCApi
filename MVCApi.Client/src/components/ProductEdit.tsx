@@ -1,9 +1,7 @@
-import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { ProductDto, ProductApi } from '../api/index'
 import { useHistory, useParams } from "react-router-dom";
-import { isNumericLiteral } from 'typescript';
 
 
 // TODO: Some nicer way to pick address and phone number
@@ -26,11 +24,7 @@ export function ProductEdit(props: { id: string }) {
             .then(response => {
                 setProduct(response);
             })
-    }, [])
-
-    const isNumeric = (val: string) : boolean => {
-        return !isNaN(Number(val));
-    }
+    }, [id])
 
     const validation = (): boolean => {
         let valid = true

@@ -4,6 +4,7 @@ import { getOrCreateCart } from '../util/CartUtil'
 import { FormattedNumber, useIntl } from 'react-intl'
 import LocaleCurrency from 'locale-currency'
 import { ProductSmall } from './'
+import { Link } from 'react-router-dom'
 
 export function Cart() {
     const [cart, setCart] = useState<ShoppingCartDto>({})
@@ -64,7 +65,7 @@ export function Cart() {
                 <p className="product-price">
                     <FormattedNumber value={total.valueOf()} style={`currency`} currency={LocaleCurrency.getCurrency(intl.locale)} />
                 </p>
-                <button className="btn btn-primary">Confirm order</button>
+                <Link to={{ pathname: '/checkout' }} className="btn btn-primary">Confirm order</Link>
             </div>
         </div>
     )

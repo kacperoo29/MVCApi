@@ -25,3 +25,4 @@ export * from './ProductDto';
 export * from './ProductDtoIPaginatedList';
 export * from './RemoveProductFromCart';
 export * from './ShoppingCartDto';
+export * from './ShoppingCartState';

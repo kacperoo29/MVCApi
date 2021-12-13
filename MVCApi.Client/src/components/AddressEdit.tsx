@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { AddressDto, AddressApi } from '../api'
@@ -20,15 +19,13 @@ export function AddressEdit(props: { id: string }) {
     const [errors, setErrors] = useState<EditAddressErrors>({});
     const history = useHistory();
 
-    //var requestId = "";
-
     useEffect(() => {
         const api = new AddressApi();
         api.apiAddressGetAddressByIdIdGet({ id: id })
             .then(response => {
                 setAddress(response)
             })
-    }, [])
+    }, [id])
 
     const validation = (): boolean => {
         let valid = true
@@ -79,12 +76,9 @@ export function AddressEdit(props: { id: string }) {
         event.stopPropagation()
 
         if (validation()) {
-            try {
-                api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
-                    .then(r => history.push('/'))
-            } catch (e) {
-                console.log(e)
-            }
+            api.apiAddressEditAddressIdPut({ id: id, editAddress: address })
+                .then(r => history.push('/'))
+                .catch(e => console.log(e))
         }
     }
 

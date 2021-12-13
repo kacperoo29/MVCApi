@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MVCApi.Domain.Enums;
 
 namespace MVCApi.Application.Dto
 {
@@ -7,5 +8,6 @@ namespace MVCApi.Application.Dto
     {
         public Guid Id { get; set; }
         public ICollection<ProductCartDto> Products { get; set; }
+        public ShoppingCartState State { get; set; }
     }
 }

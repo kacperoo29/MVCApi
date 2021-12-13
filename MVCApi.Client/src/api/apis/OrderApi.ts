@@ -27,6 +27,10 @@ export interface ApiOrderCreateOrderPostRequest {
     createOrder?: CreateOrder;
 }
 
+export interface ApiOrderGetAllOrdersGetRequest {
+    currencyCode?: string | null;
+}
+
 export interface ApiOrderGetOrderByIdIdGetRequest {
     id: string;
 }
@@ -65,8 +69,12 @@ export class OrderApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrderGetAllOrdersGetRaw(): Promise<runtime.ApiResponse<Array<OrderDto>>> {
+    async apiOrderGetAllOrdersGetRaw(requestParameters: ApiOrderGetAllOrdersGetRequest): Promise<runtime.ApiResponse<Array<OrderDto>>> {
         const queryParameters: any = {};
+
+        if (requestParameters.currencyCode !== undefined) {
+            queryParameters['currencyCode'] = requestParameters.currencyCode;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -82,8 +90,8 @@ export class OrderApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrderGetAllOrdersGet(): Promise<Array<OrderDto>> {
-        const response = await this.apiOrderGetAllOrdersGetRaw();
+    async apiOrderGetAllOrdersGet(requestParameters: ApiOrderGetAllOrdersGetRequest): Promise<Array<OrderDto>> {
+        const response = await this.apiOrderGetAllOrdersGetRaw(requestParameters);
         return await response.value();
     }
 

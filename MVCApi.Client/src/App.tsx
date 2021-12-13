@@ -1,6 +1,10 @@
 import './App.css'
 
-import { Customers, Orders, Products, MenuNavbar, Cart, Categories, CustomerEdit, ContactInfoEdit, AddressEdit, ProductForm, ProductEdit, CustomerForm } from './components'
+import {
+	Customers, Orders, Products, MenuNavbar, Cart, Categories,
+	CustomerEdit, ContactInfoEdit, AddressEdit, ProductForm,
+	ProductEdit, CustomerForm, Checkout
+} from './components'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl';
 
@@ -24,6 +28,7 @@ export default function App() {
                             <Route path="/contactinfo/:id/edit" component={ContactInfoEdit} />
                             <Route path="/address/:id/edit" component={AddressEdit} />
                             <Route path="/products/:id/edit" component={ProductEdit} />
+                            <Route path="/checkout" component={Checkout} />
 						</Switch>
 					</div>
 				</BrowserRouter>

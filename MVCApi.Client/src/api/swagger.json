@@ -1116,6 +1116,16 @@
         "tags": [
           "Order"
         ],
+        "parameters": [
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1705,6 +1715,14 @@
         },
         "additionalProperties": false
       },
+      "ShoppingCartState": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "ShoppingCartDto": {
         "type": "object",
         "properties": {
@@ -1718,6 +1736,9 @@
               "$ref": "#/components/schemas/ProductCartDto"
             },
             "nullable": true
+          },
+          "state": {
+            "$ref": "#/components/schemas/ShoppingCartState"
           }
         },
         "additionalProperties": false

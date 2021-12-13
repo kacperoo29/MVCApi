@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { isNull } from 'util'
 import { CreateProduct, ProductApi, CategoryDto, CategoryApi } from '../api'
 
 interface CreateProductErrors {

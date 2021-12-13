@@ -18,7 +18,6 @@ export function CategoryForm({ added, setAdded }: CategoryFormProps) {
     const [categories, setCategories] = useState<CategoryDto[]>([])
     const [isChild, setIsChild] = useState<boolean>(false)
     const [errors, setErrors] = useState<CategoryErrors>({})
-    //const [added, setAdded] = useState<boolean>(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 

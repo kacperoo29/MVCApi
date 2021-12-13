@@ -22,8 +22,10 @@ namespace MVCApi.Domain.Entites
 
         public static Order Create(Customer customer, ShoppingCart shoppingCart)
         {
-            if(shoppingCart.Products.Count < 1)
+            if (shoppingCart.Products.Count < 1)
                 throw new EmptyCartException(shoppingCart.Id);
+
+            shoppingCart.Lock();
 
             return new Order(customer, shoppingCart);
         }

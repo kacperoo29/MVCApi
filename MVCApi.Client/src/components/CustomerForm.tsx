@@ -43,7 +43,7 @@ export function CustomerForm() {
         if (!customer.dateOfBirth) {
             newErrors.dateOfBirth = "Date of birth must be set"
             valid = false
-        } else {         
+        } else {
             if (moment().diff(moment(customer.dateOfBirth), 'year') < 18) {
                 newErrors.dateOfBirth = "You must be older than 18"
                 valid = false
@@ -115,11 +115,9 @@ export function CustomerForm() {
 
         if (validation()) {
             let api = new CustomerApi()
-            try {
-                api.apiCustomerCreateCustomerPost({ createCustomer: customer })
-            } catch (e) {
-                console.log(e)
-            }
+
+            api.apiCustomerCreateCustomerPost({ createCustomer: customer })
+                .catch(e => console.log(e))
         }
     }
 
