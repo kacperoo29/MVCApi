@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { ContactInfoDto, ContactInfoApi } from '../api'
@@ -17,19 +16,13 @@ export function ContactInfoEdit(props: { id: string }) {
     const [errors, setErrors] = useState<EditContactInfoErrors>({})
     const history = useHistory();
 
-    var requestId = "";
-
-    if (id !== undefined) {
-        requestId = id;
-    }
-
     useEffect(() => {
         const api = new ContactInfoApi()
         api.apiContactInfoGetContactInfoByIdIdGet({ id: id })
             .then(response => {
                 setContactInfo(response)
             })
-    }, [])
+    }, [id])
 
     const validation = (): boolean => {
         let valid = true

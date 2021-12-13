@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using MVCApi.Domain;
 using MVCApi.Domain.Entites;
+using MVCApi.Domain.Enums;
 
 namespace MVCApi.Application.Commands
 {

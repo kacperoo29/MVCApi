@@ -31,7 +31,7 @@ export function Customers() {
 						<Dropdown.Menu>
 							{customer.addresses && customer.addresses.map(address =>
 								<Dropdown.Item key={address.id}>
-									{'Country: ' + address.country + ', ' + 'Post code: ' + address.postCode + ', ' + 'City:' + address.city + ', ' + 'Street: ' + address.street + ' ' + 'Street number: ' + address.streetNumber + ' '}
+									{'Country: ' + address.country + ', Post code: ' + address.postCode + ', City:' + address.city + ', Street: ' + address.street + ' Street number: ' + address.streetNumber + ' '}
 									<Link className='btn btn-primary ml-2' to={`/address/${address.id}/edit`}>Edit</Link>
 								</Dropdown.Item>
 							)}
@@ -43,7 +43,7 @@ export function Customers() {
 						</Dropdown.Toggle>
 						<Dropdown.Menu>
 							{customer.contactInfos && customer.contactInfos.map(contact =>
-								<Dropdown.Item key={contact.id}>{'Email: ' + contact.email + ', ' + ' Phone number: ' + contact.phoneNumber + ' '}
+								<Dropdown.Item key={contact.id}>{'Email: ' + contact.email + ', Phone number: ' + contact.phoneNumber + ' '}
 									<Link className='btn btn-primary ml-2' to={`/contactinfo/${contact.id}/edit`}>Edit</Link></Dropdown.Item>
 							)}
 						</Dropdown.Menu>

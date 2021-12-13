@@ -18,6 +18,10 @@ import {
     ProductCartDtoFromJSON,
     ProductCartDtoFromJSONTyped,
     ProductCartDtoToJSON,
+    ShoppingCartState,
+    ShoppingCartStateFromJSON,
+    ShoppingCartStateFromJSONTyped,
+    ShoppingCartStateToJSON,
 } from './';
 
 /**
@@ -38,6 +42,12 @@ export interface ShoppingCartDto {
      * @memberof ShoppingCartDto
      */
     products?: Array<ProductCartDto> | null;
+    /**
+     * 
+     * @type {ShoppingCartState}
+     * @memberof ShoppingCartDto
+     */
+    state?: ShoppingCartState;
 }
 
 export function ShoppingCartDtoFromJSON(json: any): ShoppingCartDto {
@@ -52,6 +62,7 @@ export function ShoppingCartDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'products': !exists(json, 'products') ? undefined : (json['products'] === null ? null : (json['products'] as Array<any>).map(ProductCartDtoFromJSON)),
+        'state': !exists(json, 'state') ? undefined : ShoppingCartStateFromJSON(json['state']),
     };
 }
 
@@ -66,6 +77,7 @@ export function ShoppingCartDtoToJSON(value?: ShoppingCartDto | null): any {
         
         'id': value.id,
         'products': value.products === undefined ? undefined : (value.products === null ? null : (value.products as Array<any>).map(ProductCartDtoToJSON)),
+        'state': ShoppingCartStateToJSON(value.state),
     };
 }
 

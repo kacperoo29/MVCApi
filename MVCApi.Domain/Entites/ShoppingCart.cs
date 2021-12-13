@@ -1,17 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MVCApi.Domain.Enums;
 
 namespace MVCApi.Domain.Entites
 {
     public class ShoppingCart : BaseEntity
     {
+        public virtual ICollection<ProductCart> Products { get; private set; }
+
+        public ShoppingCartState State { get; private set; }
+
         protected ShoppingCart()
         {
             Products = new List<ProductCart>();
+            State = ShoppingCartState.Operable;
         }
-
-        public virtual ICollection<ProductCart> Products { get; private set; }
 
         public static ShoppingCart Create()
         {
@@ -21,12 +25,17 @@ namespace MVCApi.Domain.Entites
         public void AddProduct(Product product, int count)
         {
             // TODO: Check if product can be added
+            if (State != ShoppingCartState.Operable)
+                return; //TODO: Throw
 
             Products.Add(new ProductCart(product, this, count));
         }
 
         public void RemoveProduct(Guid productId)
         {
+            if (State != ShoppingCartState.Operable)
+                return; //TODO: Throw
+
             foreach (var item in Products)
             {
                 if (item.Product.Id == productId)
@@ -39,6 +48,9 @@ namespace MVCApi.Domain.Entites
 
         public void ChangeProductCount(Guid productId, int count)
         {
+            if (State != ShoppingCartState.Operable)
+                return; //TODO: Throw
+
             var product = Products.FirstOrDefault(x => x.ProductId == productId);
             if (product != null)
                 product.SetCount(count);
@@ -46,7 +58,15 @@ namespace MVCApi.Domain.Entites
 
         public void Clear()
         {
+            if (State != ShoppingCartState.Operable)
+                return; //TODO: Throw
+
             Products.Clear();
+        }
+
+        public void Lock()
+        {
+            State = ShoppingCartState.Locked;
         }
     }
 }
