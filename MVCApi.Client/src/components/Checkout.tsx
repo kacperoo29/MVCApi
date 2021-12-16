@@ -9,7 +9,7 @@ import { useHistory } from 'react-router'
 
 export function Checkout() {
     const [customers, setCustomers] = useState<CustomerDto[]>([])
-    const [customerIdx, setCustomerIdx] = useState<number | null>(null)
+    const [customerIdx, setCustomerIdx] = useState<number | null>(0)
     const [cart, setCart] = useState<ShoppingCartDto>({})
     const intl = useIntl()
     const history = useHistory()
