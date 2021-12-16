@@ -83,12 +83,13 @@ export function CustomerEdit() {
     }
 
     const handleChangeCustomer = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCustomer({
-            ...customer,
-            [event.target.name]: event.target.value
-        });
+        if (event.target.name === 'dateOfBirth')
+            setCustomer({ ...customer, [event.target.name]: new Date(event.target.valueAsNumber) })
+        else
+            setCustomer({ ...customer, [event.target.name]: event.target.value })
     }
 
+    
     return (
         <Form noValidate onSubmit={(e) => handleSubmit(e)}>
             <Row className="mb-2">
