@@ -1,0 +1,5 @@
+<div class="row mb-4" >
+  <div class="col-md-4" *ngFor="let category of rootCategories | async">
+    <app-category-tree [category]="category"></app-category-tree>
+  </div>
+</div>
