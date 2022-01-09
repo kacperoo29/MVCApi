@@ -9,6 +9,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryTreeComponent } from './category-tree/category-tree.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CategoriesComponent } from './categories/categories.component';
     CustomersComponent,
     CustomerFormComponent,
     CategoryTreeComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ProductsComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div *ngIf="product" class="row">
+  <div class="col-md-2">
+    <img
+      src="{{ '/assets' + product.image }}"
+      alt="{{ product.name + '_image' }}"
+      class="img-fluid"
+    />
+  </div>
+  <div class="col-md-6 product-detail">
+    <h4>{{ product.name }}</h4>
+    <p>{{ product.description }}</p>
+  </div>
+  <div *ngIf="product.price && product.price.currency" class="col-md-2 product-price">
+    {{ product.price.value | currency: product.price.currency.code! }}
+  </div>
+</div>
