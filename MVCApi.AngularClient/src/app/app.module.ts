@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoryTreeComponent } from './category-tree/category-tree.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    CategoryTreeComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
