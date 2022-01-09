@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateCustomer } from 'src/api';
+import { CreateCustomer, CustomerService } from 'src/api';
 
 @Component({
   selector: 'app-customer-form',
@@ -21,13 +21,15 @@ export class CustomerFormComponent implements OnInit {
     phoneNumber: new FormControl('', Validators.required)
   })
 
-  constructor() { }
+  constructor(private readonly customerService: CustomerService) { }
 
   ngOnInit(): void {
   }
 
   submit(): void {
-    console.log(this.form.value)
+    var createCustomer: CreateCustomer = this.form.value
+    if (this.form.valid) {
+      var response = this.customerService.apiCustomerCreateCustomerPost(createCustomer)
+    }
   }
-
 }
