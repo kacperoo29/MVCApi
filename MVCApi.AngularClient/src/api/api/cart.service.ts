@@ -385,14 +385,14 @@ export class CartService {
         }
 
         return this.httpClient.delete<string>(`${this.configuration.basePath}/api/Cart/RemoveProduct`,
-            removeProductFromCart,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
                 observe: observe,
-                reportProgress: reportProgress
+                reportProgress: reportProgress,
+                body: removeProductFromCart
             }
         );
     }
