@@ -28,11 +28,21 @@ services:
       - 9229:9229
     depends_on:
       - api
-    volumes:     
+    volumes:
       - type: bind
         source: ./MVCApi.Client
         target: /app
       - /app/node_modules/
-
+  angular_client:
+    build: ./MVCApi.AngularClient
+    ports:
+      - 4200:4200
+    depends_on:
+      - api
+    volumes:
+    - type: bind
+      source: ./MVCApi.AngularClient
+      target: /app
+    - /app/node_modules/
 volumes:
-  db_data:
+  db_data: null
