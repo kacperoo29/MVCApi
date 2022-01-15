@@ -58,7 +58,8 @@ namespace MVCApi.Application
             CreateMap<ShoppingCart, ShoppingCartDto>();
             CreateMap<Order, OrderDto>();
             CreateMap(typeof(IPaginatedList<>), typeof(IPaginatedList<>)).ConvertUsing(typeof(PaginatedListMapping<,>));
-            //.ConvertUsing(typeof(PaginatedListMapping<,>));
+            CreateMap<IApplicationUser, ApplicationUserDto>()
+                .ForMember(d => d.DomainUserId, o => o.MapFrom(s => s.DomainUser.Id));
         }
         private class PaginatedListMapping<TSource, TDestination>
             : ITypeConverter<IPaginatedList<TSource>, IPaginatedList<TDestination>>

@@ -1,6 +1,7 @@
 using System;
+using MVCApi.Domain;
 
-namespace MVCApi.Domain
+namespace MVCApi.Application
 {
     public interface IApplicationUser
     {

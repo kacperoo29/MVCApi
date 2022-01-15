@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Identity;
+using MVCApi.Application;
 using MVCApi.Domain;
 
 namespace MVCApi.Services

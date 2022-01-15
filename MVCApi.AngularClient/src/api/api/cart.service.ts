@@ -38,7 +38,7 @@ import { Configuration }                                     from '../configurat
 })
 export class CartService {
 
-    protected basePath = 'http://localhost';
+    protected basePath = 'http://localhost:5000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -384,7 +384,7 @@ export class CartService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.delete<string>(`${this.configuration.basePath}/api/Cart/RemoveProduct`,
+        return this.httpClient.delete<string>(`${this.configuration.basePath}/api/Cart/RemoveProduct`,            
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

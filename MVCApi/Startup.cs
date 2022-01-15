@@ -50,7 +50,7 @@ namespace MVCApi
 
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
             });
 
             services.AddHttpContextAccessor();
@@ -71,6 +71,8 @@ namespace MVCApi
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
             services.AddScoped<ICurrencyService, CurrencyService>();
+            services.AddTransient<SignInManager<ApplicationUser>>();
+            services.AddTransient<UserManager<ApplicationUser>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,8 +86,6 @@ namespace MVCApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MVCApi v1"));
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -1,8 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
+using MVCApi.Application.Dto;
+using MVCApi.Application.Queries;
 
 namespace MVCApi.Controllers
 {
@@ -20,6 +24,26 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<Guid>> CreateUser([FromBody] CreateUser command)
         {
             return Ok(await _mediator.Send(command));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Guid>> SignIn([FromBody] SignIn command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async new Task<ActionResult<Guid>> SignOut()
+        {
+            return Ok(await _mediator.Send(new SignOut()));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<ApplicationUserDto>> GetCurrentUser()
+        {
+            return Ok(await _mediator.Send(new GetCurrentUser()));
         }
     }
 }

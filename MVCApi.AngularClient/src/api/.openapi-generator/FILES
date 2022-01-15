@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 api.module.ts
 api/address.service.ts
@@ -19,6 +18,7 @@ index.ts
 model/addProductToCart.ts
 model/addProductToCategory.ts
 model/addressDto.ts
+model/applicationUserDto.ts
 model/categoryDto.ts
 model/changeProductCountInCart.ts
 model/contactInfoDto.ts
@@ -45,4 +45,5 @@ model/productDtoIPaginatedList.ts
 model/removeProductFromCart.ts
 model/shoppingCartDto.ts
 model/shoppingCartState.ts
+model/signIn.ts
 variables.ts
