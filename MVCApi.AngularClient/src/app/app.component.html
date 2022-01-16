@@ -18,6 +18,12 @@
         </li>
       </ul>
       <ul class="ms-auto navbar-nav nav">
+        <li *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/login">Sign in</a>
+        </li>
+        <li *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/signout">Sign out</a>
+        </li>
         <li>
           <a class="nav-link" routerLink="/cart"><i class="bi bi-cart4"></i></a>
         </li>

@@ -6,7 +6,8 @@ using MVCApi.Domain.Entites;
 
 namespace MVCApi.Services
 {
-    public class EShopContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+    public class EShopContext
+        : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         public EShopContext(DbContextOptions<EShopContext> options)
             : base(options)
@@ -21,23 +22,23 @@ namespace MVCApi.Services
         public DbSet<Address> Addresses { get; private set; }
         public DbSet<Order> Orders { get; private set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            modelBuilder.Entity<ApplicationUser>()
+            builder.Entity<ApplicationUser>()
                 .HasOne(x => (Customer)x.DomainUser);
 
-            modelBuilder.Entity<ProductCart>()
+            builder.Entity<ProductCart>()
                 .HasKey(pc => new { pc.ProductId, pc.ShoppingCartId });
 
-            modelBuilder.Entity<CurrencyProduct>()
+            builder.Entity<CurrencyProduct>()
                 .HasKey(cp => new { cp.CurrencyId, cp.ProductId });
 
-            modelBuilder.Entity<Currency>()
+            builder.Entity<Currency>()
                 .HasIndex(c => c.Code).IsUnique();
 
-            modelBuilder.Entity<CurrencyProduct>()
+            builder.Entity<CurrencyProduct>()
                 .Property(cp => cp.Value).HasPrecision(19, 4);
         }
     }

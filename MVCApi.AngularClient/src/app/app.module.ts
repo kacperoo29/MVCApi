@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,6 +11,9 @@ import { CategoryTreeComponent } from './category-tree/category-tree.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { BASE_PATH, Configuration, UserService } from 'src/api';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +23,34 @@ import { ProductComponent } from './product/product.component';
     CategoryTreeComponent,
     CategoriesComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    SignInComponent,
+    SignOutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: BASE_PATH, useValue: 'http://localhost:5000' },
+    {
+      provide: UserService,
+      useFactory: (httpClient: HttpClient) =>
+        new UserService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () => localStorage.getItem('jwt_token')!,
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

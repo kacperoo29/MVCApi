@@ -1,9 +1,11 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using MVCApi.Application;
+using MVCApi.Application.Dto;
 using MVCApi.Application.Exceptions;
 using MVCApi.Domain;
 
@@ -14,12 +16,17 @@ namespace MVCApi.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly JwtHandler _jwtHandler;
 
-        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserService(IHttpContextAccessor httpContextAccessor,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            JwtHandler jwtHandler)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _signInManager = signInManager;
+            _jwtHandler = jwtHandler;
         }
 
         public async Task<IApplicationUser> GetCurrentUser()
@@ -47,27 +54,25 @@ namespace MVCApi.Services
             return appUser.Id;
         }
 
-        public async Task<Guid> SignInAsync(string email, string password, bool rememberMe)
+        public async Task<AuthResponseDto> SignInAsync(string email, string password, bool rememberMe)
         {
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
                 throw new UserNotFoundException(email);
 
-            var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, lockoutOnFailure: false);
+            var result = await _userManager.CheckPasswordAsync(user, password);
+            //var result = await _signInManager.PasswordSignInAsync(user, password, rememberMe, lockoutOnFailure: false);
 
-            if (!result.Succeeded)
-                throw new SignInException(email);
+            if (!result)
+                return new AuthResponseDto { ErrorMessage = "Invalid authentication" };
 
-            return user.Id;
-        }
+            var signingCredentials = _jwtHandler.GetSigningCredentials();
+            var claims = _jwtHandler.GetClaims(user);
+            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-        public async Task<Guid> SignOutAsync()
-        {
-            var user = await GetCurrentUser();
-            await _signInManager.SignOutAsync();
-
-            return user.Id;
+            return new AuthResponseDto { IsAuthSuccessful = true, Token = token };
         }
     }
 }

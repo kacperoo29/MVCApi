@@ -19,6 +19,7 @@ model/addProductToCart.ts
 model/addProductToCategory.ts
 model/addressDto.ts
 model/applicationUserDto.ts
+model/authResponseDto.ts
 model/categoryDto.ts
 model/changeProductCountInCart.ts
 model/contactInfoDto.ts

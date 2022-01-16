@@ -27,16 +27,9 @@ namespace MVCApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> SignIn([FromBody] SignIn command)
+        public async Task<ActionResult<AuthResponseDto>> SignIn([FromBody] SignIn command)
         {
             return Ok(await _mediator.Send(command));
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async new Task<ActionResult<Guid>> SignOut()
-        {
-            return Ok(await _mediator.Send(new SignOut()));
         }
 
         [HttpGet]

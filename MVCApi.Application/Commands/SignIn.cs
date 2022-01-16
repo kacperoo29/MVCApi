@@ -5,16 +5,17 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using MVCApi.Application.Dto;
 
 namespace MVCApi.Application.Commands
 {
-    public class SignIn : IRequest<Guid>
+    public class SignIn : IRequest<AuthResponseDto>
     {
         public string Email { get; init; }
         public string Password { get; init; }
         public bool RememberMe { get; init; }
 
-        public class Handler : IRequestHandler<SignIn, Guid>
+        public class Handler : IRequestHandler<SignIn, AuthResponseDto>
         {
             private readonly IUserService _userService;
 
@@ -23,7 +24,7 @@ namespace MVCApi.Application.Commands
                 _userService = userService;
             }
 
-            public async Task<Guid> Handle(SignIn request, CancellationToken cancellationToken)
+            public async Task<AuthResponseDto> Handle(SignIn request, CancellationToken cancellationToken)
             {
                 return await _userService.SignInAsync(request.Email, request.Password, request.RememberMe);
             }

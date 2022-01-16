@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using MVCApi.Application.Dto;
 using MVCApi.Domain;
 
 namespace MVCApi.Application
@@ -8,7 +9,6 @@ namespace MVCApi.Application
     {
         Task<IApplicationUser> GetCurrentUser();
         Task<Guid> CreateUser(string email, string userName, string password);
-        Task<Guid> SignInAsync(string email, string password, bool rememberMe);
-        Task<Guid> SignOutAsync();
+        Task<AuthResponseDto> SignInAsync(string email, string password, bool rememberMe);
     }
 }

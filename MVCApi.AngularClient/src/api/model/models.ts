@@ -2,6 +2,7 @@ export * from './addProductToCart';
 export * from './addProductToCategory';
 export * from './addressDto';
 export * from './applicationUserDto';
+export * from './authResponseDto';
 export * from './categoryDto';
 export * from './changeProductCountInCart';
 export * from './contactInfoDto';

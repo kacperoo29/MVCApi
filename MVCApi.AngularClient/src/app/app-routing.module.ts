@@ -4,12 +4,16 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ProductsComponent } from './products/products.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'customers/add', component: CustomerFormComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'login', component: SignInComponent },
+  { path: 'signout', component: SignOutComponent }
 ];
 
 @NgModule({

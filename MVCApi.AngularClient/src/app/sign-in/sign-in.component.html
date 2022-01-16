@@ -1,0 +1,30 @@
+<div class="card card-container">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="submit()">
+    <span id="reauth-email" class="reauth-email"></span>
+    <input
+      type="email"
+      id="email"
+      class="form-control"
+      placeholder="Email address"
+      formControlName="email"
+      required
+      autofocus
+    />
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      placeholder="Password"
+      formControlName="password"
+      required
+    />
+    <label>
+      <input type="checkbox" value="rememberMe" formControlName="rememberMe" />
+      Remember me
+    </label>
+    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">
+      Sign in
+    </button>
+  </form>
+  <a href="#" class="forgot-password"> Forgot the password? </a>
+</div>
