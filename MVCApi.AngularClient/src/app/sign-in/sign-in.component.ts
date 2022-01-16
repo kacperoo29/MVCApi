@@ -14,7 +14,11 @@ export class SignInComponent implements OnInit {
     rememberMe: new FormControl(false),
   });
 
-  constructor(private readonly authService: AuthService) {}
+  public isLoggedIn: boolean = false
+
+  constructor(private readonly authService: AuthService) {
+    this.authService.isAuthenticated.subscribe((val) => this.isLoggedIn = val)
+  }
 
   ngOnInit(): void {}
 

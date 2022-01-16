@@ -14,6 +14,17 @@ import { ProductComponent } from './product/product.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BASE_PATH, Configuration, UserService } from 'src/api';
 import { SignOutComponent } from './sign-out/sign-out.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { registerLocaleData } from '@angular/common';
+
+import(
+  /* webpackExclude: /\.d\.ts$/ */
+  /* webpackMode: "lazy-once" */
+  /* webpackChunkName: "i18n-extra" */
+  `@/../@angular/common/locales/${navigator.language}.mjs`
+).then(locale => { registerLocaleData(locale.default); });
 
 @NgModule({
   declarations: [
@@ -26,6 +37,7 @@ import { SignOutComponent } from './sign-out/sign-out.component';
     ProductComponent,
     SignInComponent,
     SignOutComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +45,8 @@ import { SignOutComponent } from './sign-out/sign-out.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },

@@ -1,3 +1,8 @@
-<div *ngFor="let customer of $customers | async">
-  <p>{{ customer.firstName }}, {{ customer.lastName }}</p>
+<div *ngFor="let customer of $customers | async" class="rounded border p-2">
+  <div class="row">
+    <p class="col-md-3">First name: {{customer.firstName}}</p>
+    <p class="col-md-3">Last name: {{customer.lastName}}</p>
+    <p class="col-md-3">Date of birth: {{customer.dateOfBirth | date}}</p>
+    <p class="col-md-3"><a class='btn btn-primary ml-2'>Edit</a></p>
+  </div> 
 </div>

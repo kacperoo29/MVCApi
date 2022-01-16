@@ -9,7 +9,7 @@
     <div *ngFor="let product of products | async" class="row product">
       <app-product class="col-md-10" [product]="product"></app-product>
       <div class="col-md-2">
-        <button class="btn btn-primary">Add to cart</button>
+        <button class="btn btn-primary" (click)="addToCart(product.id)">Add to cart</button>
       </div>
     </div>
   </div>

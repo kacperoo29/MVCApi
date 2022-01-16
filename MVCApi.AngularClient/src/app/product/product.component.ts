@@ -1,3 +1,4 @@
+import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductDto } from 'src/api';
 
@@ -8,6 +9,8 @@ import { ProductDto } from 'src/api';
 })
 export class ProductComponent implements OnInit {
   @Input() product: ProductDto | undefined;
+
+  currency = getLocaleCurrencyCode(navigator.language) ?? "PLN"
 
   constructor() { }
 

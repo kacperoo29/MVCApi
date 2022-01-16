@@ -1,0 +1,24 @@
+<div *ngIf='isLoading' style="margin:0 auto;">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf='!isLoading && $cart' class='row'>
+    <div class="col col-lg-10">        
+            <div *ngFor='let product of $cart.products' class="row product">
+                <app-product class="col-md-10" [product]="product.product" ></app-product>
+                <div class="col-md-1">
+                    <input class="form-control input-sm" type="number" min="1" step="1" value={{product.count}} (change)="onCountChange($event, product.product?.id)" />
+                </div>
+                <div class="col-md-1">
+                    <button class="btn" (click)="removeFromCart(product.product?.id)"><i class="bi bi-trash text-danger"></i></button>
+                </div>
+            </div>       
+    </div>
+    <div class="col col-lg-2 product">
+        <h4>
+            Total price:
+        </h4>
+        <p className="product-price">
+            {{ total | currency: currency }}
+        </p>
+    </div>
+</div>

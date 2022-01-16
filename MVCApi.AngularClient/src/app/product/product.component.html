@@ -11,6 +11,6 @@
     <p>{{ product.description }}</p>
   </div>
   <div *ngIf="product.price && product.price.currency" class="col-md-2 product-price">
-    {{ product.price.value | currency: product.price.currency.code! }}
+    {{ product.price.value | currency: currency }}
   </div>
 </div>
