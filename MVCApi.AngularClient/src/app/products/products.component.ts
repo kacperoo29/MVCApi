@@ -1,5 +1,6 @@
 import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
   CartService,
@@ -17,24 +18,57 @@ import { ShoppingCartService } from '../shopping-cart.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  // TODO: Pagination
-  products: Observable<ProductDto[]> =
-    this.productService.apiProductGetAllProductsGet(
-      getLocaleCurrencyCode(navigator.language) ?? 'PLN'
-    );
-  // TODO: Change category depending on selected
+  products: Observable<ProductDtoIPaginatedList> | null = null;
   categories: Observable<CategoryDto[]> =
     this.categoryService.apiCategoryGetRootCategoriesGet();
-  // TODO: Take optional category id as input
+
+  categoryId: string | null = null;
+
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1
+  hasNextPage: boolean = false
+  hasPreviousPage: boolean = false
 
   constructor(
     private readonly productService: ProductService,
     private readonly categoryService: CategoryService,
     private readonly cartService: CartService,
-    private readonly shoppingCartService: ShoppingCartService
+    private readonly shoppingCartService: ShoppingCartService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.categoryId = params['categoryId'];
+      if (this.categoryId) {
+        this.products =
+          this.productService.apiProductGetPaginatedProductsByCategoryGet(
+            this.pageIndex,
+            this.pageSize,
+            getLocaleCurrencyCode(navigator.language) ?? 'PLN',
+            this.categoryId
+          );
+      } else {
+        this.products = this.productService.apiProductGetPaginatedProductsGet(
+          this.pageIndex,
+          this.pageSize,
+          getLocaleCurrencyCode(navigator.language) ?? 'PLN'
+        );
+      }
+      
+      this.products.subscribe({
+        next: (res) =>
+        {
+          this.pageIndex = res.pageIndex ?? 1
+          this.pageSize = res.pageSize ?? 10
+          this.totalPages = res.totalPages ?? 1
+          this.hasNextPage = res.hasNextPage ?? false
+          this.hasPreviousPage = res.hasPreviousPage ?? false
+        }
+      })
+    });
+  }
 
   addToCart(id: string | undefined) {
     if (!id) return;

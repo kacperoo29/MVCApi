@@ -17,7 +17,9 @@ import { SignOutComponent } from './sign-out/sign-out.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { registerLocaleData } from '@angular/common';
+import { PaginationComponent } from './pagination/pagination.component';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -38,6 +40,7 @@ import(
     SignInComponent,
     SignOutComponent,
     ShoppingCartComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import(
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },

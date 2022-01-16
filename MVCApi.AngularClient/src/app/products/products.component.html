@@ -5,12 +5,20 @@
     </div>
   </div>
 
-  <div class="col-lg-9">
-    <div *ngFor="let product of products | async" class="row product">
+  <div *ngIf="products" class="col-lg-9">
+    <div *ngFor="let product of (products | async)?.items" class="row product">
       <app-product class="col-md-10" [product]="product"></app-product>
       <div class="col-md-2">
-        <button class="btn btn-primary" (click)="addToCart(product.id)">Add to cart</button>
+        <button class="btn btn-primary" (click)="addToCart(product.id)">
+          Add to cart
+        </button>
       </div>
     </div>
+    <app-pagination
+      [pageIndex]="pageIndex"
+      [totalPages]="totalPages"
+      [hasNextPage]="hasNextPage"
+      [hasPreviousPage]="hasPreviousPage"
+    ></app-pagination>
   </div>
 </div>

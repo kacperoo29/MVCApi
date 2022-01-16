@@ -1,5 +1,5 @@
 .category-tree-element {
-  width: "100%";
-  display: "block";
-  height: "100%";
+  width: 100%;
+  display: inline-block;
+  height: 100%;
 }

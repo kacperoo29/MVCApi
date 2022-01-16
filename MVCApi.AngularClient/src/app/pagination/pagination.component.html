@@ -1,0 +1,21 @@
+<nav>
+  <ul class="pagination justify-content-center">
+    <li *ngIf="hasPreviousPage" class="page-item">
+      <span class="page-link">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </span>
+    </li>
+
+    <li *ngFor="let item in rangeWithDots" class="page-item">
+      <span class="page-link">{{ item }}</span>
+    </li>
+
+    <li *ngIf="hasNextPage" oclassName="page-item">
+      <span class="page-link">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </span>
+    </li>
+  </ul>
+</nav>
