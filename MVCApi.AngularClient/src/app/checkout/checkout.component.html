@@ -1,1 +1,16 @@
-<p>checkout works!</p>
+<div *ngIf="user">
+  <div *ngIf="!hasCustomer">
+    <div class="alert alert-info" role="alert">
+      You must provide your personal info to confirm the order
+    </div>
+    <app-customer-form></app-customer-form>
+  </div>
+  <div *ngIf="hasCustomer">
+    <div *ngIf="!customer" class="alert alert-error" role="alert">
+      Unable to fetch customer data
+    </div>
+    <div *ngIf="customer">
+      {{ customer.firstName }}
+    </div>
+  </div>
+</div>

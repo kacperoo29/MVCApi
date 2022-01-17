@@ -10,5 +10,6 @@ namespace MVCApi.Application
         Task<IApplicationUser> GetCurrentUser();
         Task<Guid> CreateUser(string email, string userName, string password);
         Task<AuthResponseDto> SignInAsync(string email, string password, bool rememberMe);
+        Task<Guid> LinkDomainUser<T>(Guid id, T user) where T : IDomainUser;
     }
 }

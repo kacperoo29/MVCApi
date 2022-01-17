@@ -37,6 +37,7 @@ model/editContactInfo.ts
 model/editCustomer.ts
 model/editProduct.ts
 model/importCurrencies.ts
+model/linkCustomer.ts
 model/models.ts
 model/orderDto.ts
 model/orderState.ts

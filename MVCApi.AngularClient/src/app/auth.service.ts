@@ -66,6 +66,27 @@ export class AuthService {
     sessionStorage.removeItem('jwt_token');
   }
 
+  linkCustomer(customerId: string) {
+    this.currentUser.subscribe({
+      next: (user) => {
+        this.api
+          .apiUserLinkCustomerPut({
+            customerId: customerId,
+            userId: user.id,
+          })
+          .subscribe({
+            next: (res) => {
+              this.currentUserSubject.next({
+                domainUserId: customerId,
+                id: res,
+              });
+            },
+            error: (err) => console.log(err),
+          });
+      },
+    });
+  }
+
   getToken() {
     var token = sessionStorage.getItem('jwt_token');
     if (!token) {

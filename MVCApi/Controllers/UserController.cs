@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +36,12 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<ApplicationUserDto>> GetCurrentUser()
         {
             return Ok(await _mediator.Send(new GetCurrentUser()));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Guid>> LinkCustomer([FromBody] LinkCustomer command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }

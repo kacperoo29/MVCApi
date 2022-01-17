@@ -20,6 +20,7 @@ export * from './editContactInfo';
 export * from './editCustomer';
 export * from './editProduct';
 export * from './importCurrencies';
+export * from './linkCustomer';
 export * from './orderDto';
 export * from './orderState';
 export * from './productCartDto';

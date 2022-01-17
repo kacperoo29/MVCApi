@@ -45,7 +45,7 @@ namespace MVCApi.Services
             return newUser.Id;
         }
 
-        public async Task<Guid> LinkDomainUser(Guid id, IDomainUser user)
+        public async Task<Guid> LinkDomainUser<T>(Guid id, T user) where T : IDomainUser
         {
             var appUser = await _userManager.FindByIdAsync(id.ToString());
             appUser.DomainUser = user;
