@@ -1,7 +1,14 @@
 <div *ngIf="product" class="row">
   <div class="col-md-2">
     <img
+      *ngIf="!product.image?.startsWith('http')"
       src="{{ '/assets' + product.image }}"
+      alt="{{ product.name + '_image' }}"
+      class="img-fluid"
+    />
+    <img
+      *ngIf="product.image?.startsWith('http')"
+      src="{{ product.image }}"
       alt="{{ product.name + '_image' }}"
       class="img-fluid"
     />
@@ -10,7 +17,10 @@
     <h4>{{ product.name }}</h4>
     <p>{{ product.description }}</p>
   </div>
-  <div *ngIf="product.price && product.price.currency" class="col-md-2 product-price">
+  <div
+    *ngIf="product.price && product.price.currency"
+    class="col-md-2 product-price"
+  >
     {{ product.price.value | currency: currency }}
   </div>
 </div>

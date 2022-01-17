@@ -23,22 +23,19 @@ export class AuthService {
   public currentUserToken = this.currentUserTokenSubject.asObservable();
 
   constructor(private readonly api: UserService) {
-    var token = localStorage.getItem('jwt_token')
+    var token = this.getToken();
     if (token) {
-      this.currentUserTokenSubject.next(token)
-      this.isAuthenticatedSubject.next(true)
-      this.api.apiUserGetCurrentUserGet()
-        .subscribe({
-          next: (response) =>
-          {
-            this.currentUserSubject.next(response)
-          },
-          error: () =>
-          {
-            this.currentUserTokenSubject.next('')
-            this.isAuthenticatedSubject.next(false)
-          }
-        })
+      this.currentUserTokenSubject.next(token);
+      this.isAuthenticatedSubject.next(true);
+      this.api.apiUserGetCurrentUserGet().subscribe({
+        next: (response) => {
+          this.currentUserSubject.next(response);
+        },
+        error: () => {
+          this.currentUserTokenSubject.next('');
+          this.isAuthenticatedSubject.next(false);
+        },
+      });
     }
   }
 
@@ -50,7 +47,8 @@ export class AuthService {
           if (response.isAuthSuccessful) {
             this.isAuthenticatedSubject.next(true);
             this.currentUserTokenSubject.next(response.token!);
-            localStorage.setItem('jwt_token', response.token!);
+            sessionStorage.setItem('jwt_token', response.token!);
+            if (rememberMe) localStorage.setItem('jwt_token', response.token!);
             this.api.apiUserGetCurrentUserGet().subscribe((realUser) => {
               this.currentUserSubject.next(realUser);
             });
@@ -64,6 +62,17 @@ export class AuthService {
     this.currentUserSubject.next({});
     this.currentUserTokenSubject.next('');
     this.isAuthenticatedSubject.next(false);
-    localStorage.setItem('jwt_token', '');
+    localStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('jwt_token');
+  }
+
+  getToken() {
+    var token = sessionStorage.getItem('jwt_token');
+    if (!token) {
+      token = localStorage.getItem('jwt_token');
+      if (token) sessionStorage.setItem('jwt_token', token);
+    }
+
+    return token;
   }
 }

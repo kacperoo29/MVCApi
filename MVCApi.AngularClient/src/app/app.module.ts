@@ -17,16 +17,20 @@ import { SignOutComponent } from './sign-out/sign-out.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { registerLocaleData } from '@angular/common';
 import { PaginationComponent } from './pagination/pagination.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AuthService } from './auth.service';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
   /* webpackMode: "lazy-once" */
   /* webpackChunkName: "i18n-extra" */
   `@/../@angular/common/locales/${navigator.language}.mjs`
-).then(locale => { registerLocaleData(locale.default); });
+).then((locale) => {
+  registerLocaleData(locale.default);
+});
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import(
     SignOutComponent,
     ShoppingCartComponent,
     PaginationComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,7 @@ import(
     FormsModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },
@@ -62,7 +67,10 @@ import(
           'http://localhost:5000',
           new Configuration({
             credentials: {
-              Bearer: () => localStorage.getItem('jwt_token')!,
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
             },
           })
         ),
