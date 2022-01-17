@@ -11,7 +11,7 @@ export class ShoppingCartService {
   constructor(private readonly api: CartService) {}
 
   async getOrCreateCart(): Promise<ShoppingCartDto | null> {
-    let cartId = localStorage.getItem('cartId');
+    let cartId: string | null = localStorage.getItem('cartId');
     var cart: ShoppingCartDto | null = null;
 
     if (!cartId) {

@@ -25,7 +25,7 @@ export class PaginationComponent implements OnInit {
   @Input() hasPreviousPage: boolean = false;
   @Input() hasNextPage: boolean = false;
 
-  allowedPageSizes = [5, 10, 25, 50, 100, 250];
+  allowedPageSizes: Array<number> = [5, 10, 25, 50, 100, 250];
 
   rangeWithDots: Array<string | number> = [];
 

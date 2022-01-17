@@ -11,9 +11,9 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   $cart: ShoppingCartDto | null = null;
-  isLoading = true;
+  isLoading: boolean = true;
   total: number = 0;
-  currency = getLocaleCurrencyCode(navigator.language) ?? 'PLN';
+  currency: string = getLocaleCurrencyCode(navigator.language) ?? 'PLN';
 
   constructor(
     private readonly service: ShoppingCartService,
