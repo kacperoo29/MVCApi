@@ -47,7 +47,6 @@ export class AuthService {
       .apiUserSignInPost({ email, password, rememberMe })
       .subscribe({
         next: (response) => {
-          console.log(response);
           if (response.isAuthSuccessful) {
             this.isAuthenticatedSubject.next(true);
             this.currentUserTokenSubject.next(response.token!);

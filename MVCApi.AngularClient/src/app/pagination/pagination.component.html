@@ -1,21 +1,34 @@
-<nav>
-  <ul class="pagination justify-content-center">
-    <li *ngIf="hasPreviousPage" class="page-item">
+<nav class="navbar">
+  <ul class="pagination justify-content-center nav">
+    <li *ngIf="hasPreviousPage" class="page-item" (click)="onPreviousPage()">
       <span class="page-link">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
+        <span>&laquo;</span>
       </span>
     </li>
 
-    <li *ngFor="let item in rangeWithDots" class="page-item">
+    <li *ngFor="let item of rangeWithDots" class="page-item" (click)="onPageChange(item)">
       <span class="page-link">{{ item }}</span>
     </li>
 
-    <li *ngIf="hasNextPage" oclassName="page-item">
+    <li *ngIf="hasNextPage" oclassName="page-item" (click)="onNextPage()">
       <span class="page-link">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
+        <span>&raquo;</span>
       </span>
+    </li>
+  </ul>
+
+  <ul class="ms-auto nav justify-content-end">
+    <li class="form-group">
+      <label class="form-check-label">Page size</label>
+      <select class="form-control" (change)="onPageSizeChanged($event)">
+        <option
+          *ngFor="let size of allowedPageSizes"
+          [value]="size"
+          [selected]="size == pageSize"
+        >
+          {{ size }}
+        </option>
+      </select>
     </li>
   </ul>
 </nav>

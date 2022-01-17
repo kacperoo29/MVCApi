@@ -78,7 +78,7 @@ namespace MVCApi.Application
                     opt.Items["currencyService"] = context.Items["currencyService"];
                 });
 
-                return new PaginatedList<TDestination>(list, list.Count, source.PageIndex, source.PageSize);
+                return new PaginatedList<TDestination>(list, list.Count, source.PageIndex, source.PageSize, source.TotalPages);
             }
         }
     }

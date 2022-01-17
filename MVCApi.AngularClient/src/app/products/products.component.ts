@@ -1,5 +1,5 @@
 import { getLocaleCurrencyCode } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
@@ -25,10 +25,10 @@ export class ProductsComponent implements OnInit {
   categoryId: string | null = null;
 
   pageIndex: number = 1;
-  pageSize: number = 10;
-  totalPages: number = 1
-  hasNextPage: boolean = false
-  hasPreviousPage: boolean = false
+  pageSize: number = 5;
+  totalPages: number = 1;
+  hasNextPage: boolean = false;
+  hasPreviousPage: boolean = false;
 
   constructor(
     private readonly productService: ProductService,
@@ -41,33 +41,24 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.categoryId = params['categoryId'];
-      if (this.categoryId) {
-        this.products =
-          this.productService.apiProductGetPaginatedProductsByCategoryGet(
-            this.pageIndex,
-            this.pageSize,
-            getLocaleCurrencyCode(navigator.language) ?? 'PLN',
-            this.categoryId
-          );
-      } else {
-        this.products = this.productService.apiProductGetPaginatedProductsGet(
-          this.pageIndex,
-          this.pageSize,
-          getLocaleCurrencyCode(navigator.language) ?? 'PLN'
-        );
-      }
-      
-      this.products.subscribe({
-        next: (res) =>
-        {
-          this.pageIndex = res.pageIndex ?? 1
-          this.pageSize = res.pageSize ?? 10
-          this.totalPages = res.totalPages ?? 1
-          this.hasNextPage = res.hasNextPage ?? false
-          this.hasPreviousPage = res.hasPreviousPage ?? false
-        }
-      })
+      this.fetchProducts();
     });
+  }
+
+  ngOnChanges(changes: SimpleChange) { 
+
+  }
+
+  pageIndexChange() {
+    this.fetchProducts()
+  }
+
+  totalPagesChange() {
+    this.fetchProducts()
+  }
+
+  pageSizeChange() {
+    this.fetchProducts()
   }
 
   addToCart(id: string | undefined) {
@@ -84,6 +75,35 @@ export class ProductsComponent implements OnInit {
           next: () => console.log('Added'),
           error: (err) => console.log(err),
         });
+    });
+  }
+
+  private fetchProducts() {
+    if (this.categoryId) {
+      this.products =
+        this.productService.apiProductGetPaginatedProductsByCategoryGet(
+          this.pageIndex,
+          this.pageSize,
+          getLocaleCurrencyCode(navigator.language) ?? 'PLN',
+          this.categoryId
+        );
+    } else {
+      this.products = this.productService.apiProductGetPaginatedProductsGet(
+        this.pageIndex,
+        this.pageSize,
+        getLocaleCurrencyCode(navigator.language) ?? 'PLN'
+      );
+    }
+
+    this.products.subscribe({
+      next: (res) => {
+        this.pageIndex = res.pageIndex ?? 1;
+        this.pageSize = res.pageSize ?? 10;
+        this.totalPages = res.totalPages ?? 1;
+        this.hasNextPage = res.hasNextPage ?? false;
+        this.hasPreviousPage = res.hasPreviousPage ?? false;
+        console.log(res)
+      },
     });
   }
 }

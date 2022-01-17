@@ -15,10 +15,14 @@
       </div>
     </div>
     <app-pagination
-      [pageIndex]="pageIndex"
-      [totalPages]="totalPages"
+      [(pageIndex)]="pageIndex"
+      (pageIndexChange)="pageIndexChange()"
+      [(totalPages)]="totalPages"
+      (totalPagesChange)="totalPagesChange()"
       [hasNextPage]="hasNextPage"
       [hasPreviousPage]="hasPreviousPage"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="pageSizeChange()"
     ></app-pagination>
   </div>
 </div>
