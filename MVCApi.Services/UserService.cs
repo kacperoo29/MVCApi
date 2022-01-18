@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -87,14 +87,21 @@ namespace MVCApi.Services
             return role.Id;
         }
 
-        public async Task<Guid> AddUserToRole(Guid userId, string role) 
+        public async Task<Guid> AddUserToRole(Guid userId, string role)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            var result = await _userManager.AddToRoleAsync(user, role);            
+            var result = await _userManager.AddToRoleAsync(user, role);
             if (!result.Succeeded)
                 throw new IdentityException(result.Errors.Select(x => x.Description));
 
             return user.Id;
+        }
+
+        public async Task<IEnumerable<string>> GetUserRoles(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            return await _userManager.GetRolesAsync(user);
         }
     }
 }

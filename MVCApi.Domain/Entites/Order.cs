@@ -9,25 +9,29 @@ namespace MVCApi.Domain.Entites
         {
         }
 
-        protected Order(Customer customer, ShoppingCart shoppingCart)
+        protected Order(Customer customer, ShoppingCart shoppingCart, Address address, ContactInfo contactInfo)
         {
             Customer = customer;
             ShoppingCart = shoppingCart;
             OrderState = OrderState.New;
+            Address = address;
+            ContactInfo = contactInfo;
         }
 
         public virtual Customer Customer { get; private set; }
         public virtual ShoppingCart ShoppingCart { get; private set; }
+        public virtual Address Address { get; private set; }
+        public virtual ContactInfo ContactInfo { get; private set; }
         public OrderState OrderState { get; private set; }
 
-        public static Order Create(Customer customer, ShoppingCart shoppingCart)
+        public static Order Create(Customer customer, ShoppingCart shoppingCart, Address address, ContactInfo contactInfo)
         {
             if (shoppingCart.Products.Count < 1)
                 throw new EmptyCartException(shoppingCart.Id);
 
             shoppingCart.Lock();
 
-            return new Order(customer, shoppingCart);
+            return new Order(customer, shoppingCart, address, contactInfo);
         }
 
         public void Process()

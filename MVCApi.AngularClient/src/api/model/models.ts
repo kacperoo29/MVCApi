@@ -1,3 +1,5 @@
+export * from './addAddress';
+export * from './addContactInfo';
 export * from './addProductToCart';
 export * from './addProductToCategory';
 export * from './addressDto';
@@ -10,6 +12,7 @@ export * from './createCategory';
 export * from './createCustomer';
 export * from './createOrder';
 export * from './createProduct';
+export * from './createRole';
 export * from './createSubcategory';
 export * from './createUser';
 export * from './currencyDto';

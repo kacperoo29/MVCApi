@@ -50,5 +50,19 @@ namespace MVCApi.Controllers
             command.CustomerId = id;
             return Ok(await _mediator.Send(command));
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Guid>> AddAddress([FromBody] AddAddress command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Guid>> AddContactInfo([FromBody] AddContactInfo command) 
+        {
+            return Ok(await _mediator.Send(command));
+        }
     } 
 }
