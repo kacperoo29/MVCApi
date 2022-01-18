@@ -68,10 +68,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   submitOrder() {
-    // TODO: Change api to accept address and contact info
+    if (!(this.customer && this.cart && this.customer.addresses && this.customer.contactInfos))
+      return;
+    
     this.orderService.apiOrderCreateOrderPost({
-      customerId: this.customer?.id,
-      cartId: this.cart?.id,
+      customerId: this.customer.id,
+      cartId: this.cart.id,
+      addressId: this.customer.addresses[this.selectedAddressIdx].id,
+      contactInfoId: this.customer.contactInfos[this.selectedContactInfoIdx].id
     }).subscribe({
       next: (orderId) => {
         //TODO: Redirect to order page

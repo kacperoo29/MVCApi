@@ -1,6 +1,9 @@
 <div *ngIf="isLoggedIn" class="alert alert-success" role="alert">
   Succesfully logged in
 </div>
+<div *ngIf="message && !isLoggedIn" class="alert alert-danger" role="alert">
+  {{ message }}
+</div>
 <div class="card card-container">
   <form class="form-signin" [formGroup]="form" (ngSubmit)="submit()">
     <span id="reauth-email" class="reauth-email"></span>

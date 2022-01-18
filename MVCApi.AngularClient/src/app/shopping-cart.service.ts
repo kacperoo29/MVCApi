@@ -1,4 +1,5 @@
 import { getLocaleCurrencyCode } from '@angular/common';
+import { compileDeclareFactoryFunction } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CartService, ShoppingCartDto } from 'src/api';
@@ -33,5 +34,9 @@ export class ShoppingCartService {
     }
 
     return cart;
+  }
+
+  clearCart() {
+    localStorage.removeItem('cartId')
   }
 }

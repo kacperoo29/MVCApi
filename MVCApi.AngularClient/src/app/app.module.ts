@@ -1,4 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -34,6 +38,8 @@ import { registerLocaleData } from '@angular/common';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthService } from './auth.service';
+import { AuthInterceptor } from './auth.interceptor';
+import { Router } from '@angular/router';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -71,6 +77,14 @@ import(
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useFactory: (router: Router) => {
+        return new AuthInterceptor(router);
+      },
+      multi: true,
+      deps: [Router],
+    },
     {
       provide: UserService,
       useFactory: (httpClient: HttpClient) =>
