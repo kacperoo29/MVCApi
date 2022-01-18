@@ -12,13 +12,13 @@
       </div>
       <div *ngIf="customer">
         <div class="row">
-          <div class="col-lg-8">
-            <div class="row card p-3 pt-1 mb-4">
+          <div class="col-lg-9">
+            <div class="row border p-3 pt-1 mb-4">
               <p>Select your delivery address</p>
               <div
                 *ngFor="let address of customer.addresses; let i = index"
                 [attr.data-index]="i"
-                class="col-md-2 card p-2"
+                class="col-md-3 card p-2"
                 [ngClass]="selectedAddressIdx == i ? 'selected-card' : ''"
                 (click)="onChangeAddressIdx(i)"
               >
@@ -27,12 +27,12 @@
                 <p>Street: {{ address.street }} {{ address.streetNumber }}</p>
               </div>
             </div>
-            <div class="row card p-3 pt-1 mb-4">
+            <div class="row border p-3 pt-1 mb-4">
               <p>Select your contact info</p>
               <div
                 *ngFor="let contactInfo of customer.contactInfos; let i = index"
                 [attr.data-index]="i"
-                class="col-md-2 card p-2"
+                class="col-md-3 card p-2"
                 [ngClass]="selectedContactInfoIdx == i ? 'selected-card' : ''"
                 (click)="onChangeContactInfoIdx(i)"
               >
@@ -41,7 +41,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 card p-4 h-75">
+          <div class="col-lg-3 card p-4 h-75">
             <h3>Order details</h3>
             <p>Price: {{ totalPrice | currency: currency }}</p>
             <p>Products:</p>

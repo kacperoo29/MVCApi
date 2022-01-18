@@ -78,6 +78,7 @@ export class CheckoutComponent implements OnInit {
       contactInfoId: this.customer.contactInfos[this.selectedContactInfoIdx].id
     }).subscribe({
       next: (orderId) => {
+        this.cartService.clearCart()
         //TODO: Redirect to order page
       },
       error: (err) => console.log(err)
