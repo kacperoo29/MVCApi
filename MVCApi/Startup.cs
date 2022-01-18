@@ -166,7 +166,6 @@ namespace MVCApi
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             await CreateAdmin(app.ApplicationServices);
-
         }
 
         private async Task CreateAdmin(IServiceProvider services)

@@ -1,16 +1,71 @@
-<div *ngIf="user">
-  <div *ngIf="!hasCustomer">
-    <div class="alert alert-info" role="alert">
-      You must provide your personal info to confirm the order
+<div class="mt-2">
+  <div *ngIf="user">
+    <div *ngIf="!hasCustomer">
+      <div class="alert alert-info" role="alert">
+        You must provide your personal info to confirm the order
+      </div>
+      <app-customer-form></app-customer-form>
     </div>
-    <app-customer-form></app-customer-form>
-  </div>
-  <div *ngIf="hasCustomer">
-    <div *ngIf="!customer" class="alert alert-error" role="alert">
-      Unable to fetch customer data
-    </div>
-    <div *ngIf="customer">
-      {{ customer.firstName }}
+    <div *ngIf="hasCustomer">
+      <div *ngIf="!customer" class="alert alert-error" role="alert">
+        Unable to fetch customer data
+      </div>
+      <div *ngIf="customer">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row card p-3 pt-1 mb-4">
+              <p>Select your delivery address</p>
+              <div
+                *ngFor="let address of customer.addresses; let i = index"
+                [attr.data-index]="i"
+                class="col-md-2 card p-2"
+                [ngClass]="selectedAddressIdx == i ? 'selected-card' : ''"
+                (click)="onChangeAddressIdx(i)"
+              >
+                <p>Country: {{ address.country }}</p>
+                <p>City: {{ address.postCode }}, {{ address.city }}</p>
+                <p>Street: {{ address.street }} {{ address.streetNumber }}</p>
+              </div>
+            </div>
+            <div class="row card p-3 pt-1 mb-4">
+              <p>Select your contact info</p>
+              <div
+                *ngFor="let contactInfo of customer.contactInfos; let i = index"
+                [attr.data-index]="i"
+                class="col-md-2 card p-2"
+                [ngClass]="selectedContactInfoIdx == i ? 'selected-card' : ''"
+                (click)="onChangeContactInfoIdx(i)"
+              >
+                <p>Email: {{ contactInfo.email }}</p>
+                <p>Phone number: {{ contactInfo.phoneNumber }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 card p-4 h-75">
+            <h3>Order details</h3>
+            <p>Price: {{ totalPrice | currency: currency }}</p>
+            <p>Products:</p>
+            <p *ngFor="let product of cart?.products">
+              {{ product?.product?.name }}
+              {{ product?.product?.price?.value | currency: currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <span
+        class="d-inline-block"
+        tabindex="0"
+        data-toggle="tooltip"
+        title="Select address and contact info before submitting"
+      >
+        <button
+          class="btn btn-primary"
+          [disabled]="selectedContactInfoIdx == -1 || selectedAddressIdx == -1"
+          (click)="submitOrder()"
+        >
+          Submit
+        </button>
+      </span>
     </div>
   </div>
 </div>

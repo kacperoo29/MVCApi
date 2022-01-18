@@ -1,7 +1,16 @@
+import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ApplicationUserDto, CustomerDto, CustomerService } from 'src/api';
+import {
+  ApplicationUserDto,
+  CustomerDto,
+  CustomerService,
+  OrderService,
+  ShoppingCartDto,
+  ShoppingCartState,
+} from 'src/api';
 import { isEmpty } from 'src/util';
 import { AuthService } from '../auth.service';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,10 +21,18 @@ export class CheckoutComponent implements OnInit {
   user: ApplicationUserDto | null = null;
   hasCustomer: boolean = false;
   customer: CustomerDto | null = null;
+  selectedAddressIdx: number = -1;
+  selectedContactInfoIdx: number = -1;
+  cart: ShoppingCartDto | null = null;
+  totalPrice: number = 0;
+  currency: string = getLocaleCurrencyCode(navigator.language) ?? 'PLN';
 
+  // TODO: Display form for creating new addresses and contact infos
   constructor(
     private readonly authService: AuthService,
-    private readonly customerService: CustomerService
+    private readonly customerService: CustomerService,
+    private readonly cartService: ShoppingCartService,
+    private readonly orderService: OrderService
   ) {}
 
   ngOnInit(): void {
@@ -35,5 +52,40 @@ export class CheckoutComponent implements OnInit {
         }
       },
     });
+
+    this.cartService.getOrCreateCart().then((cart) => {
+      this.cart = cart;
+      this.totalPrice = this.calculateTotal();
+    });
+  }
+
+  onChangeAddressIdx(i: number) {
+    this.selectedAddressIdx = i;
+  }
+
+  onChangeContactInfoIdx(i: number) {
+    this.selectedContactInfoIdx = i;
+  }
+
+  submitOrder() {
+    // TODO: Change api to accept address and contact info
+    this.orderService.apiOrderCreateOrderPost({
+      customerId: this.customer?.id,
+      cartId: this.cart?.id,
+    }).subscribe({
+      next: (orderId) => {
+        //TODO: Redirect to order page
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  private calculateTotal(): number {
+    let lTotal = 0;
+    this.cart?.products?.forEach((p) => {
+      lTotal += p.count! * p.product?.price?.value!;
+    });
+
+    return lTotal;
   }
 }
