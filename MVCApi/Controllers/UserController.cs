@@ -40,6 +40,7 @@ namespace MVCApi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<Guid>> LinkCustomer([FromBody] LinkCustomer command)
         {
             return Ok(await _mediator.Send(command));

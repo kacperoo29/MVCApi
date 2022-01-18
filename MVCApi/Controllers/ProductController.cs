@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
@@ -21,6 +22,7 @@ namespace MVCApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> CreateProduct([FromBody] CreateProduct command)
         {
             return Ok(await _mediator.Send(command));
@@ -34,6 +36,7 @@ namespace MVCApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts([FromQuery] string currencyCode)
         {
             return Ok(await _mediator.Send(new GetAllProducts { CurrencyCode = currencyCode }));
@@ -75,6 +78,7 @@ namespace MVCApi.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> EditProduct([FromRoute] Guid id, [FromBody] EditProduct command)
         {
             command.ProductId = id;

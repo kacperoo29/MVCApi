@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
@@ -20,6 +21,7 @@ namespace MVCApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> CreateOrder([FromBody] CreateOrder command)
         {
             return Ok(await _mediator.Send(command));
@@ -27,12 +29,14 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
         public async Task<ActionResult<OrderDto>> GetOrderById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetOrderById { OrderId = id }));
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllOrders([FromQuery] string currencyCode)
         {
             return Ok(await _mediator.Send(new GetAllOrders { CurrencyCode = currencyCode }));
