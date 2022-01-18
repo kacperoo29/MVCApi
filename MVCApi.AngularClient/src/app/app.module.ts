@@ -12,7 +12,19 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { BASE_PATH, Configuration, UserService } from 'src/api';
+import {
+  AddressService,
+  BASE_PATH,
+  CartService,
+  CategoryService,
+  Configuration,
+  ContactInfoService,
+  CurrencyService,
+  CustomerService,
+  OrderService,
+  ProductService,
+  UserService,
+} from 'src/api';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,6 +75,142 @@ import(
       provide: UserService,
       useFactory: (httpClient: HttpClient) =>
         new UserService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: CustomerService,
+      useFactory: (httpClient: HttpClient) =>
+        new CustomerService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: AddressService,
+      useFactory: (httpClient: HttpClient) =>
+        new AddressService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: CartService,
+      useFactory: (httpClient: HttpClient) =>
+        new CartService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: CategoryService,
+      useFactory: (httpClient: HttpClient) =>
+        new CategoryService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: ContactInfoService,
+      useFactory: (httpClient: HttpClient) =>
+        new ContactInfoService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: CurrencyService,
+      useFactory: (httpClient: HttpClient) =>
+        new CurrencyService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: OrderService,
+      useFactory: (httpClient: HttpClient) =>
+        new OrderService(
+          httpClient,
+          'http://localhost:5000',
+          new Configuration({
+            credentials: {
+              Bearer: () =>
+                sessionStorage.getItem('jwt_token') ??
+                localStorage.getItem('jwt_token') ??
+                '',
+            },
+          })
+        ),
+      deps: [HttpClient],
+    },
+    {
+      provide: ProductService,
+      useFactory: (httpClient: HttpClient) =>
+        new ProductService(
           httpClient,
           'http://localhost:5000',
           new Configuration({
