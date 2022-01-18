@@ -43,10 +43,13 @@ namespace MVCApi.Controllers
         public async Task<ActionResult<IPaginatedList<ProductDto>>> GetPaginatedProducts(
             [FromQuery] int pageNumber,
             [FromQuery] int pageSize,
-            [FromQuery] string currencyCode) 
+            [FromQuery] string currencyCode)
         {
-            var products = await _mediator.Send(new GetProductsPaginated { 
-                PageNumber = pageNumber, PageSize = pageSize, CurrencyCode = currencyCode
+            var products = await _mediator.Send(new GetProductsPaginated
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                CurrencyCode = currencyCode
             });
 
             return Ok(products);
@@ -57,10 +60,14 @@ namespace MVCApi.Controllers
             [FromQuery] int pageNumber,
             [FromQuery] int pageSize,
             [FromQuery] string currencyCode,
-            [FromQuery] Guid categoryId) 
+            [FromQuery] Guid categoryId)
         {
-            var products = await _mediator.Send(new GetProductsPaginatedByCategory { 
-                PageNumber = pageNumber, PageSize = pageSize, CurrencyCode = currencyCode, CategoryId = categoryId
+            var products = await _mediator.Send(new GetProductsPaginatedByCategory
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                CurrencyCode = currencyCode,
+                CategoryId = categoryId
             });
 
             return Ok(products);

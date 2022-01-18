@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +19,7 @@ using MVCApi.Application;
 using MVCApi.Application.Commands;
 using MVCApi.Domain;
 using MVCApi.Services;
+using MVCApi.Services.Exceptions;
 
 namespace MVCApi
 {
@@ -88,8 +93,9 @@ namespace MVCApi
 
             services.AddScoped(typeof(IUserService), typeof(UserService));
 
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<EShopContext>()
+                .AddRoles<IdentityRole<Guid>>()
                 .AddDefaultTokenProviders();
 
             services.AddCors(options =>
@@ -141,7 +147,7 @@ namespace MVCApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("cors_policy");
 
@@ -158,6 +164,42 @@ namespace MVCApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            await CreateAdmin(app.ApplicationServices);
+
+        }
+
+        private async Task CreateAdmin(IServiceProvider services)
+        {
+            using var scope = services.CreateScope();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (!(await roleManager.RoleExistsAsync("Admin")))
+            {
+                var result = await roleManager.CreateAsync(new IdentityRole<Guid> { Name = "Admin" });
+                if (!result.Succeeded)
+                    throw new IdentityException(result.Errors.Select(x => x.Description));
+            }
+
+            if (await userManager.FindByEmailAsync(Configuration["SiteAdminEmail"]) == null)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = Configuration["SiteAdminName"],
+                    Email = Configuration["SiteAdminEmail"]
+                };
+
+                var result = await userManager.CreateAsync(user, Configuration["SiteAdminPassword"]);
+
+                if (!result.Succeeded)
+                    throw new IdentityException(result.Errors.Select(x => x.Description));
+
+                result = await userManager.AddToRoleAsync(user, "Admin");
+
+                if (!result.Succeeded)
+                    throw new IdentityException(result.Errors.Select(x => x.Description));
+            }
         }
     }
 }
