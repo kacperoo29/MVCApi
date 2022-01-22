@@ -40,6 +40,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptor } from './auth.interceptor';
 import { Router } from '@angular/router';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -55,6 +58,7 @@ import(
     AppComponent,
     CustomersComponent,
     CustomerFormComponent,
+    CustomerEditComponent,
     CategoryTreeComponent,
     CategoriesComponent,
     ProductsComponent,
@@ -64,6 +68,8 @@ import(
     ShoppingCartComponent,
     PaginationComponent,
     CheckoutComponent,
+    ProductFormComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
