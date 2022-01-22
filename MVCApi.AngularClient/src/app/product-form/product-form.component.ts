@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateProduct, ProductService } from 'src/api';
 import { isEmpty } from 'src/util';
@@ -16,8 +16,9 @@ export class ProductFormComponent implements OnInit {
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required)
+    price: new FormControl('', [Validators.required, Validators.min(0)])
   });
+  submitted = false;
 
   constructor(
     private readonly productService: ProductService,
@@ -28,6 +29,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(): void {
+    this.submitted = true;
     var createProduct: CreateProduct = this.form.value;
     if (this.form.valid) {
       this.productService
@@ -41,6 +43,10 @@ export class ProductFormComponent implements OnInit {
           error: (err) => console.log(err),
         });
     }
-    
+  }
+
+  get f(): { [key: string]: AbstractControl; }
+  {
+    return this.form.controls;
   }
 }

@@ -4,12 +4,17 @@
         <label for="name">Product name</label>
         <input
           class="form-control"
+          id="name"
           name="name"
           type="text"
           formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
           required
         />
-      </div>
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+          <div *ngIf="f['name'].errors['required']">Name is required</div>
+        </div>
+        </div>
   
       <div class="form-group col">
         <label for="description">Product description</label>
@@ -18,8 +23,12 @@
           name="description"
           type="text"
           formControlName="description"
+          [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
           required
         />
+        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+          <div *ngIf="f['description'].errors['required']">Description is required</div>
+        </div>
       </div>
   
       <div class="form-group col">
@@ -29,8 +38,12 @@
           name="image"
           type="text"
           formControlName="image"
+          [ngClass]="{ 'is-invalid': submitted && f['image'].errors }"
           required
         />
+        <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+          <div *ngIf="f['image'].errors['required']">Image is required</div>
+        </div>
       </div>
 
       <div class="form-group col">
@@ -40,8 +53,13 @@
           name="price"
           type="number"
           formControlName="price"
+          [ngClass]="{ 'is-invalid': submitted && f['price'].errors }"
           required
         />
+        <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+          <div *ngIf="f['price'].errors['required']">Price is required</div>
+          <div *ngIf="f['price'].errors['min']">Price must be greater than 0</div>
+        </div>
       </div>
 
     </div>
