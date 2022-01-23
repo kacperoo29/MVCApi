@@ -34,9 +34,6 @@ export class CustomerFormComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(): void {
-    console.log(this.minDate);
-    console.log("XD: "+ this.minDate>this.form.controls['dateOfBirth'].value);
-    console.log(this.form.controls['dateOfBirth'].value);
     this.submitted = true;
     var createCustomer: CreateCustomer = this.form.value;
     if (this.form.valid) {
