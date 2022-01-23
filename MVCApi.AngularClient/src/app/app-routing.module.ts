@@ -11,9 +11,11 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
+  { path: 'customers/add', component: CustomerFormComponent },
   { path: 'customers/edit/:customerId', component: CustomerEditComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'products', component: ProductsComponent },

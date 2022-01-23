@@ -1,6 +1,6 @@
 import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EditProduct, ProductDto, ProductService } from 'src/api';
@@ -28,6 +28,7 @@ export class ProductEditComponent implements OnInit {
 
   productId: string = "";
   product: Observable<ProductDto> | null = null;
+  submitted : boolean = false;
 
   ngOnInit(): void {
     this.productId = <string>this.route.snapshot.paramMap.get('productId')?.toString();
@@ -35,6 +36,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   submit(): void {
+    this.submitted = true;
     var editCustomer: EditProduct = this.form.value;
     if (this.form.valid) {
       this.productService
@@ -60,6 +62,11 @@ export class ProductEditComponent implements OnInit {
         this.form.patchValue({image: res.image});
       }
     )
+  }
+
+  get f(): { [key: string]: AbstractControl; }
+  {
+    return this.form.controls;
   }
 
 }

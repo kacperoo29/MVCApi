@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import { EditCustomer, CustomerService, CustomerDto, AddressService, ContactInfoService, AddressDto, ContactInfoDto } from 'src/api';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -16,20 +16,22 @@ export class CustomerEditComponent implements OnInit {
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', Validators.required),
+    dateOfBirth: new FormControl('', [Validators.required, this.dateValidator.bind(this)]),
     country: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     street: new FormControl('', Validators.required),
     streetNumber: new FormControl('', Validators.required),
     postCode: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     phoneNumber: new FormControl('', Validators.required),
   });
 
   customer: Observable<CustomerDto> | null = null;
   address: Observable<AddressDto> | null = null;
   contactInfo: Observable<ContactInfoDto> | null = null;
-
+  customerId: string = "";
+  minDate : number = new Date().getFullYear() - 18;
+  submitted : boolean = false; 
 
   constructor(
     private readonly customerService: CustomerService,
@@ -39,14 +41,13 @@ export class CustomerEditComponent implements OnInit {
     private router: Router
   ) {}
 
-  customerId: string = "";
-
   ngOnInit(): void {
     this.customerId = <string>this.route.snapshot.paramMap.get('customerId')?.toString();
     this.fetchCustomer();
   }
 
   submit(): void {
+    this.submitted = true;
     var editCustomer: EditCustomer = this.form.value;
     if (this.form.valid) {
       this.customerService
@@ -99,5 +100,23 @@ export class CustomerEditComponent implements OnInit {
 
       }
     )
+  }
+
+  get f(): { [key: string]: AbstractControl; }
+  {
+    return this.form.controls;
+  }
+
+  dateValidator(control: FormControl): { [s: string]: boolean } | null {
+    if (control.value) {
+      const date = new Date(this.form.controls['dateOfBirth'].value);
+      const dateYr = date.getFullYear();
+      const minDate = this.minDate;
+      
+      if (minDate<=dateYr) {
+        return { 'invalidDate': true }
+      }
+    }
+    return null;
   }
 }
