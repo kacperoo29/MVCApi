@@ -43,6 +43,7 @@ import { Router } from '@angular/router';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -70,6 +71,7 @@ import(
     CheckoutComponent,
     ProductFormComponent,
     ProductEditComponent,
+    CategoryFormComponent,
   ],
   imports: [
     BrowserModule,

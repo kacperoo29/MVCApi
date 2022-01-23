@@ -18,11 +18,10 @@ export class ProductFormComponent implements OnInit {
     image: new FormControl('', Validators.required),
     price: new FormControl('', [Validators.required, Validators.min(0)])
   });
-  submitted = false;
+  submitted : boolean = false;
 
   constructor(
     private readonly productService: ProductService,
-    private readonly authService: AuthService,
     private router: Router
   ) {}
 

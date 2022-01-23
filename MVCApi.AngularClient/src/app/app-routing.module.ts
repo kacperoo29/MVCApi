@@ -12,12 +12,14 @@ import { SignOutComponent } from './sign-out/sign-out.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'customers/add', component: CustomerFormComponent },
   { path: 'customers/edit/:customerId', component: CustomerEditComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'categories/add', component: CategoryFormComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/add', component: ProductFormComponent },
   { path: 'products/edit/:productId', component: ProductEditComponent },
