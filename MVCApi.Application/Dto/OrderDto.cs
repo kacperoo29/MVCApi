@@ -9,5 +9,6 @@ namespace MVCApi.Application.Dto
         public CustomerDto Customer { get; set; }
         public ShoppingCartDto ShoppingCart { get; set; }
         public OrderState OrderState { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
