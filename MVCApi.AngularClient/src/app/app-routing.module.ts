@@ -14,6 +14,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'signout', component: SignOutComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
-  { path: 'popularity', component: OrdersInRangeComponent }
+  { path: 'popularity', component: OrdersInRangeComponent },
+  { path: 'order/:orderId', component: OrderComponent }
 ];
 
 @NgModule({

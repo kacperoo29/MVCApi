@@ -1187,6 +1187,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "currencyCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
           }
         ],
         "responses": {

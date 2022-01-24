@@ -30,9 +30,9 @@ namespace MVCApi.Controllers
         [HttpGet]
         [Route("{id}")]
         [Authorize]
-        public async Task<ActionResult<OrderDto>> GetOrderById([FromRoute] Guid id)
+        public async Task<ActionResult<OrderDto>> GetOrderById([FromRoute] Guid id, [FromQuery] string currencyCode)
         {
-            return Ok(await _mediator.Send(new GetOrderById { OrderId = id }));
+            return Ok(await _mediator.Send(new GetOrderById { OrderId = id, CurrencyCode = currencyCode }));
         }
 
         [HttpGet]

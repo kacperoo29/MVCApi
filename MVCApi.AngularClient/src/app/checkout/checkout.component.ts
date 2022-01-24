@@ -1,5 +1,6 @@
 import { getLocaleCurrencyCode } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ApplicationUserDto,
   CustomerDto,
@@ -32,7 +33,8 @@ export class CheckoutComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly customerService: CustomerService,
     private readonly cartService: ShoppingCartService,
-    private readonly orderService: OrderService
+    private readonly orderService: OrderService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -68,21 +70,31 @@ export class CheckoutComponent implements OnInit {
   }
 
   submitOrder() {
-    if (!(this.customer && this.cart && this.customer.addresses && this.customer.contactInfos))
+    if (
+      !(
+        this.customer &&
+        this.cart &&
+        this.customer.addresses &&
+        this.customer.contactInfos
+      )
+    )
       return;
-    
-    this.orderService.apiOrderCreateOrderPost({
-      customerId: this.customer.id,
-      cartId: this.cart.id,
-      addressId: this.customer.addresses[this.selectedAddressIdx].id,
-      contactInfoId: this.customer.contactInfos[this.selectedContactInfoIdx].id
-    }).subscribe({
-      next: (orderId) => {
-        this.cartService.clearCart()
-        //TODO: Redirect to order page
-      },
-      error: (err) => console.log(err)
-    });
+
+    this.orderService
+      .apiOrderCreateOrderPost({
+        customerId: this.customer.id,
+        cartId: this.cart.id,
+        addressId: this.customer.addresses[this.selectedAddressIdx].id,
+        contactInfoId:
+          this.customer.contactInfos[this.selectedContactInfoIdx].id,
+      })
+      .subscribe({
+        next: (orderId) => {
+          this.cartService.clearCart();
+          this.router.navigate([`order/${orderId}`]);
+        },
+        error: (err) => console.log(err),
+      });
   }
 
   private calculateTotal(): number {

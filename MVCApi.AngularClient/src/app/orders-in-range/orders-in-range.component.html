@@ -32,3 +32,20 @@
   >
   </ngx-charts-line-chart>
 </div>
+
+<div class="mt-2">
+  <table class="table">
+    <thead>
+      <th>Order id</th>
+      <th>Date</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>
+          <a [routerLink]="['/order', order.id]">{{ order.id }}</a>
+        </td>
+        <td>{{ order.dateCreated }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

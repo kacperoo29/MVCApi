@@ -46,6 +46,7 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { OrdersInRangeComponent } from './orders-in-range/orders-in-range.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OrderComponent } from './order/order.component';
 
 
 import(
@@ -75,7 +76,8 @@ import(
     ProductFormComponent,
     ProductEditComponent,
     CategoryFormComponent,
-    OrdersInRangeComponent
+    OrdersInRangeComponent,
+    OrderComponent
 
   ],
   imports: [

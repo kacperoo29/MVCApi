@@ -24,7 +24,7 @@ export class OrdersInRangeComponent implements OnInit {
   );
   endDateSubject: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
 
-  private orders: OrderDto[] | null = null;
+  orders: OrderDto[] | null = null;
   private orderMap: Map<Date, Map<ProductDto, number>> | null = null;
   private dateArray: Date[] | null = null;
   
@@ -35,13 +35,6 @@ export class OrdersInRangeComponent implements OnInit {
       startDate: this.startDateSubject,
       endDate: this.endDateSubject,
     }).subscribe((res) => {
-      // this.dateArray = new Array<Date>();
-      // var currentDate = res.startDate;
-      // while (currentDate <= res.endDate) {
-      //   this.dateArray.push(new Date(currentDate));
-      //   currentDate.setDate(currentDate.getDate() + 1);
-      // }
-
       this.orderService
         .apiOrderGetOrdersInDateRangeGet(
           new Date(res.startDate).toISOString(),
