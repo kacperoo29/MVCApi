@@ -22,6 +22,8 @@ import { registerLocaleData } from '@angular/common';
 import { PaginationComponent } from './pagination/pagination.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthService } from './auth.service';
+import { OrdersInRangeComponent } from './orders-in-range/orders-in-range.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -46,6 +48,7 @@ import(
     ShoppingCartComponent,
     PaginationComponent,
     CheckoutComponent,
+    OrdersInRangeComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import(
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    NgxChartsModule
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },

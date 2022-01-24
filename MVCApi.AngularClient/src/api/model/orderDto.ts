@@ -19,5 +19,6 @@ export interface OrderDto {
     customer?: CustomerDto;
     shoppingCart?: ShoppingCartDto;
     orderState?: OrderState;
+    dateCreated?: string;
 }
 

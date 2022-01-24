@@ -37,5 +37,11 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(new GetAllOrders { CurrencyCode = currencyCode }));
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersInDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string currencyCode)
+        {
+            return Ok(await _mediator.Send(new GetOrdersInDateRange { StartDate = startDate, EndDate = endDate, CurrencyCode = currencyCode }));
+        }
     }
 }
