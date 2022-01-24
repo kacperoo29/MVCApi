@@ -29,7 +29,7 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<ActionResult<CustomerDto>> GetCustomerById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetCustomerById {CustomerId = id}));
@@ -44,7 +44,7 @@ namespace MVCApi.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<ActionResult<Guid>> EditCustomer([FromRoute] Guid id, [FromBody] EditCustomer command)
         {
             command.CustomerId = id;
