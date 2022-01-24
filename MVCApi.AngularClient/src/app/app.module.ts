@@ -40,8 +40,13 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptor } from './auth.interceptor';
 import { Router } from '@angular/router';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 import { OrdersInRangeComponent } from './orders-in-range/orders-in-range.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -57,6 +62,7 @@ import(
     AppComponent,
     CustomersComponent,
     CustomerFormComponent,
+    CustomerEditComponent,
     CategoryTreeComponent,
     CategoriesComponent,
     ProductsComponent,
@@ -66,7 +72,11 @@ import(
     ShoppingCartComponent,
     PaginationComponent,
     CheckoutComponent,
+    ProductFormComponent,
+    ProductEditComponent,
+    CategoryFormComponent,
     OrdersInRangeComponent
+
   ],
   imports: [
     BrowserModule,
