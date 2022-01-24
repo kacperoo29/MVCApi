@@ -24,9 +24,10 @@ export class OrdersInRangeComponent implements OnInit {
   );
   endDateSubject: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
 
-  orders: OrderDto[] | null = null;
-  orderMap: Map<Date, Map<ProductDto, number>> | null = null;
-  dateArray: Date[] | null = null;
+  private orders: OrderDto[] | null = null;
+  private orderMap: Map<Date, Map<ProductDto, number>> | null = null;
+  private dateArray: Date[] | null = null;
+  
   chartData: ChartData[] | null = null;
 
   constructor(private readonly orderService: OrderService) {
