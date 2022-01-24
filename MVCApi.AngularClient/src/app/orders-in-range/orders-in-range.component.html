@@ -1,0 +1,34 @@
+<div class="form-inline">
+  <div class="form-group">
+    <label>Choose start date</label>
+    <input
+      class="form-control"
+      type="date"
+      [ngModel]="startDateSubject | async"
+      (ngModelChange)="startDateSubject.next($event)"
+    />
+    <label>Choose end date</label>
+    <input
+      class="form-control"
+      type="date"
+      [ngModel]="endDateSubject | async"
+      (ngModelChange)="endDateSubject.next($event)"
+    />
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <ngx-charts-line-chart
+    *ngIf="chartData"
+    [view]="[1000, 500]"
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Year'"
+    [yAxisLabel]="'Count'"
+    [timeline]="true"
+    [results]="chartData"
+  >
+  </ngx-charts-line-chart>
+</div>

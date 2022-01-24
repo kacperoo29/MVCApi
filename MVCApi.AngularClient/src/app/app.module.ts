@@ -44,6 +44,9 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { OrdersInRangeComponent } from './orders-in-range/orders-in-range.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 import(
   /* webpackExclude: /\.d\.ts$/ */
@@ -72,6 +75,8 @@ import(
     ProductFormComponent,
     ProductEditComponent,
     CategoryFormComponent,
+    OrdersInRangeComponent
+
   ],
   imports: [
     BrowserModule,
@@ -82,6 +87,7 @@ import(
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    NgxChartsModule
   ],
   providers: [
     { provide: BASE_PATH, useValue: 'http://localhost:5000' },
