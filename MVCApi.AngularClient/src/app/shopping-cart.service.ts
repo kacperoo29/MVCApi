@@ -1,4 +1,5 @@
 import { getLocaleCurrencyCode } from '@angular/common';
+import { compileDeclareFactoryFunction } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CartService, ShoppingCartDto } from 'src/api';
@@ -11,7 +12,7 @@ export class ShoppingCartService {
   constructor(private readonly api: CartService) {}
 
   async getOrCreateCart(): Promise<ShoppingCartDto | null> {
-    let cartId = localStorage.getItem('cartId');
+    let cartId: string | null = localStorage.getItem('cartId');
     var cart: ShoppingCartDto | null = null;
 
     if (!cartId) {
@@ -33,5 +34,9 @@ export class ShoppingCartService {
     }
 
     return cart;
+  }
+
+  clearCart() {
+    localStorage.removeItem('cartId')
   }
 }

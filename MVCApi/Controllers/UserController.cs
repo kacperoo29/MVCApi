@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +40,15 @@ namespace MVCApi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<Guid>> LinkCustomer([FromBody] LinkCustomer command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult<Guid>> CreateRole([FromBody] CreateRole command)
         {
             return Ok(await _mediator.Send(command));
         }

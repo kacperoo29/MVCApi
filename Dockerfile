@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copy everything else and build
 COPY . ./
-RUN dotnet restore --no-cache
+RUN dotnet restore
 RUN dotnet publish -c Debug -o out
 
 # Build runtime image

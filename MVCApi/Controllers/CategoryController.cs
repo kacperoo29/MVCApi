@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
@@ -20,12 +21,14 @@ namespace MVCApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> CreateCategory([FromBody] CreateCategory command)
         {
             return Ok(await _mediator.Send(command));
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> CreateSubcategory([FromBody] CreateSubcategory command)
         {
             return Ok(await _mediator.Send(command));
@@ -51,6 +54,7 @@ namespace MVCApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> AddProductToCategory([FromBody] AddProductToCategory command)
         {
             return Ok(await _mediator.Send(command));

@@ -11,10 +11,9 @@
  */
 
 
-export interface CreateOrder { 
-    cartId?: string;
+export interface AddContactInfo { 
     customerId?: string;
-    addressId?: string;
-    contactInfoId?: string;
+    email?: string | null;
+    phoneNumber?: string | null;
 }
 

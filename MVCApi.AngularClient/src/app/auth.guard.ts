@@ -25,7 +25,12 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     if (this.authService.getToken()) return true;
 
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl: state.url },
+      state: {
+        data: 'You must be logged in to view this resource',
+      },
+    });
     return false;
   }
 }

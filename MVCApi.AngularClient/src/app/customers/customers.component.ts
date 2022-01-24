@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/api';
+import { Observable } from 'rxjs';
+import { CustomerDto, CustomerService } from 'src/api';
 
 @Component({
   selector: 'app-customers',
@@ -7,7 +8,7 @@ import { CustomerService } from 'src/api';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
-  $customers = this.customerService.apiCustomerGetAllCustomersGet()
+  $customers: Observable<CustomerDto[]> = this.customerService.apiCustomerGetAllCustomersGet()
 
   constructor(private readonly customerService: CustomerService) { 
     

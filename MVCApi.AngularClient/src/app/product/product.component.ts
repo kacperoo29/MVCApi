@@ -10,7 +10,7 @@ import { ProductDto } from 'src/api';
 export class ProductComponent implements OnInit {
   @Input() product: ProductDto | undefined;
 
-  currency = getLocaleCurrencyCode(navigator.language) ?? "PLN"
+  currency: string = getLocaleCurrencyCode(navigator.language) ?? "PLN"
 
   constructor() { }
 

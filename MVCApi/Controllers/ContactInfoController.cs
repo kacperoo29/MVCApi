@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCApi.Application.Commands;
 using MVCApi.Application.Dto;
@@ -21,6 +22,7 @@ namespace MVCApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
         public async Task<ActionResult<ContactInfoDto>> GetContactInfoById([FromRoute] Guid id)
         {
             return Ok(await _mediator.Send(new GetContactInfoById { ContactInfoId = id}));
@@ -28,6 +30,7 @@ namespace MVCApi.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize]
         public async Task<ActionResult<Guid>> EditContactInfo([FromRoute] Guid id, [FromBody] EditContactInfo command)
         {
             command.ContactInfoId = id;

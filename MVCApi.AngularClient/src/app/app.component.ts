@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'eshop';
+  title: string = 'eshop';
   isAuthenticated: boolean = false
 
   constructor(private readonly authService: AuthService) {

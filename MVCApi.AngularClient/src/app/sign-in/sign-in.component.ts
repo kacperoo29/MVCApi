@@ -15,9 +15,10 @@ export class SignInComponent implements OnInit {
     rememberMe: new FormControl(false),
   });
 
+  message: string = '';
   public isLoggedIn: boolean = false;
 
-  private returnUrl: string = ''
+  private returnUrl: string = '';
 
   constructor(
     private readonly authService: AuthService,
@@ -27,6 +28,12 @@ export class SignInComponent implements OnInit {
     this.authService.isAuthenticated.subscribe(
       (val) => (this.isLoggedIn = val)
     );
+    var extra = this.router.getCurrentNavigation()?.extras.state as {
+      data: string;
+    };
+    if (extra) {
+      this.message = extra.data;
+    }
   }
 
   ngOnInit(): void {
@@ -46,7 +53,7 @@ export class SignInComponent implements OnInit {
       this.authService.isAuthenticated.subscribe({
         next: (res) => {
           if (res) {
-            this.router.navigate([this.returnUrl])
+            this.router.navigate([this.returnUrl]);
           } else {
             // TODO: Error message on failed login
           }
