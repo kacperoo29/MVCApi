@@ -14,8 +14,8 @@
     />
   </div>
   <div class="col-md-6 product-detail">
-    <h4>{{ product.name }}</h4>
-    <p>{{ product.description }}</p>
+    <h4 [routerLink]="['/', 'products', 'details', product.id]">{{ product.name }}</h4>
+    <div [innerHTML]="product.description"></div>
   </div>
   <div
     *ngIf="product.price && product.price.currency"
