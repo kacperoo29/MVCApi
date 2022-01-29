@@ -47,11 +47,9 @@ export class ProductDetailsComponent implements OnInit {
         imageURL = this.product.image;
       }
       else {
-        //IDK jak to powinno być + może dać localhost do jakiejś zmiennej
         imageURL = 'http://localhost:4200' + '/assets' + this.product?.image
       }
 
-      //Basic html, maybe imporve later, free points
     return `
       <div>
         <div class="col-md-4">
