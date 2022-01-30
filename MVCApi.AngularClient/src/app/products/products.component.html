@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div *ngIf="products" class="col-lg-9">
+  <div id="pdfTable" #pdfTable *ngIf="products" class="col-lg-9">
     <div *ngFor="let product of (products | async)?.items" class="row product">
       <app-product class="col-md-10" [product]="product"></app-product>
       <div class="col-md-2">
@@ -20,6 +20,7 @@
         </button>
       </div>
     </div>
+    <app-products-pdf class="col-md-12" [products]="products"></app-products-pdf>
     <app-pagination
       [(pageIndex)]="pageIndex"
       (pageIndexChange)="pageIndexChange()"

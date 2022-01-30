@@ -16,6 +16,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { OrderComponent } from './order/order.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { Observable } from 'rxjs';
+import { ProductsPdfComponent } from './products-pdf/products-pdf.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
@@ -27,6 +29,7 @@ const routes: Routes = [
   { path: 'products/add', component: ProductFormComponent },
   { path: 'products/edit/:productId', component: ProductEditComponent },
   { path: 'products/details/:productId', component: ProductDetailsComponent },
+  { path: 'products/pdf', component: ProductsPdfComponent},
   { path: 'login', component: SignInComponent },
   { path: 'signout', component: SignOutComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: ShoppingCartComponent },

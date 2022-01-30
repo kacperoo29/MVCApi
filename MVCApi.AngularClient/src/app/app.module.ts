@@ -48,6 +48,7 @@ import { OrdersInRangeComponent } from './orders-in-range/orders-in-range.compon
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { OrderComponent } from './order/order.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductsPdfComponent } from './products-pdf/products-pdf.component';
 
 
 import(
@@ -79,7 +80,8 @@ import(
     CategoryFormComponent,
     OrdersInRangeComponent,
     OrderComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductsPdfComponent
 
   ],
   imports: [

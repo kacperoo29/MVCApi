@@ -1,5 +1,5 @@
 import { getLocaleCurrencyCode } from '@angular/common';
-import { Component, OnInit, SimpleChange } from '@angular/core';
+import { Component, OnInit, SimpleChange, ViewChild, ElementRef  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
@@ -11,6 +11,7 @@ import {
   ProductService,
 } from 'src/api';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-products',
@@ -23,6 +24,7 @@ export class ProductsComponent implements OnInit {
     this.categoryService.apiCategoryGetRootCategoriesGet();
 
   categoryId: string | null = null;
+  pdfProducts: ProductDtoIPaginatedList | null = null;
 
   pageIndex: number = 1;
   pageSize: number = 5;
@@ -106,4 +108,6 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
+
+  
 }
