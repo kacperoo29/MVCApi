@@ -2,13 +2,13 @@
   <div class="col-md-2">
     <img
       *ngIf="!product.image?.startsWith('http')"
-      src="{{ '/assets' + product.image }}"
+      [src]="base64Image"
       alt="{{ product.name + '_image' }}"
       class="img-fluid"
     />
     <img
       *ngIf="product.image?.startsWith('http')"
-      src="{{ product.image }}"
+      [src]="base64Image"
       alt="{{ product.name + '_image' }}"
       class="img-fluid"
     />
