@@ -1,0 +1,37 @@
+<div *ngIf="message">
+  {{ message }}
+</div>
+<div class="card card-container">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="submit()">
+    <span id="reauth-email" class="reauth-email"></span>
+    <input
+      type="string"
+      id="userName"
+      class="form-control"
+      placeholder="Username"
+      formControlName="userName"
+      required
+      autofocus
+    />
+    <input
+      type="email"
+      id="email"
+      class="form-control"
+      placeholder="Email address"
+      formControlName="email"
+      required
+      autofocus
+    />
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      placeholder="Password"
+      formControlName="password"
+      required
+    />
+    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">
+      Register
+    </button>
+  </form>
+</div>

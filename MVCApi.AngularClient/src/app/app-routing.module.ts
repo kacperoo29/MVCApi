@@ -18,6 +18,7 @@ import { OrderComponent } from './order/order.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { Observable } from 'rxjs';
 import { ProductsPdfComponent } from './products-pdf/products-pdf.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
@@ -29,13 +30,14 @@ const routes: Routes = [
   { path: 'products/add', component: ProductFormComponent },
   { path: 'products/edit/:productId', component: ProductEditComponent },
   { path: 'products/details/:productId', component: ProductDetailsComponent },
-  { path: 'products/pdf', component: ProductsPdfComponent},
+  { path: 'products/pdf', component: ProductsPdfComponent },
   { path: 'login', component: SignInComponent },
   { path: 'signout', component: SignOutComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'popularity', component: OrdersInRangeComponent },
-  { path: 'order/:orderId', component: OrderComponent }
+  { path: 'order/:orderId', component: OrderComponent },
+  { path: 'register', component: RegistrationComponent },
 ];
 
 @NgModule({

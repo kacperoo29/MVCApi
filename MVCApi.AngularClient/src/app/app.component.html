@@ -22,6 +22,9 @@
       </ul>
       <ul class="ms-auto navbar-nav nav">
         <li *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+        <li *ngIf="!isAuthenticated">
           <a class="nav-link" routerLink="/login">Sign in</a>
         </li>
         <li *ngIf="isAuthenticated">
