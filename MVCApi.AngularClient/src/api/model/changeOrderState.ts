@@ -9,14 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { OrderState } from './orderState';
 
 
-export type OrderState = 0 | 1 | 2 | 3;
-
-export const OrderState = {
-    New: 0 as OrderState,
-    InProgress: 1 as OrderState,
-    Ended: 2 as OrderState,
-    Cancelled: 3 as OrderState
-};
+export interface ChangeOrderState { 
+    orderId?: string;
+    state?: OrderState;
+}
 

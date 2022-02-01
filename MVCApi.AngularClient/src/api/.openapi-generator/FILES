@@ -23,6 +23,7 @@ model/addressDto.ts
 model/applicationUserDto.ts
 model/authResponseDto.ts
 model/categoryDto.ts
+model/changeOrderState.ts
 model/changeProductCountInCart.ts
 model/contactInfoDto.ts
 model/createCategory.ts

@@ -34,20 +34,9 @@ namespace MVCApi.Domain.Entites
             return new Order(customer, shoppingCart, address, contactInfo);
         }
 
-        public void Process()
+        public void ChangeState(OrderState state)
         {
-            if (OrderState != OrderState.New)
-                throw new InvalidEntityStateException(typeof(Order), OrderState.ToString(), nameof(Process));
-
-            OrderState = OrderState.InProgress;
-        }
-
-        public void Finish()
-        {
-            if (OrderState != OrderState.InProgress)
-                throw new InvalidEntityStateException(typeof(Order), OrderState.ToString(), nameof(Process));
-
-            OrderState = OrderState.Ended;
+            OrderState = state;
         }
     }
 }

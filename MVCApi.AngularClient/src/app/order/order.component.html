@@ -17,4 +17,11 @@
       </tr>
     </tbody>
   </table>
+  State: <select [(ngModel)]="selectedIdx">
+    <option value="0">New</option>
+    <option value="1">InProgress</option>
+    <option value="2">Ended</option>
+    <option value="3">Cancelled</option>
+  </select>
+  <button class="btn btn-primary" (click)="onChangeState()">Change state</button>
 </div>

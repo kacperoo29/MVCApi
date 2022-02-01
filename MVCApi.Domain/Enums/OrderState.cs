@@ -4,6 +4,7 @@ namespace MVCApi.Domain.Enums
     {
         New,
         InProgress,
-        Ended
+        Ended,
+        Canceled
     }
 }

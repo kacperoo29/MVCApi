@@ -47,5 +47,12 @@ namespace MVCApi.Controllers
         {
             return Ok(await _mediator.Send(new GetOrdersInDateRange { StartDate = startDate, EndDate = endDate, CurrencyCode = currencyCode }));
         }
+
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<Guid>> ChangeState([FromBody] ChangeOrderState command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
     }
 }

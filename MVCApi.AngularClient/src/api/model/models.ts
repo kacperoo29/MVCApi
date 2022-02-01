@@ -6,6 +6,7 @@ export * from './addressDto';
 export * from './applicationUserDto';
 export * from './authResponseDto';
 export * from './categoryDto';
+export * from './changeOrderState';
 export * from './changeProductCountInCart';
 export * from './contactInfoDto';
 export * from './createCategory';
